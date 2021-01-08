@@ -41,6 +41,14 @@ class SrPagoChannel {
       }
     }
 
+    if (permission == PermissionStatus.unknown) {
+      final p = await requestPermissions();
+      if (p == PermissionStatus.restricted) {
+        response.message = "Es necesario aceptar el permiso de localización para realizar el pago";
+        return response;
+      }
+    }
+
     if (_publicKey == null || _publicKey.isEmpty) {
       response.message = "Se necesita la llave pública de la aplicación SrPago";
       return response;
@@ -75,7 +83,9 @@ class SrPagoChannel {
   }
 
   Future<PermissionStatus> requestPermissions() async {
-    final String result = await _channel.invokeMethod<String>("requestPermissions");
+    final String result = await _channel.invokeMethod<String>("requestPermissions", {
+      "openAppSettings": this._status == PermissionStatus.denied,
+    });
     return this._getStatus(result);
   }
 
