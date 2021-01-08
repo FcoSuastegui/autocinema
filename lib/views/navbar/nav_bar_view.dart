@@ -28,65 +28,62 @@ class NavBarView extends GetView<NavBarController> {
       () => Scaffold(
         body: pages[controller.currentIndex],
         extendBody: true,
-        bottomNavigationBar: Padding(
-          padding: EdgeInsets.symmetric(
-            vertical: getProportionateScreenWidth(20),
-          ),
-          child: AnimatedOpacity(
-            opacity: scroller.show ? 1 : 0,
-            curve: Curves.easeInOut,
-            duration: Duration(milliseconds: 300),
-            child: CustomNavigationBar(
-              elevation: 10.0,
-              bubbleCurve: Curves.easeIn,
-              strokeColor: Colors.transparent,
-              iconSize: 25.0,
-              selectedColor: Colors.grey,
-              unSelectedColor: Colors.grey[300],
-              backgroundColor: Colors.white,
-              borderRadius: Radius.circular(15.0),
-              items: [
-                CustomNavigationBarItem(
-                  title: Text(
-                    "home".tr,
-                    style: TextStyle(
-                      fontSize: getProportionateScreenWidth(11),
-                    ),
-                  ),
-                  icon: Icon(Icons.home),
-                ),
-                CustomNavigationBarItem(
-                  title: Text(
-                    "billboard".tr,
-                    style: TextStyle(
-                      fontSize: getProportionateScreenWidth(11),
-                    ),
-                  ),
-                  icon: Icon(Icons.movie),
-                ),
-                CustomNavigationBarItem(
-                  title: Text(
-                    "comming".tr,
-                    style: TextStyle(
-                      fontSize: getProportionateScreenWidth(11),
-                    ),
-                  ),
-                  icon: Icon(Icons.calendar_today),
-                ),
-                CustomNavigationBarItem(
-                  title: Text(
-                    "account".tr,
-                    style: TextStyle(
-                      fontSize: getProportionateScreenWidth(11),
-                    ),
-                  ),
-                  icon: Icon(Icons.account_circle),
-                ),
-              ],
-              currentIndex: controller.currentIndex,
-              onTap: controller.selectCurrentIndex,
-              isFloating: true,
+        bottomNavigationBar: AnimatedOpacity(
+          opacity: scroller.show ? 1 : 0,
+          curve: Curves.easeInOut,
+          duration: Duration(milliseconds: 300),
+          child: CustomNavigationBar(
+            elevation: 8.0,
+            bubbleCurve: Curves.easeIn,
+            strokeColor: Colors.transparent,
+            iconSize: getProportionateScreenWidth(20),
+            selectedColor: Colors.grey,
+            unSelectedColor: Colors.grey[300],
+            backgroundColor: Colors.white,
+            borderRadius: Radius.circular(
+              getProportionateScreenWidth(15),
             ),
+            items: [
+              CustomNavigationBarItem(
+                title: Text(
+                  "home".tr,
+                  style: TextStyle(
+                    fontSize: getProportionateScreenWidth(11),
+                  ),
+                ),
+                icon: Icon(Icons.home),
+              ),
+              CustomNavigationBarItem(
+                title: Text(
+                  "billboard".tr,
+                  style: TextStyle(
+                    fontSize: getProportionateScreenWidth(11),
+                  ),
+                ),
+                icon: Icon(Icons.movie),
+              ),
+              CustomNavigationBarItem(
+                title: Text(
+                  "comming".tr,
+                  style: TextStyle(
+                    fontSize: getProportionateScreenWidth(11),
+                  ),
+                ),
+                icon: Icon(Icons.calendar_today),
+              ),
+              CustomNavigationBarItem(
+                title: Text(
+                  "account".tr,
+                  style: TextStyle(
+                    fontSize: getProportionateScreenWidth(11),
+                  ),
+                ),
+                icon: Icon(Icons.account_circle),
+              ),
+            ],
+            currentIndex: controller.currentIndex,
+            onTap: controller.selectCurrentIndex,
+            isFloating: true,
           ),
         ),
       ),
