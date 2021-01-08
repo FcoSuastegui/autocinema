@@ -28,6 +28,7 @@ class ConnectivityController extends GetxController {
 
   Future<void> initConnectivity() async {
     try {
+      print(" 12");
       ConnectivityResult result = await _connectivity.checkConnectivity();
       _pageConnection(result);
     } on PlatformException catch (e) {
@@ -48,6 +49,7 @@ class ConnectivityController extends GetxController {
   }
 
   Future<void> _updateConnection(ConnectivityResult result) async {
+    print("12132123");
     switch (result) {
       case ConnectivityResult.wifi:
       case ConnectivityResult.mobile:
