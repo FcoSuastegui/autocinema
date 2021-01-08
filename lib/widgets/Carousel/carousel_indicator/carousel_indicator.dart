@@ -54,7 +54,7 @@ class CarouselWithIndicator extends StatelessWidget {
                 enlargeCenterPage: true,
                 aspectRatio: 16 / 9,
                 viewportFraction: 1.0,
-                autoPlayCurve: Curves.fastLinearToSlowEaseIn,
+                autoPlayCurve: Curves.easeOut,
                 onPageChanged: (index, reason) {
                   controller.currentIndex = index;
                 },
