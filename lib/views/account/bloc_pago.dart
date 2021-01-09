@@ -1,4 +1,5 @@
-import 'package:autocinema/controllers/native/sr_pago_channel.dart';
+import 'package:autocinema/controllers/native/SrPago/sr_pago_card_model.dart';
+import 'package:autocinema/controllers/native/SrPago/sr_pago_flutter.dart';
 import 'package:autocinema/helpers/validator_string_bloc.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
@@ -27,12 +28,10 @@ class PagoBloc extends FormBloc<String, String> {
   @override
   void onSubmitting() async {
     final expire = expired.value.split('/');
-
-    final sr = SrPagoChannel.i;
-    sr.publicKey = "pk_dev_5c056344c05fdc*?37";
+    SrPagoFlutter.publicKey = "pk_dev_5c056344c05fdc*?37";
 
     try {
-      final r = await sr.getTokenSrPago(SrPagoCreditCard(
+      final r = await SrPagoFlutter.createCardToken(SrPagoCardModel(
         name: name.value,
         number: tarjet.value.replaceAll(" ", ""),
         cvv: cvv.value,

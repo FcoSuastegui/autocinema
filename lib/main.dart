@@ -12,6 +12,5 @@ void main() async {
 Future<void> initServices() async {
   print('starting services ...');
   await GetStorages.i.init();
-  await ConnectivityController.i.onInit();
   print('All services started...');
 }

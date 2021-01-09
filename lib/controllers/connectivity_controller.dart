@@ -6,10 +6,6 @@ import 'package:get/get.dart';
 import 'dart:async';
 
 class ConnectivityController extends GetxController {
-  ConnectivityController._internal();
-  static ConnectivityController _instance = ConnectivityController._internal();
-  static ConnectivityController get i => _instance;
-
   Connectivity _connectivity = Connectivity();
   StreamSubscription<ConnectivityResult> subscription;
 
