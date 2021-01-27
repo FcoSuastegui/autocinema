@@ -1,4 +1,8 @@
 import 'package:autocinema/controllers/bindings/app_bidings.dart';
+import 'package:autocinema/views/card-add/card_add_view.dart';
+import 'package:autocinema/views/card-details/card_details_view.dart';
+import 'package:autocinema/views/card/binding/card_binding.dart';
+import 'package:autocinema/views/card/card_view.dart';
 import 'package:autocinema/views/movie-details/binding/movie_binding.dart';
 import 'package:autocinema/views/movie-details/movie_detail_detail.dart';
 import 'package:autocinema/views/navbar/binding/nav_bar_binding.dart';
@@ -16,6 +20,21 @@ class Routes {
     GetPage(
       name: Pages.NoWifi,
       page: () => NoWifiView(),
+    ),
+    GetPage(
+      name: Pages.Card,
+      page: () => CardView(),
+      binding: CardBinding(),
+      children: [
+        GetPage(
+          name: Pages.CardAdd,
+          page: () => CardAddView(),
+        ),
+        GetPage(
+          name: Pages.CardDetails,
+          page: () => CardDetailsView(),
+        ),
+      ],
     ),
     GetPage(
       name: Pages.MovieDetails,

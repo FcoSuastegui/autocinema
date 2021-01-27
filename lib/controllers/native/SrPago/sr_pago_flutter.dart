@@ -54,7 +54,7 @@ class SrPagoFlutter {
     final Map<String, dynamic> arguments = {
       "liveMode": _liveMode,
       "publicKey": _publicKey,
-      "creditCard": card.toJson(),
+      "card": card.toJson(),
     };
 
     final result = await _channel.invokeMethod("getToken", arguments);

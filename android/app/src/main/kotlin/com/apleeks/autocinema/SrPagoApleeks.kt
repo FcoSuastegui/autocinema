@@ -75,7 +75,7 @@ class SrPagoApleeks internal constructor(private val activity: Activity, flutter
         val data = call.arguments as HashMap<String, Any>
         val publicKey = data["publicKey"] as String?
         val liveMode = data["liveMode"] as Boolean
-        val creditCard = data["creditCard"] as HashMap<String, Any>?
+        val card = data["card"] as HashMap<String, Any>?
         Log.d(LOG, data.toString())
         Log.d(LOG, publicKey)
         if (srPago != null) {
@@ -83,14 +83,14 @@ class SrPagoApleeks internal constructor(private val activity: Activity, flutter
             srPago!!.isLiveMode = liveMode
             srPago!!.publishableKey = publicKey
         }
-        val card = Card()
-        card.name = creditCard!!["name"].toString()
-        card.number = creditCard["number"].toString()
-        card.cvv = creditCard["cvv"].toString()
-        card.expMonth = creditCard["month"].toString()
-        card.expYear = creditCard["year"].toString()
+        val spCard = Card()
+        spCard.name = card!!["name"].toString()
+        spCard.number = card["number"].toString()
+        spCard.cvv = card["cvv"].toString()
+        spCard.expMonth = card["month"].toString()
+        spCard.expYear = card["year"].toString()
         try {
-            srPago!!.createToken(card, object : SpTokenListener {
+            srPago!!.createToken(spCard, object : SpTokenListener {
                 @RequiresApi(api = Build.VERSION_CODES.N)
                 override fun onSuccess(spToken: Token) {
                     response.replace("status", true)

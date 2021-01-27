@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:autocinema/controllers/native/SrPago/sr_pago_card_model.dart';
 import 'package:autocinema/controllers/native/SrPago/sr_pago_flutter.dart';
 import 'package:autocinema/helpers/validator_string_bloc.dart';
@@ -28,7 +30,11 @@ class PagoBloc extends FormBloc<String, String> {
   @override
   void onSubmitting() async {
     final expire = expired.value.split('/');
-    SrPagoFlutter.publicKey = "pk_dev_5c056344c05fdc*?37";
+
+    SrPagoFlutter.publicKey =
+        Platform.isAndroid ? "pk_dev_600b22e10a2013gXUe" : "pk_dev_600b23519d87fMbtz9";
+
+    //SrPagoFlutter.publicKey = "pk_dev_5c056344c05fdc*?37";
 
     try {
       final r = await SrPagoFlutter.createCardToken(SrPagoCardModel(

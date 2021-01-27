@@ -11,4 +11,7 @@ class Pages {
   static const NavBar = "/nav-bar";
   static const NoWifi = "/no-wifi";
   static const MovieDetails = "/movie-details";
+  static const Card = "/card";
+  static const CardAdd = "/card-add";
+  static const CardDetails = "/card-details";
 }

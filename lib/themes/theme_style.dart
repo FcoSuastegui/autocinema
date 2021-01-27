@@ -11,6 +11,8 @@ class ThemeStyle {
     bottomAppBarColor: const Color.fromRGBO(45, 45, 48, 1),
     primaryColorLight: const Color(0xFFF5F5F5),
     primaryColorDark: const Color(0xFFEEEEEE),
+    textTheme: GoogleFonts.quicksandTextTheme(),
+    visualDensity: VisualDensity.adaptivePlatformDensity,
   );
   static final darkTheme = ThemeData.dark().copyWith(
     tabBarTheme: TabBarTheme(
@@ -21,12 +23,11 @@ class ThemeStyle {
     cardColor: const Color(0xFF333333),
     primaryColorLight: const Color(0xFF505050),
     primaryColorDark: const Color(0xFF404040),
-  );
-  static MediaQueryData _mediaQuery;
-  static ThemeData theme = ThemeData(
     textTheme: GoogleFonts.quicksandTextTheme(),
     visualDensity: VisualDensity.adaptivePlatformDensity,
   );
+  static MediaQueryData _mediaQuery;
+  static ThemeData theme = ThemeData();
   static ThemeData getTheme(BuildContext context) {
     _mediaQuery = MediaQuery.of(context);
     theme = _mediaQuery.platformBrightness == Brightness.light ? lightTheme : darkTheme;

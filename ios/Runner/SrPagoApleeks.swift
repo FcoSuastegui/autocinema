@@ -48,7 +48,7 @@ class SrPagoApleeks : NSObject, CLLocationManagerDelegate {
     private func getToken(call:FlutterMethodCall, result:@escaping FlutterResult ) {
         
         let data: [String:Any] =  call.arguments  as! [String:Any]
-        let creditCard: [String:Any] =  data["creditCard"] as! [String:Any]
+        let card: [String:Any] =  data["card"] as! [String:Any]
         
         srPago = SrPago.sharedInstance() as? SrPago
         srPago?.publisableKey = (data["publicKey"] as! String)
@@ -56,16 +56,16 @@ class SrPagoApleeks : NSObject, CLLocationManagerDelegate {
         
         var resquest = ["status": false, "message":"", "token": ""] as [String : Any]
         
-        let card = SPCard()
+        let spCard = SPCard()
         
-        card.name = creditCard["name"] as! String as NSString
-        card.number = creditCard["number"] as! String as NSString //self.cardNumber.text;
-        card.expMonth = creditCard["month"] as! String as NSString
-        card.expYear = creditCard["year"] as! String as NSString
-        card.cvv = creditCard["cvv"] as! String as NSString
+        spCard.name = card["name"] as! String as NSString
+        spCard.number = card["number"] as! String as NSString //self.cardNumber.text;
+        spCard.expMonth = card["month"] as! String as NSString
+        spCard.expYear = card["year"] as! String as NSString
+        spCard.cvv = card["cvv"] as! String as NSString
         
         SwiftTryCatch.try({ [self] in
-            srPago?.token.createToken(with: card, onSuccess: { response in
+            srPago?.token.createToken(with: spCard, onSuccess: { response in
                 if let token = response?.token {
                     resquest["status"] = true
                     resquest["token"] = token
@@ -114,19 +114,19 @@ class SrPagoApleeks : NSObject, CLLocationManagerDelegate {
     private func sendStatus(result: FlutterResult, status: CLAuthorizationStatus ){
         switch status {
         case .authorizedWhenInUse:
-            print("check 😁 granted")
+            print("granted")
             result("granted")
         case .denied:
-            print("check 😁 denied")
+            print("denied")
             result("denied")
         case .restricted:
-            print("check 😁 restricted")
+            print("restricted")
             result("restricted")
         case .notDetermined:
-            print("check 😁 notDetermined")
+            print("notDetermined")
             result("unknown")
         default:
-            print("check 😁 unknown")
+            print("unknown")
             result("unknown");
         }
     }
