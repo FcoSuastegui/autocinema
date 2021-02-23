@@ -42,9 +42,6 @@ class Routes {
     GetPage(
       name: NavBarView.routeName,
       page: () => NavBarView(),
-      bindings: [
-        NavBarBinding(),
-      ],
     ),
   ];
 }
