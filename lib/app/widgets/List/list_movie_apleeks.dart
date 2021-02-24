@@ -1,5 +1,4 @@
 import 'package:autocinema/app/data/models/movie_model.dart';
-import 'package:autocinema/app/utils/get_storage.dart';
 import 'package:autocinema/app/themes/adapt.dart';
 import 'package:autocinema/app/themes/theme_style.dart';
 import 'package:autocinema/app/widgets/Shimmer/shimmer.dart';
@@ -19,19 +18,22 @@ class ListApleeks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData _theme = ThemeStyle.getTheme(context);
+
+    final double height = Adapt.px(300);
+    final double width = Adapt.px(200);
+
     return loading
         ? _ShimmerListApleeks()
         : SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext ctx, int index) {
                 final movie = movies[index];
-                final String path = "${GetStorages.i.server}/storage/images/peliculas/${movie.img}";
                 return Container(
                   margin: EdgeInsets.symmetric(
                     horizontal: Adapt.px(10),
                     vertical: Adapt.px(10),
                   ),
-                  height: Adapt.px(210),
+                  height: height,
                   decoration: BoxDecoration(
                     color: _theme.cardColor,
                     borderRadius: BorderRadius.circular(
@@ -65,19 +67,19 @@ class ListApleeks extends StatelessWidget {
                             ),
                           ),
                           child: Container(
-                            width: Adapt.px(150),
+                            width: width,
                             color: const Color(0xFFAABBCC),
-                            height: Adapt.px(210),
+                            height: height,
                             child: CachedNetworkImage(
                               fit: BoxFit.fill,
-                              imageUrl: path,
+                              imageUrl: movie.image,
                             ),
                           ),
                         ),
                         Expanded(
                           child: Padding(
                             padding: EdgeInsets.symmetric(
-                              horizontal: Adapt.px(10),
+                              horizontal: Adapt.px(25),
                               vertical: Adapt.px(10),
                             ),
                             child: SizedBox(
@@ -94,7 +96,7 @@ class ListApleeks extends StatelessWidget {
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
-                                            fontSize: Adapt.px(13),
+                                            fontSize: Adapt.px(26),
                                             fontWeight: FontWeight.w500,
                                           ),
                                         ),
@@ -106,7 +108,7 @@ class ListApleeks extends StatelessWidget {
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             color: const Color(0xFF9E9E9E),
-                                            fontSize: Adapt.px(10),
+                                            fontSize: Adapt.px(25),
                                           ),
                                         ),
                                         SizedBox(
@@ -123,7 +125,7 @@ class ListApleeks extends StatelessWidget {
                                                   Icon(
                                                     Icons.insert_emoticon,
                                                     color: Colors.white,
-                                                    size: Adapt.px(18),
+                                                    size: Adapt.px(25),
                                                   ),
                                                   SizedBox(
                                                     width: Adapt.px(5),
@@ -132,7 +134,7 @@ class ListApleeks extends StatelessWidget {
                                                     "${movie.clasificacion}",
                                                     style: TextStyle(
                                                       color: Colors.white,
-                                                      fontSize: Adapt.px(12),
+                                                      fontSize: Adapt.px(20),
                                                     ),
                                                   ),
                                                 ],
@@ -149,7 +151,7 @@ class ListApleeks extends StatelessWidget {
                                                   Icon(
                                                     Icons.query_builder,
                                                     color: Colors.white,
-                                                    size: Adapt.px(18),
+                                                    size: Adapt.px(25),
                                                   ),
                                                   SizedBox(
                                                     width: Adapt.px(5),
@@ -158,7 +160,7 @@ class ListApleeks extends StatelessWidget {
                                                     "${movie.duracion} min",
                                                     style: TextStyle(
                                                       color: Colors.white,
-                                                      fontSize: Adapt.px(12),
+                                                      fontSize: Adapt.px(20),
                                                     ),
                                                   ),
                                                 ],
@@ -172,7 +174,7 @@ class ListApleeks extends StatelessWidget {
                                             maxLines: 2,
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
-                                              fontSize: Adapt.px(12),
+                                              fontSize: Adapt.px(20),
                                               fontWeight: FontWeight.w300,
                                             ),
                                           ),
@@ -183,8 +185,8 @@ class ListApleeks extends StatelessWidget {
                                   Align(
                                     alignment: Alignment.centerRight,
                                     child: Container(
-                                      width: Adapt.px(40),
-                                      height: Adapt.px(30),
+                                      width: Adapt.px(50),
+                                      height: Adapt.px(50),
                                       decoration: BoxDecoration(
                                         color: const Color(0xFF334455),
                                         borderRadius: BorderRadius.circular(

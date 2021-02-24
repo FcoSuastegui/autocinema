@@ -24,10 +24,10 @@ class FilterBar extends StatelessWidget {
               vertical: Adapt.px(5),
             ),
             padding: EdgeInsets.symmetric(
+              horizontal: Adapt.px(25),
               vertical: Adapt.px(5),
-              horizontal: Adapt.px(10),
             ),
-            height: Adapt.px(50),
+            height: Adapt.px(100),
             decoration: BoxDecoration(
               border: Border.all(
                 color: _theme.brightness == Brightness.light
@@ -35,7 +35,7 @@ class FilterBar extends StatelessWidget {
                     : const Color(0xFF505050),
               ),
               borderRadius: BorderRadius.circular(
-                Adapt.px(8),
+                Adapt.px(10),
               ),
               color: _theme.cardColor,
             ),
@@ -48,7 +48,7 @@ class FilterBar extends StatelessWidget {
                 GestureDetector(
                   child: Container(
                     padding: EdgeInsets.all(
-                      Adapt.px(5),
+                      Adapt.px(10),
                     ),
                     decoration: BoxDecoration(
                       color: const Color(0xFF334455),
@@ -58,7 +58,7 @@ class FilterBar extends StatelessWidget {
                     ),
                     child: Icon(
                       Icons.filter_list,
-                      size: Adapt.px(15),
+                      size: Adapt.px(35),
                       color: const Color(0xFFFFFFFF),
                     ),
                   ),

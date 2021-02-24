@@ -2,7 +2,6 @@ import 'package:autocinema/app/themes/adapt.dart';
 import 'package:autocinema/app/views/navbar/components/nar_bar_items.dart';
 import 'package:autocinema/app/views/navbar/components/nav_bar_pages.dart';
 import 'package:autocinema/app/views/navbar/controller/nav_bar_controller.dart';
-import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

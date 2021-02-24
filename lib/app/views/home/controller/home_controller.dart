@@ -1,6 +1,5 @@
 import 'package:autocinema/app/data/models/movie_model.dart';
 import 'package:autocinema/app/data/services/autocinema_service.dart';
-import 'package:autocinema/app/utils/get_storage.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
@@ -38,14 +37,15 @@ class HomeController extends GetxController {
 
   Future<void> getBanners() async {
     final list = await AutoCinemaService().banners();
+    banners.clear();
     list.forEach((element) {
-      final item = "${GetStorages.i.server}/storage/images/banners/${element.valor}";
-      banners.add(item);
+      banners.add(element.valor);
     });
   }
 
   Future<void> getCartelera() async {
     final list = await AutoCinemaService().cartelera();
+    cartelera.clear();
     list.forEach((element) {
       cartelera.add(element);
     });
@@ -53,6 +53,7 @@ class HomeController extends GetxController {
 
   Future<void> getProximamente() async {
     final list = await AutoCinemaService().proximamente();
+    proximamente.clear();
     list.forEach((element) {
       proximamente.add(element);
     });

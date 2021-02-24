@@ -34,7 +34,7 @@ class MovieDetails extends GetView<MovieController> {
                       child: SizedBox(
                         height: Adapt.px(600),
                         child: HeaderBackground(
-                          imgUrl: "${GetStorages.i.server}/storage/images/peliculas/${movie.img}",
+                          imgUrl: "${GetStorages.i.server}/storage/images/peliculas/${movie.image}",
                           scrollController: scrollController,
                         ),
                       ),

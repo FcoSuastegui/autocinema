@@ -1,4 +1,4 @@
-import 'package:autocinema/app/global/bindings/app_bidings.dart';
+import 'package:autocinema/app/globals/bindings/global_binding.dart';
 import 'package:autocinema/app/shared/logger/logger_utils.dart';
 import 'package:autocinema/app/themes/theme_style.dart';
 import 'package:autocinema/app/utils/get_storage.dart';
@@ -25,7 +25,7 @@ class App extends StatelessWidget {
         darkTheme: ThemeStyle.darkTheme,
         locale: Get.deviceLocale,
         translations: I18(),
-        initialBinding: AppBidings(),
+        initialBinding: GlobalBinding(),
         defaultTransition: Transition.fadeIn,
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,

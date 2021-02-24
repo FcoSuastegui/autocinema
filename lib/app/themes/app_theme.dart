@@ -2,7 +2,7 @@ import 'package:autocinema/app/themes/adapt.dart';
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  static const kPrimaryColor = Color(0xFFC4A27D);
+  static const kPrimaryColor = Color(0xFF141ACA);
   static const kPrimaryLightColor = Color(0xFFEAD4A3);
   static const kPrimaryGradientColor = LinearGradient(
     begin: Alignment.topLeft,

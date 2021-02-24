@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:autocinema/app/global/SrPago/sr_pago_card_model.dart';
-import 'package:autocinema/app/global/SrPago/sr_pago_flutter.dart';
+import 'package:autocinema/app/globals/SrPago/sr_pago_card_model.dart';
+import 'package:autocinema/app/globals/SrPago/sr_pago_flutter.dart';
 import 'package:autocinema/app/utils/validator_string.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';

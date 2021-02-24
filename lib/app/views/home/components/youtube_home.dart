@@ -37,6 +37,7 @@ class TrailerCell extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: SizedBox(
+        height: Adapt.px(920),
         width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,11 +45,11 @@ class TrailerCell extends StatelessWidget {
             Stack(
               children: [
                 Container(
-                  height: Adapt.px(180),
+                  height: Adapt.px(920),
                   decoration: BoxDecoration(
                     color: _theme.primaryColorDark,
                     image: DecorationImage(
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fill,
                       image: CachedNetworkImageProvider(
                         'https://i.ytimg.com/vi/$data/hqdefault.jpg',
                       ),
@@ -56,7 +57,7 @@ class TrailerCell extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  height: Adapt.px(180),
+                  height: Adapt.px(320),
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: const Color(0x55000000),

@@ -14,7 +14,7 @@ class MovieModel {
     this.clasificacion,
     this.descripcion,
     this.trailer,
-    this.img,
+    this.image,
     this.facebook,
     this.horario,
     this.idioma,
@@ -28,7 +28,7 @@ class MovieModel {
   String clasificacion;
   String descripcion;
   String trailer;
-  String img;
+  String image;
   String facebook;
   String horario;
   String idioma;
@@ -42,7 +42,7 @@ class MovieModel {
         clasificacion: json["clasificacion"] ?? '',
         descripcion: json["descripcion"] ?? '',
         trailer: json["trailer"] ?? '',
-        img: json["img"] ?? '',
+        image: json["image"] ?? '',
         facebook: json["facebook"] ?? '',
         horario: json["horario"] ?? '',
         idioma: json["idioma"] ?? '',
@@ -57,7 +57,7 @@ class MovieModel {
         "clasificacion": clasificacion,
         "descripcion": descripcion,
         "trailer": trailer,
-        "img": img,
+        "image": image,
         "facebook": facebook,
         "horario": horario,
         "idioma": idioma,

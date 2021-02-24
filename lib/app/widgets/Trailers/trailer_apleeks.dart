@@ -28,7 +28,7 @@ class TrailerApleeks extends StatelessWidget {
             Stack(
               children: [
                 Container(
-                  height: Adapt.px(180),
+                  height: Adapt.px(350),
                   decoration: BoxDecoration(
                     color: _theme.primaryColorDark,
                     image: DecorationImage(
@@ -40,7 +40,7 @@ class TrailerApleeks extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  height: Adapt.px(180),
+                  height: Adapt.px(350),
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: const Color(0x55000000),

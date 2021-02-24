@@ -10,7 +10,7 @@ class ShimmerMovie extends StatelessWidget {
       margin: EdgeInsets.symmetric(
         vertical: Adapt.px(20),
       ),
-      height: Adapt.px(80),
+      height: Adapt.px(200),
       width: double.infinity,
       child: ListView.separated(
         itemCount: 4,

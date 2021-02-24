@@ -1,6 +1,6 @@
-import 'package:autocinema/app/global/SrPago/sr_pago_card_model.dart';
-import 'package:autocinema/app/global/SrPago/permission.dart';
-import 'package:autocinema/app/global/SrPago/sr_pago_response.dart';
+import 'package:autocinema/app/globals/SrPago/sr_pago_card_model.dart';
+import 'package:autocinema/app/globals/SrPago/permission.dart';
+import 'package:autocinema/app/globals/SrPago/sr_pago_response.dart';
 import 'package:flutter/services.dart';
 
 class SrPagoFlutter {

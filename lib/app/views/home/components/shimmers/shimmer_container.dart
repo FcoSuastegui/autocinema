@@ -8,7 +8,7 @@ class ShimmerContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: Adapt.px(180),
+      height: Adapt.px(320),
       color: Colors.white,
     );
   }
