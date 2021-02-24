@@ -11,7 +11,6 @@ class NavBarController extends GetxController {
   int get currentIndex => _currentIndex.value;
 
   void selectCurrentIndex(int index) => _currentIndex.value = index;
-
   final scroll = Get.find<ScrollBarController>().scroll;
 
   RxBool _show = true.obs;
