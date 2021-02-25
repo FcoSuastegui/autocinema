@@ -1,0 +1,200 @@
+import 'package:autocinema/app/data/models/movie_model.dart';
+import 'package:autocinema/app/themes/adapt.dart';
+import 'package:autocinema/app/themes/theme_style.dart';
+import 'package:autocinema/app/widgets/Animation/pulse_animation.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+
+class MovieCardFront extends StatelessWidget {
+  final double height;
+  final MovieModel movie;
+
+  const MovieCardFront({
+    Key key,
+    this.height = 200,
+    this.movie,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData _theme = ThemeStyle.getTheme(context);
+    return Stack(
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.all(
+            Radius.circular(
+              Adapt.px(20),
+            ),
+          ),
+          child: Container(
+            width: height,
+            decoration: BoxDecoration(
+              color: _theme.cardColor,
+              boxShadow: [
+                BoxShadow(
+                  offset: Offset(5, 5),
+                  color: _theme.brightness == Brightness.light
+                      ? _theme.primaryColorDark
+                      : const Color(0xFF303030),
+                  blurRadius: 5,
+                )
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CachedNetworkImage(
+                  imageUrl: movie.image,
+                  imageBuilder: (context, image) => Container(
+                    color: const Color(0xFFAABBCC),
+                    child: CachedNetworkImage(
+                      height: height * 1.2,
+                      width: height,
+                      fit: BoxFit.fill,
+                      imageUrl: movie.image,
+                    ),
+                  ),
+                  placeholder: (context, url) => Container(
+                    color: const Color(0xFFAABBCC),
+                    height: height * 1.2,
+                  ),
+                  errorWidget: (context, url, error) => Container(
+                    color: const Color(0xFFAABBCC),
+                    height: height * 1.2,
+                  ),
+                  fadeOutDuration: const Duration(milliseconds: 400),
+                  fadeInDuration: const Duration(milliseconds: 800),
+                ),
+                SizedBox(
+                  height: Adapt.px(20),
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 10,
+                  ),
+                  child: Text(
+                    movie.titulo,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: Adapt.px(24),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 10,
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Transform(
+                        transform: new Matrix4.identity()..scale(0.7),
+                        child: Chip(
+                          padding: EdgeInsets.all(5),
+                          backgroundColor: const Color(0xFF9E9E9E),
+                          label: Row(
+                            children: [
+                              Icon(
+                                Icons.insert_emoticon,
+                                color: Colors.white,
+                                size: Adapt.px(40),
+                              ),
+                              SizedBox(
+                                width: Adapt.px(5),
+                              ),
+                              Text(
+                                "${movie.clasificacion}",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: Adapt.px(30),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Transform(
+                        transform: new Matrix4.identity()..scale(0.7),
+                        child: Chip(
+                          padding: EdgeInsets.all(5),
+                          backgroundColor: const Color(0xFF9E9E9E),
+                          label: Row(
+                            children: [
+                              Icon(
+                                Icons.query_builder,
+                                color: Colors.white,
+                                size: Adapt.px(40),
+                              ),
+                              SizedBox(
+                                width: Adapt.px(5),
+                              ),
+                              Text(
+                                "${movie.duracion} min",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: Adapt.px(30),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 10,
+                  ),
+                  child: Text(
+                    movie.descripcion,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                    style: TextStyle(
+                      color: Colors.black.withOpacity(0.4),
+                      fontWeight: FontWeight.bold,
+                      fontSize: Adapt.px(24),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Positioned(
+          child: movie.reciente == 1
+              ? PulseAnimation(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(
+                        Adapt.px(10),
+                      ),
+                      topLeft: Radius.circular(
+                        Adapt.px(20),
+                      ),
+                    ),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 5,
+                        horizontal: 10,
+                      ),
+                      child: Text(
+                        "ESTRENO",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      decoration: BoxDecoration(
+                        color: Color(0xFFF1494E),
+                      ),
+                    ),
+                  ),
+                )
+              : SizedBox.shrink(),
+        )
+      ],
+    );
+  }
+}

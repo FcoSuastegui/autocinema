@@ -1,5 +1,4 @@
 import 'package:autocinema/app/globals/controller/scroll_bar_controller.dart';
-import 'package:autocinema/app/widgets/ScrollBar/scroll_bar_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

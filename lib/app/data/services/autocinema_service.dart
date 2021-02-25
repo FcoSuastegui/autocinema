@@ -1,11 +1,9 @@
 import 'package:autocinema/app/data/domian/network.dart';
 import 'package:autocinema/app/data/models/configuration_model.dart';
+import 'package:autocinema/app/data/models/list_page.dart';
 import 'package:autocinema/app/data/models/movie_model.dart';
-import 'package:autocinema/app/utils/get_storage.dart';
 
 class AutoCinemaService {
-  String pathImage = "${GetStorages.i.server}/storage/images";
-
   Future<List<ConfigurationModel>> banners() async {
     List<ConfigurationModel> list = List<ConfigurationModel>();
     final response = await Network.i.post(
@@ -19,34 +17,33 @@ class AutoCinemaService {
   }
 
   Future<ConfigurationModel> trailer() async {
-    ConfigurationModel trailer;
-
     final response = await Network.i.post(
       route: '/v1/app/trailer',
     );
 
-    if (response.status) {
-      trailer = ConfigurationModel.fromJson(response.data);
-    }
-
-    return trailer;
+    return response.status
+        ? ConfigurationModel.fromJson(response.data)
+        : ConfigurationModel.fromJson({});
   }
 
-  Future<List<MovieModel>> cartelera() async {
-    List<MovieModel> list = List<MovieModel>();
-
+  static Future<ListPage<MovieModel>> movies({type = 1, int page = 1}) async {
+    final List<MovieModel> list = List<MovieModel>();
+    String message = "";
     final response = await Network.i.post(
       route: '/v1/app/movies',
       data: {
-        "caso": 1,
+        "caso": type,
       },
     );
+    response.status
+        ? response.data.forEach((e) => list.add(MovieModel.fromJson(e)))
+        : message = response.message;
 
-    if (response.status) {
-      response.data.forEach((item) => list.add(MovieModel.fromJson(item)));
-    }
-
-    return list;
+    return ListPage<MovieModel>(
+      itemList: list,
+      totalCount: list.length,
+      message: message,
+    );
   }
 
   Future<List<MovieModel>> proximamente() async {

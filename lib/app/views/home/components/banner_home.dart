@@ -9,10 +9,12 @@ class BannerHome extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return CarouselWithIndicator(
-      controller: CarouselIndicatorController(),
-      listImage: controller.banners,
-      fit: BoxFit.fill,
+    return SliverToBoxAdapter(
+      child: CarouselWithIndicator(
+        controller: CarouselIndicatorController(),
+        listImage: controller.banners,
+        fit: BoxFit.fill,
+      ),
     );
   }
 }

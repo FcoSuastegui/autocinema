@@ -22,6 +22,10 @@ class BillBoardView extends StatelessWidget {
           child: GetBuilder<BillBoardController>(
             init: BillBoardController.i,
             builder: (controller) => SliverScrollBarView(
+              physics: AlwaysScrollableScrollPhysics(),
+              onRefresh: () => Future.sync(
+                () => controller.carteleraController.refresh(),
+              ),
               slivers: [
                 SliverPersistentHeader(
                   floating: true,
@@ -31,6 +35,11 @@ class BillBoardView extends StatelessWidget {
                     child: FilterBar(
                       title: "billboard".tr,
                     ),
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: 10,
                   ),
                 ),
                 ListBillBoard(),

@@ -21,7 +21,10 @@ class CommingView extends StatelessWidget {
           bottom: false,
           child: GetBuilder<CommingController>(
             init: CommingController.i,
-            builder: (controller) => SliverScrollBarView(
+            builder: (c) => SliverScrollBarView(
+              onRefresh: () => Future.sync(
+                () => c.commingController.refresh(),
+              ),
               slivers: [
                 SliverPersistentHeader(
                   floating: true,
@@ -33,7 +36,17 @@ class CommingView extends StatelessWidget {
                     ),
                   ),
                 ),
+                const SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: 10,
+                  ),
+                ),
                 const ListComming(),
+                const SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: 20,
+                  ),
+                ),
               ],
             ),
           ),

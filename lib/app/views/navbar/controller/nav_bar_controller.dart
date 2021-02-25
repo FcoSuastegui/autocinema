@@ -17,7 +17,6 @@ class NavBarController extends GetxController {
   bool get show => _show.value;
 
   void _listener() {
-    print(true);
     if (scroll.position.userScrollDirection == ScrollDirection.reverse && _show.value) {
       _show.value = false;
     } else if (scroll.position.userScrollDirection == ScrollDirection.forward && !_show.value) {

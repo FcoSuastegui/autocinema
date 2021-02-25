@@ -1,29 +1,34 @@
 import 'package:autocinema/app/data/models/movie_model.dart';
 import 'package:autocinema/app/data/services/autocinema_service.dart';
 import 'package:get/get.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class CommingController extends GetxController {
   CommingController._internal();
   static CommingController _instance = CommingController._internal();
   static CommingController get i => _instance;
 
-  RxList<MovieModel> comming = List<MovieModel>().obs;
+  static const _pageSize = 10;
+  final PagingController<int, MovieModel> commingController = PagingController(firstPageKey: 1);
 
-  RxBool _loading = false.obs;
-  bool get loading => _loading.value;
+  Future<void> getCartelera(int pageKey) async {
+    final movies = await AutoCinemaService.movies(
+      type: 2,
+      page: pageKey,
+    );
+    if (movies.message.isEmpty) {
+      final isLastPage = movies.itemList.length <= _pageSize;
+      isLastPage
+          ? commingController.appendLastPage(movies.itemList)
+          : commingController.appendPage(movies.itemList, pageKey + 1);
+    } else {
+      commingController.error = movies.message;
+    }
+  }
 
   @override
   void onInit() {
-    getProximamente();
+    commingController.addPageRequestListener((pageKey) => getCartelera(pageKey));
     super.onInit();
-  }
-
-  Future<void> getProximamente() async {
-    _loading(true);
-    final list = await AutoCinemaService().proximamente();
-    list.forEach((element) {
-      comming.add(element);
-    });
-    _loading(false);
   }
 }

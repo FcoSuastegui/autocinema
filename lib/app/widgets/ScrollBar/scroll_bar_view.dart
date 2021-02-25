@@ -1,4 +1,3 @@
-import 'package:autocinema/app/globals/controller/scroll_bar_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

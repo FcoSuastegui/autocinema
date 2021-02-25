@@ -1,67 +1,61 @@
+import 'package:autocinema/app/data/models/movie_model.dart';
 import 'package:autocinema/app/themes/adapt.dart';
 import 'package:autocinema/app/views/home/controller/home_controller.dart';
-import 'package:autocinema/app/widgets/Card/movie_card.dart';
+import 'package:autocinema/app/widgets/Card/movie_card_front.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class CarteleraHome extends GetView<HomeController> {
   const CarteleraHome({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final double heightCard = Adapt.px(330);
-    return Obx(
-      () => Column(
+    final double heightCard = Adapt.px(700);
+    return SliverToBoxAdapter(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            alignment: Alignment.center,
             padding: EdgeInsets.symmetric(
-              horizontal: Adapt.px(10),
-              vertical: Adapt.px(10),
+              horizontal: Adapt.px(20),
+              vertical: Adapt.px(20),
             ),
-            child: Text(
-              'billboard'.tr,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.black54,
-                fontSize: Adapt.px(30),
-              ),
-            ),
-          ),
-          AnimatedSwitcher(
-            transitionBuilder: (widget, animated) => SlideTransition(
-              position: animated.drive(
-                Tween(
-                  begin: Offset(1, 0),
-                  end: Offset.zero,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'billboard'.tr,
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    color: Colors.black54,
+                    fontWeight: FontWeight.bold,
+                    fontSize: Adapt.px(40),
+                  ),
                 ),
-              ),
-              child: widget,
-            ),
-            switchInCurve: Curves.easeIn,
-            switchOutCurve: Curves.easeOut,
-            duration: Duration(milliseconds: 300),
-            child: Container(
-              height: heightCard,
-              child: ListView.separated(
-                itemCount: controller.cartelera.length,
-                padding: EdgeInsets.symmetric(
-                  horizontal: Adapt.px(5),
+                SizedBox(
+                  height: 10,
                 ),
-                scrollDirection: Axis.horizontal,
-                physics: BouncingScrollPhysics(),
-                shrinkWrap: true,
-                separatorBuilder: (_, index) => SizedBox(
-                  width: Adapt.px(5),
+                Container(
+                  height: heightCard,
+                  child: PagedListView<int, MovieModel>.separated(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: Adapt.px(10),
+                    ),
+                    pagingController: controller.carteleraController,
+                    scrollDirection: Axis.horizontal,
+                    builderDelegate: PagedChildBuilderDelegate<MovieModel>(
+                      firstPageProgressIndicatorBuilder: (context) => SizedBox.shrink(),
+                      itemBuilder: (context, cartelera, index) => MovieCardFront(
+                        movie: cartelera,
+                      ),
+                    ),
+                    separatorBuilder: (context, index) => SizedBox(
+                      width: Adapt.px(30),
+                    ),
+                  ),
                 ),
-                itemBuilder: (_, index) {
-                  final cartelera = controller.cartelera[index];
-                  return MovieCard(
-                    movie: cartelera,
-                  );
-                },
-              ),
+              ],
             ),
           ),
         ],
