@@ -18,6 +18,8 @@ class MovieModel {
     this.facebook,
     this.horario,
     this.idioma,
+    this.director,
+    this.actores,
   });
 
   int id;
@@ -32,6 +34,8 @@ class MovieModel {
   String facebook;
   String horario;
   String idioma;
+  String director;
+  String actores;
 
   factory MovieModel.fromJson(Map<String, dynamic> json) => MovieModel(
         id: json["id"],
@@ -46,6 +50,8 @@ class MovieModel {
         facebook: json["facebook"] ?? '',
         horario: json["horario"] ?? '',
         idioma: json["idioma"] ?? '',
+        director: json["director"] ?? '',
+        actores: json["actores"] ?? '',
       );
 
   Map<String, dynamic> toJson() => {
@@ -61,5 +67,7 @@ class MovieModel {
         "facebook": facebook,
         "horario": horario,
         "idioma": idioma,
+        "director": director,
+        "actores": actores,
       };
 }

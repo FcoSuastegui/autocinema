@@ -28,9 +28,27 @@ class CarouselWithIndicator extends StatelessWidget {
           (item) => Container(
             child: network
                 ? CachedNetworkImage(
-                    width: MediaQuery.of(context).size.width,
                     imageUrl: item,
-                    fit: fit,
+                    imageBuilder: (context, image) => Container(
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFAABBCC),
+                        image: DecorationImage(
+                          image: image,
+                          fit: fit,
+                        ),
+                      ),
+                    ),
+                    placeholder: (context, url) => Container(
+                      width: MediaQuery.of(context).size.width,
+                      color: const Color(0xFFAABBCC),
+                    ),
+                    errorWidget: (context, url, error) => Container(
+                      width: MediaQuery.of(context).size.width,
+                      color: const Color(0xFFAABBCC),
+                    ),
+                    fadeOutDuration: const Duration(milliseconds: 400),
+                    fadeInDuration: const Duration(milliseconds: 800),
                   )
                 : Image.asset(
                     item,

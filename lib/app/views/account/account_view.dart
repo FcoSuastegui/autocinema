@@ -40,9 +40,7 @@ class AccountView extends StatelessWidget {
 } */
 
 final List<String> imgList = [
-  'https://cinema.timeshareapp.com/storage/images/banners/banner01.jpg?0.0024339407705086663',
-  'https://cinema.timeshareapp.com/storage/images/banners/banner02.jpg?0.9654531581005577',
-  'https://cinema.timeshareapp.com/storage/images/banners/banner03.jpg?0.8199639989249073',
+  'https://autocinemaimperial.com/storage/images/banners/banner02.jpg?0.9835921889018194',
 ];
 
 class AccountView extends StatefulWidget {

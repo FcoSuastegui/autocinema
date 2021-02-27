@@ -16,7 +16,7 @@ class HeaderBackground extends StatefulWidget {
 
 class HeaderBackgroundState extends State<HeaderBackground> {
   double postion = 0;
-  final _height = Adapt.px(600).floorToDouble();
+  final _height = Adapt.px(1200).floorToDouble();
   void _imageScroll() {
     if (widget.scrollController.position.pixels <= _height)
       postion = widget.scrollController.position.pixels;
@@ -45,24 +45,35 @@ class HeaderBackgroundState extends State<HeaderBackground> {
           )
         : Stack(
             children: [
-              Container(
-                width: MediaQuery.of(context).size.width,
-                key: ValueKey(widget.imgUrl),
-                transform: Matrix4.translationValues(0, postion, 0),
-                height: _height - postion,
-                decoration: BoxDecoration(
-                  color: const Color(0xFF607D8B),
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: CachedNetworkImageProvider(
-                      widget.imgUrl,
+              CachedNetworkImage(
+                imageUrl: widget.imgUrl,
+                imageBuilder: (context, image) => Container(
+                  key: ValueKey(image),
+                  transform: Matrix4.translationValues(0, postion, 0),
+                  height: _height - postion,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF607D8B),
+                    image: DecorationImage(
+                      image: image,
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
+                placeholder: (context, url) => Container(
+                  color: const Color(0xFFAABBCC),
+                  height: _height - postion,
+                ),
+                errorWidget: (context, url, error) => Container(
+                  color: const Color(0xFFAABBCC),
+                  height: _height - postion,
+                ),
+                fadeOutDuration: const Duration(milliseconds: 400),
+                fadeInDuration: const Duration(milliseconds: 800),
               ),
               ScrollViewBackGround(
                 scrollController: widget.scrollController,
-                height: Adapt.px(600).floorToDouble(),
+                height: Adapt.px(700).floorToDouble(),
                 maxOpacity: 0.8,
               )
             ],

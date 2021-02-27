@@ -6,9 +6,11 @@ import 'package:flutter/material.dart';
 
 class TrailerApleeks extends StatelessWidget {
   final String videoId;
+  final double height;
 
   const TrailerApleeks({
     @required this.videoId,
+    this.height,
   });
   @override
   Widget build(BuildContext context) {
@@ -27,27 +29,38 @@ class TrailerApleeks extends StatelessWidget {
           children: [
             Stack(
               children: [
-                Container(
-                  height: Adapt.px(350),
-                  decoration: BoxDecoration(
-                    color: _theme.primaryColorDark,
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: CachedNetworkImageProvider(
-                        'https://i.ytimg.com/vi/$videoId/hqdefault.jpg',
+                CachedNetworkImage(
+                  imageUrl: 'https://i.ytimg.com/vi/$videoId/hqdefault.jpg',
+                  imageBuilder: (context, image) => Container(
+                    height: Adapt.px(500),
+                    decoration: BoxDecoration(
+                      color: _theme.primaryColorDark,
+                      image: DecorationImage(
+                        image: image,
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
+                  placeholder: (context, url) => Container(
+                    color: const Color(0xFFAABBCC),
+                    height: height ?? Adapt.px(800),
+                  ),
+                  errorWidget: (context, url, error) => Container(
+                    color: const Color(0xFFAABBCC),
+                    height: height ?? Adapt.px(800),
+                  ),
+                  fadeOutDuration: const Duration(milliseconds: 400),
+                  fadeInDuration: const Duration(milliseconds: 800),
                 ),
                 Container(
-                  height: Adapt.px(350),
+                  height: Adapt.px(500),
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: const Color(0x55000000),
                   ),
                   child: Icon(
                     Icons.play_circle_outline,
-                    size: Adapt.px(80),
+                    size: Adapt.px(120),
                     color: const Color(0xFFFFFFFF),
                   ),
                 )

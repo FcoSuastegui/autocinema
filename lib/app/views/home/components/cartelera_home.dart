@@ -1,4 +1,5 @@
 import 'package:autocinema/app/data/models/movie_model.dart';
+import 'package:autocinema/app/routes/routes.dart';
 import 'package:autocinema/app/themes/adapt.dart';
 import 'package:autocinema/app/views/home/controller/home_controller.dart';
 import 'package:autocinema/app/widgets/Card/movie_card_front.dart';
@@ -11,7 +12,7 @@ class CarteleraHome extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    final double heightCard = Adapt.px(700);
+    final double heightCard = Adapt.px(740);
     return SliverToBoxAdapter(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,6 +48,7 @@ class CarteleraHome extends GetView<HomeController> {
                     builderDelegate: PagedChildBuilderDelegate<MovieModel>(
                       firstPageProgressIndicatorBuilder: (context) => SizedBox.shrink(),
                       itemBuilder: (context, cartelera, index) => MovieCardFront(
+                        onTap: () => Routes.goToPage('/movie-details', arguments: cartelera),
                         movie: cartelera,
                       ),
                     ),

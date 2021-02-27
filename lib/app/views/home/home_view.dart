@@ -1,8 +1,7 @@
 import 'package:autocinema/app/views/home/components/banner_home.dart';
-import 'package:autocinema/app/views/home/components/cartelera_home.dart';
-import 'package:autocinema/app/views/home/components/proximamente_home.dart';
 import 'package:autocinema/app/views/home/components/youtube_home.dart';
 import 'package:autocinema/app/views/home/controller/home_controller.dart';
+import 'package:autocinema/app/widgets/Movie/list_movie_front/list_movie_front.dart';
 import 'package:autocinema/app/widgets/Shimmer/shimmer_list_movie.dart';
 import 'package:autocinema/app/widgets/Sliver/sliver_scroll_view.dart';
 import 'package:flutter/material.dart';
@@ -27,9 +26,15 @@ class HomeView extends StatelessWidget {
                   ),
                   slivers: [
                     const BannerHome(),
-                    const CarteleraHome(),
+                    const ListMovieFront(
+                      type: 1,
+                      title: "billboard",
+                    ),
                     const YouTubeHome(),
-                    const ProximamenteHome()
+                    const ListMovieFront(
+                      type: 2,
+                      title: "comming",
+                    ),
                   ],
                 ),
         ),

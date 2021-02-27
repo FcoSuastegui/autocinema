@@ -28,7 +28,7 @@ class ValidatorString {
   static String validateCelPhone(String celphone) =>
       RegExp(r'^\d{10}$').hasMatch(celphone) ? null : 'Número de celular no válido';
 
-  static String staticOnlyNumber(String textField) =>
+  static String validateOnlyNumber(String textField) =>
       RegExp(r'^[0-9]+$').hasMatch(textField) ? null : 'Sólo número';
 
   static String validateText(String textField) =>

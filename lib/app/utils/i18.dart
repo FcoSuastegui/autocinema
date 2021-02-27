@@ -17,6 +17,15 @@ class I18 extends Translations {
           'logout': 'Log out',
           'change-password': 'Change password',
           'receive-notifications': 'Receive notifications',
+          'password': 'Password',
+          'button-session': 'Log in',
+          'google-btn': 'Sign up with Google.',
+          'facebook-btn': 'Sign up with Facebook.',
+          'apple-btn': 'Sign up with Apple.',
+          'bad-request': 'Bad request',
+          'method-not-allowed': 'Method Not Allowed',
+          'required': 'The field is required',
+          'email-format': 'The email format is wrong',
         },
         'es': {
           'home': 'Inicio',
@@ -32,6 +41,16 @@ class I18 extends Translations {
           'logout': 'Cerrar sesión',
           'change-password': 'Cambiar contraseña',
           'receive-notifications': 'Recibir notificaciones',
+          'user': 'Usuario',
+          'password': 'Contraseña',
+          'button-session': 'Iniciar sessión.',
+          'google-btn': 'Regístrate con Google.',
+          'facebook-btn': 'Regístrate con Facebook.',
+          'apple-btn': 'Regístrate con Apple.',
+          'bad-request': 'Solicitud incorrecta',
+          'method-not-allowed': 'Método no permitido',
+          'required': 'El campo es requerido',
+          'email-format': 'El formato de correo electrónico es incorrecto',
         }
       };
 }

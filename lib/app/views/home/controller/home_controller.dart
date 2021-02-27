@@ -71,7 +71,7 @@ class HomeController extends GetxController {
   }
 
   Future<void> getBanners() async {
-    final list = await AutoCinemaService().banners();
+    final list = await AutoCinemaService.banners();
     banners.clear();
     list.forEach((element) {
       banners.add(element.valor);

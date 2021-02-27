@@ -5,7 +5,11 @@ class PulseAnimation extends StatefulWidget {
   final Widget child;
   final Duration duration;
 
-  const PulseAnimation({@required this.child, this.duration, this.tween}) : assert(child != null);
+  const PulseAnimation({
+    @required this.child,
+    this.duration,
+    this.tween,
+  }) : assert(child != null);
   _PulseAnimation createState() => _PulseAnimation();
 }
 

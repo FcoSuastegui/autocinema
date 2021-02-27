@@ -11,7 +11,7 @@ class ProximamenteHome extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    final double heightCard = Adapt.px(700);
+    final double heightCard = Adapt.px(730);
     return SliverToBoxAdapter(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

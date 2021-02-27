@@ -45,7 +45,7 @@ class ThemeStyle {
       color: Colors.white,
       centerTitle: false,
       elevation: 0.0,
-      brightness: Brightness.dark,
+      brightness: Brightness.light,
       iconTheme: IconThemeData(
         color: AppTheme.kPrimaryColor,
       ),

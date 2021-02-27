@@ -42,7 +42,7 @@ class _CustomAppBarState extends State<_CustomAppBar> {
   double _opacity = 0.0;
   final double _opacityHeight = Adapt.px(300);
   final double _appBarChangeHeight = Adapt.px(400);
-  final double _totalHeight = Adapt.px(550);
+  final double _totalHeight = Adapt.px(800);
   void _checkTitle() {
     if (widget.controller.position.pixels >= _appBarChangeHeight) {
       double v = _opacityHeight - (_totalHeight - widget.controller.position.pixels);
@@ -74,19 +74,20 @@ class _CustomAppBarState extends State<_CustomAppBar> {
         ? AppBar(
             key: ValueKey('AppBarShow'),
             backgroundColor: _theme.backgroundColor.withOpacity(_opacity),
-            brightness: _theme.brightness,
+            brightness: Brightness.light,
             iconTheme: _theme.iconTheme,
             title: Text(
               widget.title,
               style: TextStyle(
                 color: _theme.textTheme.bodyText1.color,
-                fontSize: Adapt.px(15),
+                fontSize: Adapt.px(30),
               ),
             ),
           )
         : AppBar(
             key: ValueKey('AppBarHide'),
             backgroundColor: Colors.transparent,
+            brightness: Brightness.dark,
             elevation: 0.0,
             leading: InkWell(
               child: Container(
@@ -99,7 +100,7 @@ class _CustomAppBarState extends State<_CustomAppBar> {
                 ),
                 child: Icon(
                   Icons.keyboard_arrow_left,
-                  size: Adapt.px(25),
+                  size: Adapt.px(50),
                   color: const Color(0xFFFFFFFF),
                 ),
               ),

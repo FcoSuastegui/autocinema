@@ -19,14 +19,13 @@ class TrailerMovie extends StatelessWidget {
         children: [
           Container(
             color: _theme.backgroundColor,
-            padding: EdgeInsets.only(
-              top: Adapt.px(10),
-              bottom: Adapt.px(20),
-              left: Adapt.px(20),
-              right: Adapt.px(20),
+            padding: EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 10,
             ),
             child: TrailerApleeks(
               videoId: youtubeId,
+              height: Adapt.px(500),
             ),
           ),
           SizedBox(

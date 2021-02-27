@@ -1,8 +1,5 @@
-import 'package:autocinema/app/views/card-add/card_add_view.dart';
-import 'package:autocinema/app/views/card-details/card_details_view.dart';
-import 'package:autocinema/app/views/card/binding/card_binding.dart';
-import 'package:autocinema/app/views/card/card_view.dart';
-import 'package:autocinema/app/views/movie-details/binding/movie_binding.dart';
+import 'package:autocinema/app/utils/helper.dart';
+import 'package:autocinema/app/views/movie-details/binding/movie_detail_binding.dart';
 import 'package:autocinema/app/views/movie-details/movie_detail_detail.dart';
 import 'package:autocinema/app/views/navbar/nav_bar_view.dart';
 import 'package:autocinema/app/views/no-wifi/no_wifi_view.dart';
@@ -18,6 +15,7 @@ class Routes {
       name: NoWifiView.routeName,
       page: () => NoWifiView(),
     ),
+
     /* GetPage(
       name: CardView.routeName,
       page: () => CardView(),
@@ -36,11 +34,25 @@ class Routes {
     GetPage(
       name: MovieDetails.routeName,
       page: () => MovieDetails(),
-      binding: MovieBinding(),
+      binding: MovieDetailBinding(),
+      maintainState: false,
     ),
     GetPage(
       name: NavBarView.routeName,
       page: () => NavBarView(),
     ),
   ];
+
+  static goToPage(String page, {dynamic arguments}) {
+    print(page);
+    pages.any((e) => e.name == page)
+        ? Get.toNamed(
+            page,
+            arguments: arguments,
+            preventDuplicates: false,
+          )
+        : Helper.error(
+            message: "El módulo no esta disponible o no tienes acceso a ello.",
+          );
+  }
 }

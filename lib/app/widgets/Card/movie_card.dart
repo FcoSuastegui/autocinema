@@ -21,30 +21,31 @@ class MovieCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData _theme = ThemeStyle.getTheme(context);
-    return Stack(
-      children: [
-        Container(
-          margin: EdgeInsets.symmetric(
-            horizontal: Adapt.px(10),
-          ),
-          height: height ?? Adapt.px(330),
-          decoration: BoxDecoration(
-            color: _theme.cardColor,
-            borderRadius: BorderRadius.circular(
-              Adapt.px(10),
+    return GestureDetector(
+      onTap: onTap,
+      behavior: HitTestBehavior.translucent,
+      child: Stack(
+        children: [
+          Container(
+            margin: EdgeInsets.symmetric(
+              horizontal: Adapt.px(10),
             ),
-            boxShadow: [
-              BoxShadow(
-                offset: Offset(5, 5),
-                color: _theme.brightness == Brightness.light
-                    ? _theme.primaryColorDark
-                    : const Color(0xFF303030),
-                blurRadius: 5,
-              )
-            ],
-          ),
-          child: GestureDetector(
-            onTap: onTap,
+            height: height ?? Adapt.px(330),
+            decoration: BoxDecoration(
+              color: _theme.cardColor,
+              borderRadius: BorderRadius.circular(
+                Adapt.px(10),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  offset: Offset(5, 5),
+                  color: _theme.brightness == Brightness.light
+                      ? _theme.primaryColorDark
+                      : const Color(0xFF303030),
+                  blurRadius: 5,
+                )
+              ],
+            ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -63,12 +64,14 @@ class MovieCard extends StatelessWidget {
                   child: CachedNetworkImage(
                     imageUrl: movie.image,
                     imageBuilder: (context, image) => Container(
-                      color: const Color(0xFFAABBCC),
-                      child: CachedNetworkImage(
-                        height: height ?? Adapt.px(330),
-                        width: Adapt.px(200),
-                        fit: BoxFit.fill,
-                        imageUrl: movie.image,
+                      height: height ?? Adapt.px(330),
+                      width: Adapt.px(200),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFAABBCC),
+                        image: DecorationImage(
+                          image: image,
+                          fit: BoxFit.fill,
+                        ),
                       ),
                     ),
                     placeholder: (context, url) => Container(
@@ -85,175 +88,177 @@ class MovieCard extends StatelessWidget {
                     fadeInDuration: const Duration(milliseconds: 800),
                   ),
                 ),
-                Container(
-                  width: height * 1.6,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: Adapt.px(20),
-                    vertical: Adapt.px(10),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              movie.titulo,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                color: Colors.black.withOpacity(0.8),
-                                fontSize: Adapt.px(35),
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            SizedBox(
-                              height: Adapt.px(5),
-                            ),
-                            Text(
-                              movie.categoria,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: const Color(0xFF9E9E9E),
-                                fontSize: Adapt.px(28),
-                              ),
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Transform(
-                                  transform: new Matrix4.identity()..scale(0.7),
-                                  child: Chip(
-                                    padding: EdgeInsets.all(5),
-                                    backgroundColor: const Color(0xFF9E9E9E),
-                                    label: Row(
-                                      children: [
-                                        Icon(
-                                          Icons.insert_emoticon,
-                                          color: Colors.white,
-                                          size: Adapt.px(40),
-                                        ),
-                                        SizedBox(
-                                          width: Adapt.px(5),
-                                        ),
-                                        Text(
-                                          "${movie.clasificacion}",
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: Adapt.px(30),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: Adapt.px(5),
-                                ),
-                                Transform(
-                                  transform: new Matrix4.identity()..scale(0.7),
-                                  child: Chip(
-                                    padding: EdgeInsets.all(5),
-                                    backgroundColor: const Color(0xFF9E9E9E),
-                                    label: Row(
-                                      children: [
-                                        Icon(
-                                          Icons.query_builder,
-                                          color: Colors.white,
-                                          size: Adapt.px(40),
-                                        ),
-                                        SizedBox(
-                                          width: Adapt.px(5),
-                                        ),
-                                        Text(
-                                          "${movie.duracion} min",
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: Adapt.px(30),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Container(
-                              child: Text(
-                                movie.descripcion,
+                Expanded(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: Adapt.px(20),
+                      vertical: Adapt.px(10),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                movie.titulo,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
-                                textAlign: TextAlign.justify,
                                 style: TextStyle(
-                                  fontSize: Adapt.px(28),
-                                  fontWeight: FontWeight.w400,
+                                  color: Colors.black.withOpacity(0.8),
+                                  fontSize: Adapt.px(35),
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
-                            ),
-                          ],
+                              SizedBox(
+                                height: Adapt.px(5),
+                              ),
+                              Text(
+                                movie.categoria,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: const Color(0xFF9E9E9E),
+                                  fontSize: Adapt.px(28),
+                                ),
+                              ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Transform(
+                                    transform: new Matrix4.identity()..scale(0.7),
+                                    child: Chip(
+                                      padding: EdgeInsets.all(5),
+                                      backgroundColor: const Color(0xFF9E9E9E),
+                                      label: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.insert_emoticon,
+                                            color: Colors.white,
+                                            size: Adapt.px(40),
+                                          ),
+                                          SizedBox(
+                                            width: Adapt.px(5),
+                                          ),
+                                          Text(
+                                            "${movie.clasificacion}",
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: Adapt.px(30),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: Adapt.px(5),
+                                  ),
+                                  Transform(
+                                    transform: new Matrix4.identity()..scale(0.7),
+                                    child: Chip(
+                                      padding: EdgeInsets.all(5),
+                                      backgroundColor: const Color(0xFF9E9E9E),
+                                      label: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.query_builder,
+                                            color: Colors.white,
+                                            size: Adapt.px(40),
+                                          ),
+                                          SizedBox(
+                                            width: Adapt.px(5),
+                                          ),
+                                          Text(
+                                            "${movie.duracion} min",
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: Adapt.px(30),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Container(
+                                child: Text(
+                                  movie.descripcion,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.justify,
+                                  style: TextStyle(
+                                    fontSize: Adapt.px(28),
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      Align(
-                        alignment: Alignment.bottomRight,
-                        child: Container(
-                          width: Adapt.px(60),
-                          height: Adapt.px(50),
-                          decoration: BoxDecoration(
-                            color: AppTheme.kPrimaryColor,
-                            borderRadius: BorderRadius.circular(
-                              Adapt.px(10),
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: Container(
+                            width: Adapt.px(60),
+                            height: Adapt.px(50),
+                            decoration: BoxDecoration(
+                              color: AppTheme.kPrimaryColor,
+                              borderRadius: BorderRadius.circular(
+                                Adapt.px(10),
+                              ),
+                            ),
+                            child: Center(
+                              child: Icon(
+                                Icons.chevron_right,
+                                color: const Color(0xFFFFFFFF),
+                              ),
                             ),
                           ),
-                          child: Center(
-                            child: Icon(
-                              Icons.chevron_right,
-                              color: const Color(0xFFFFFFFF),
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ],
             ),
           ),
-        ),
-        Positioned(
-          left: 5,
-          child: movie.reciente == 1
-              ? PulseAnimation(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(
-                        Adapt.px(10),
-                      ),
-                      topLeft: Radius.circular(
-                        Adapt.px(20),
-                      ),
-                    ),
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 5,
-                        horizontal: 10,
-                      ),
-                      child: Text(
-                        "ESTRENO",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
+          Positioned(
+            left: 5,
+            child: movie.reciente == 1
+                ? PulseAnimation(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(
+                          Adapt.px(10),
+                        ),
+                        topLeft: Radius.circular(
+                          Adapt.px(20),
                         ),
                       ),
-                      decoration: BoxDecoration(
-                        color: Color(0xFFF1494E),
+                      child: Container(
+                        width: Adapt.px(200),
+                        padding: EdgeInsets.symmetric(
+                          vertical: 5,
+                          horizontal: 10,
+                        ),
+                        child: Text(
+                          "ESTRENO",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        decoration: BoxDecoration(
+                          color: Color(0xFFF1494E),
+                        ),
                       ),
                     ),
-                  ),
-                )
-              : SizedBox.shrink(),
-        )
-      ],
+                  )
+                : SizedBox.shrink(),
+          )
+        ],
+      ),
     );
   }
 }

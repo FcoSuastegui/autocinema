@@ -1,8 +1,8 @@
 import 'package:autocinema/app/themes/adapt.dart';
 import 'package:autocinema/app/widgets/AppBar/filter_bar.dart';
-import 'package:autocinema/app/views/bill-board/components/list_bill_board.dart';
 import 'package:autocinema/app/views/bill-board/controller/bill_board_controller.dart';
 import 'package:autocinema/app/widgets/AppBar/sliverappbar_delegate.dart';
+import 'package:autocinema/app/widgets/Movie/list_movie/movie_list.dart';
 import 'package:autocinema/app/widgets/Sliver/sliver_scroll_bar_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -42,7 +42,7 @@ class BillBoardView extends StatelessWidget {
                     height: 10,
                   ),
                 ),
-                ListBillBoard(),
+                ListMovie(),
               ],
             ),
           ),

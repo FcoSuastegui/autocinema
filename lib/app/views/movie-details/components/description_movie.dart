@@ -15,23 +15,19 @@ class DescriptionMovie extends StatelessWidget {
     final ThemeData _theme = ThemeStyle.getTheme(context);
     return SliverToBoxAdapter(
       child: Container(
-        color: _theme.backgroundColor,
-        padding: EdgeInsets.only(
-          left: Adapt.px(20),
-          right: Adapt.px(20),
-          bottom: Adapt.px(20),
+        color: _theme.cardColor,
+        padding: EdgeInsets.symmetric(
+          horizontal: 20,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            SizedBox(
-              height: Adapt.px(10),
-            ),
             Text(
-              "Descripción",
+              "Sipnosis",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: Adapt.px(16),
+                color: Colors.black,
+                fontSize: Adapt.px(30),
               ),
             ),
             SizedBox(
@@ -43,6 +39,7 @@ class DescriptionMovie extends StatelessWidget {
               style: TextStyle(
                 color: const Color(0xFF717171),
                 height: 1.5,
+                fontSize: Adapt.px(25),
               ),
             ),
           ],
