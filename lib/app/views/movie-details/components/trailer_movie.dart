@@ -15,23 +15,37 @@ class TrailerMovie extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData _theme = ThemeStyle.getTheme(context);
     return SliverToBoxAdapter(
-      child: Column(
-        children: [
-          Container(
-            color: _theme.backgroundColor,
-            padding: EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 10,
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 20,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Trailer",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+                fontSize: Adapt.px(30),
+              ),
             ),
-            child: TrailerApleeks(
-              videoId: youtubeId,
-              height: Adapt.px(500),
+            SizedBox(
+              height: Adapt.px(10),
             ),
-          ),
-          SizedBox(
-            height: Adapt.px(20),
-          )
-        ],
+            Container(
+              color: _theme.backgroundColor,
+              child: TrailerApleeks(
+                videoId: youtubeId,
+                height: Adapt.px(500),
+              ),
+            ),
+            SizedBox(
+              height: Adapt.px(20),
+            )
+          ],
+        ),
       ),
     );
   }

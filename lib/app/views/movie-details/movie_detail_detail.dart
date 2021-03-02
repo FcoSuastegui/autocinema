@@ -6,6 +6,7 @@ import 'package:autocinema/app/views/movie-details/components/image_background_m
 import 'package:autocinema/app/views/movie-details/components/information_movie.dart';
 import 'package:autocinema/app/views/movie-details/components/trailer_movie.dart';
 import 'package:autocinema/app/views/movie-details/controller/movie_detail_controller.dart';
+import 'package:autocinema/app/widgets/Movie/list_movie_front/list_movie_front.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

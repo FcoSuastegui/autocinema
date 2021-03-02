@@ -35,7 +35,6 @@ class Routes {
       name: MovieDetails.routeName,
       page: () => MovieDetails(),
       binding: MovieDetailBinding(),
-      maintainState: false,
     ),
     GetPage(
       name: NavBarView.routeName,

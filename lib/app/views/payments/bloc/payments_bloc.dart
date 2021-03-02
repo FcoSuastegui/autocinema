@@ -1,12 +1,17 @@
 import 'package:autocinema/app/data/models/state_model.dart';
 import 'package:autocinema/app/data/services/autocinema_service.dart';
 import 'package:autocinema/app/utils/validator_string.dart';
+import 'package:autocinema/app/views/payments/controller/payments_controller.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
+import 'package:get/get.dart';
 
 class PaymentsBloc extends FormBloc<String, String> {
-  final double total;
+  double total = 00;
+  final PaymentsController controller;
+
+  final PaymentsController c = Get.find<PaymentsController>();
   final PageController pageViewController;
 
   List<StateModel> listStates = [];
@@ -50,12 +55,9 @@ class PaymentsBloc extends FormBloc<String, String> {
     ],
   );
   final codigoPostal = TextFieldBloc(
-    validators: [
-      ValidatorString.validateOnlyNumber,
-    ],
+    validators: [ValidatorString.validateOnlyNumber, ValidatorString.required],
   );
   final states = SelectFieldBloc<String, Object>(
-    validators: [ValidatorString.required],
     items: [],
   );
 
@@ -86,9 +88,9 @@ class PaymentsBloc extends FormBloc<String, String> {
   );
 
   PaymentsBloc({
-    @required this.total,
+    @required this.controller,
     @required this.pageViewController,
-  }) : assert(total != null) {
+  }) : assert(controller != null) {
     getStates();
     addFieldBlocs(
       step: 0,
@@ -110,8 +112,9 @@ class PaymentsBloc extends FormBloc<String, String> {
 
   @override
   void onSubmitting() async {
-    print(state.currentStep);
-    print(state.isLastStep);
+    total = c.totalC;
+    print(c.totalC);
+
     if (state.currentStep == 0) {
       await Future.delayed(const Duration(seconds: 1));
       next();

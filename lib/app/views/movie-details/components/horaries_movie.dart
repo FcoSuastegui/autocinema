@@ -115,7 +115,7 @@ class HorariesMovies extends GetView<MovieDetailController> {
                           itemCount: controller.horaries.length,
                           separatorBuilder: (_, index) {
                             return SizedBox(
-                              width: Adapt.px(0),
+                              width: Adapt.px(20),
                             );
                           },
                         ),

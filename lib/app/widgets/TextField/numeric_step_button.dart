@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 class NumericStepButton extends StatelessWidget {
   final int minValue;
   final int maxValue;
+  final int total;
   final ValueChanged<int> onChanged;
   final Color iconButtonColor;
   final double iconSize, splashRadius;
@@ -13,18 +14,19 @@ class NumericStepButton extends StatelessWidget {
   final MainAxisAlignment mainAxisAlignment;
   final Text title;
 
-  const NumericStepButton(
-      {Key key,
-      this.minValue = 1,
-      this.maxValue = 10,
-      @required this.onChanged,
-      this.iconButtonColor,
-      this.iconSize = 32.0,
-      this.textStyle,
-      this.mainAxisAlignment = MainAxisAlignment.spaceEvenly,
-      this.splashRadius = 20,
-      @required this.title})
-      : assert(onChanged != null),
+  const NumericStepButton({
+    Key key,
+    this.minValue = 1,
+    this.maxValue = 10,
+    this.total = 0,
+    @required this.onChanged,
+    this.iconButtonColor,
+    this.iconSize = 32.0,
+    this.textStyle,
+    this.mainAxisAlignment = MainAxisAlignment.spaceEvenly,
+    this.splashRadius = 20,
+    @required this.title,
+  })  : assert(onChanged != null),
         super(key: key);
 
   @override
@@ -34,6 +36,7 @@ class NumericStepButton extends StatelessWidget {
       init: NumericStepButtonController(
         maxValue: maxValue,
         minValue: minValue,
+        total: total,
       ),
       builder: (c) => Container(
         child: Column(
@@ -50,14 +53,22 @@ class NumericStepButton extends StatelessWidget {
                 mainAxisAlignment: mainAxisAlignment,
                 children: [
                   GestureDetector(
+                    behavior: HitTestBehavior.translucent,
                     onTap: () {
                       c.decrement();
                       onChanged(c.counter);
                     },
                     child: Container(
-                      color: c.counter != c.minValue
-                          ? AppTheme.kPrimaryColor
-                          : Theme.of(context).disabledColor,
+                      decoration: BoxDecoration(
+                        color: c.counter != c.minValue
+                            ? AppTheme.kPrimaryColor
+                            : Theme.of(context).disabledColor,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(
+                            Adapt.px(10),
+                          ),
+                        ),
+                      ),
                       child: Icon(Icons.remove, color: Colors.white),
                     ),
                   ),
@@ -72,6 +83,7 @@ class NumericStepButton extends StatelessWidget {
                         ),
                   ),
                   GestureDetector(
+                    behavior: HitTestBehavior.translucent,
                     onTap: () {
                       c.increment();
                       onChanged(c.counter);
@@ -82,7 +94,9 @@ class NumericStepButton extends StatelessWidget {
                             ? AppTheme.kPrimaryColor
                             : Theme.of(context).disabledColor,
                         borderRadius: BorderRadius.all(
-                          Radius.circular(Adapt.px(10)),
+                          Radius.circular(
+                            Adapt.px(10),
+                          ),
                         ),
                       ),
                       child: Icon(Icons.add, color: Colors.white),
@@ -103,13 +117,14 @@ class NumericStepButtonController extends GetxController {
   int get counter => _counter.value;
   set counter(int counter) => _counter(counter);
 
-  final int maxValue, minValue;
+  final int maxValue, minValue, total;
 
   NumericStepButtonController({
     this.minValue = 1,
     this.maxValue = 10,
+    this.total = 0,
   }) {
-    _counter(minValue);
+    _counter(total);
   }
 
   increment() => _counter < maxValue ? _counter++ : null;

@@ -28,8 +28,11 @@ class ValidatorString {
   static String validateCelPhone(String celphone) =>
       RegExp(r'^\d{10}$').hasMatch(celphone) ? null : 'Número de celular no válido';
 
-  static String validateOnlyNumber(String textField) =>
-      RegExp(r'^[0-9]+$').hasMatch(textField) ? null : 'Sólo número';
+  static String validateOnlyNumber(String textField) => textField.isEmpty
+      ? null
+      : RegExp(r'^[0-9]+$').hasMatch(textField)
+          ? null
+          : 'Sólo número';
 
   static String validateText(String textField) =>
       RegExp(r'^[a-zA-Z]').hasMatch(textField) ? null : 'Sólo texto';
@@ -66,7 +69,7 @@ class ValidatorString {
   static String validateCardValidThru(String textField) =>
       RegExp(r'^(0[1-9]|1[0-2])\/([2-9][0-9])$').hasMatch(textField)
           ? null
-          : 'ValidThru incorrecto';
+          : 'Fecha de expiración incorrecto';
 
   /* static Validator<String> minLength(TextFieldBloc textFieldBloc, int length) =>
       (String textField) => (textField.length < length)

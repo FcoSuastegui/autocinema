@@ -61,10 +61,14 @@ class HeaderBackgroundState extends State<HeaderBackground> {
                   ),
                 ),
                 placeholder: (context, url) => Container(
+                  key: ValueKey(url),
+                  transform: Matrix4.translationValues(0, postion, 0),
                   color: const Color(0xFFAABBCC),
                   height: _height - postion,
                 ),
                 errorWidget: (context, url, error) => Container(
+                  key: ValueKey(url),
+                  transform: Matrix4.translationValues(0, postion, 0),
                   color: const Color(0xFFAABBCC),
                   height: _height - postion,
                 ),

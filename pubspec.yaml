@@ -53,6 +53,11 @@ dependencies:
   infinite_scroll_pagination: ^2.3.0
   badges: ^1.1.1
   timeline_tile: ^1.0.0
+  # Qr image
+  qr_flutter: ^3.2.0
+  screenshot: ^0.2.0
+  share_extend: ^1.1.9
+  share: ^0.6.5+4
 
 dev_dependencies:
   flutter_test:

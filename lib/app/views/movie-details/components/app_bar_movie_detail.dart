@@ -41,8 +41,8 @@ class _CustomAppBarState extends State<_CustomAppBar> {
   bool showBar = false;
   double _opacity = 0.0;
   final double _opacityHeight = Adapt.px(300);
-  final double _appBarChangeHeight = Adapt.px(400);
-  final double _totalHeight = Adapt.px(800);
+  final double _appBarChangeHeight = Adapt.px(500);
+  final double _totalHeight = Adapt.px(600);
   void _checkTitle() {
     if (widget.controller.position.pixels >= _appBarChangeHeight) {
       double v = _opacityHeight - (_totalHeight - widget.controller.position.pixels);

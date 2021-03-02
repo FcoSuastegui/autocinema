@@ -6,13 +6,13 @@ class ScrollViewBackGround extends StatefulWidget {
   final ScrollController scrollController;
   final double maxOpacity;
   final Widget child;
-  ScrollViewBackGround(
-      {Key key,
-      this.child,
-      this.scrollController,
-      this.height,
-      this.maxOpacity})
-      : super(key: key);
+  ScrollViewBackGround({
+    Key key,
+    this.child,
+    this.scrollController,
+    this.height,
+    this.maxOpacity,
+  }) : super(key: key);
   @override
   ScrollViewBackGroundState createState() => ScrollViewBackGroundState();
 }

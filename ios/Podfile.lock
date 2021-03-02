@@ -32,6 +32,10 @@ PODS:
   - path_provider (0.0.1):
     - Flutter
   - Reachability (3.2)
+  - share (0.0.1):
+    - Flutter
+  - share_extend (0.0.1):
+    - Flutter
   - sqflite (0.0.2):
     - Flutter
     - FMDB (>= 2.7.5)
@@ -53,6 +57,8 @@ DEPENDENCIES:
   - flutter_keyboard_visibility (from `.symlinks/plugins/flutter_keyboard_visibility/ios`)
   - package_info (from `.symlinks/plugins/package_info/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
+  - share (from `.symlinks/plugins/share/ios`)
+  - share_extend (from `.symlinks/plugins/share_extend/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
   - SrPago (from `./SrPagoFramework`)
   - store_redirect (from `.symlinks/plugins/store_redirect/ios`)
@@ -82,6 +88,10 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/package_info/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
+  share:
+    :path: ".symlinks/plugins/share/ios"
+  share_extend:
+    :path: ".symlinks/plugins/share_extend/ios"
   sqflite:
     :path: ".symlinks/plugins/sqflite/ios"
   SrPago:
@@ -104,6 +114,8 @@ SPEC CHECKSUMS:
   package_info: 873975fc26034f0b863a300ad47e7f1ac6c7ec62
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  share: 0b2c3e82132f5888bccca3351c504d0003b3b410
+  share_extend: b6748dc53695587891126a89533b862b92548c7b
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
   SrPago: f60e85babc338d0446d7b92ab65da72340faee2a
   store_redirect: 2977747cf81689a39bd62c248c2deacb7a0d131e

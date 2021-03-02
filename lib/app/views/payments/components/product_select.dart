@@ -1,4 +1,5 @@
 import 'package:autocinema/app/themes/adapt.dart';
+import 'package:autocinema/app/utils/helper.dart';
 import 'package:autocinema/app/views/payments/controller/payments_controller.dart';
 import 'package:autocinema/app/widgets/TextField/numeric_step_button.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -17,13 +18,172 @@ class ProductSelected extends GetView<PaymentsController> {
       children: [
         Container(
           margin: EdgeInsets.symmetric(
+            horizontal: 10,
+            vertical: 10,
+          ),
+          child: Card(
+            clipBehavior: Clip.antiAlias,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 10,
+                  ),
+                  child: Text(
+                    "Detalles de la compra",
+                    style: TextStyle(
+                      fontSize: Adapt.px(35),
+                      color: Colors.black.withOpacity(0.6),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(
+                    horizontal: 10,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          child: Text(
+                            movie.titulo,
+                            style: TextStyle(
+                              fontSize: Adapt.px(25),
+                              color: Colors.black.withOpacity(0.6),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        child: Text(
+                          "${horary.fechaCorta} - ${horary.hora}",
+                          style: TextStyle(
+                            fontSize: Adapt.px(25),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 10,
+                  ),
+                  child: Obx(
+                    () => Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          child: Text(
+                            "${controller.vehiculo} Vehículos",
+                            style: TextStyle(
+                              fontSize: Adapt.px(25),
+                              color: Colors.black.withOpacity(0.3),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          child: Text(
+                            Helper.moneyFormat(controller.totalXvehiculo),
+                            style: TextStyle(
+                              fontSize: Adapt.px(25),
+                              color: Colors.green.withOpacity(0.6),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(
+                    horizontal: 10,
+                  ),
+                  child: Obx(
+                    () => Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          child: Text(
+                            "${controller.persona} Personas extras",
+                            style: TextStyle(
+                              fontSize: Adapt.px(25),
+                              color: Colors.black.withOpacity(0.3),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          child: Text(
+                            Helper.moneyFormat(controller.totalXpersona),
+                            style: TextStyle(
+                              fontSize: Adapt.px(25),
+                              color: Colors.green.withOpacity(0.6),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(
+                    horizontal: 10,
+                  ),
+                  child: Divider(),
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 10,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        child: Text(
+                          "Total",
+                          style: TextStyle(
+                            fontSize: Adapt.px(25),
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        child: Obx(
+                          () => Text(
+                            Helper.moneyFormat(controller.totalC),
+                            style: TextStyle(
+                              fontSize: Adapt.px(25),
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.symmetric(
             vertical: 10,
           ),
           padding: EdgeInsets.symmetric(
             horizontal: 20,
             vertical: 10,
           ),
-          height: Adapt.px(500),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -208,29 +368,31 @@ class ProductSelected extends GetView<PaymentsController> {
                             "Número de vehículos",
                             style: TextStyle(
                               color: Colors.black.withOpacity(0.5),
-                              fontSize: Adapt.px(25),
+                              fontSize: Adapt.px(23),
                             ),
                           ),
-                          minValue: controller.vehiculo,
+                          minValue: 1,
                           maxValue: 10,
+                          total: controller.vehiculo,
                           onChanged: controller.incrementVehiculo,
                         ),
                       ),
-                      SizedBox(
-                        width: 10,
-                      ),
                       Expanded(
-                        child: NumericStepButton(
-                          title: Text(
-                            "Número de personas extras",
-                            style: TextStyle(
-                              color: Colors.black.withOpacity(0.5),
-                              fontSize: Adapt.px(25),
+                        child: Obx(
+                          () => NumericStepButton(
+                            key: Key(controller.maxPersonXvehiculo.toString()),
+                            title: Text(
+                              "Número de personas extras",
+                              style: TextStyle(
+                                color: Colors.black.withOpacity(0.5),
+                                fontSize: Adapt.px(23),
+                              ),
                             ),
+                            minValue: 0,
+                            maxValue: controller.maxPersonXvehiculo,
+                            total: controller.persona,
+                            onChanged: controller.incrementPerson,
                           ),
-                          minValue: controller.persona,
-                          maxValue: 2,
-                          onChanged: controller.incrementPerson,
                         ),
                       ),
                     ],

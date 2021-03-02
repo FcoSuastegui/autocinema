@@ -31,7 +31,7 @@ class _StepperViewState extends State<StepperView> {
     return Column(
       children: [
         Container(
-          height: Adapt.px(150),
+          height: Adapt.px(170),
           child: StreamBuilder(
               stream: bloc,
               builder: (context, snapshot) {
@@ -48,7 +48,11 @@ class _StepperViewState extends State<StepperView> {
                     );
                     _DeliveryStatus status;
                     LineStyle afterLineStyle;
-                    if (index == bloc.state.currentStep) {
+                    print(index > bloc.state.currentStep);
+                    if (bloc.state.isLastStep) {
+                      status = _DeliveryStatus.done;
+                      indicatorSize = 30;
+                    } else if (index == bloc.state.currentStep) {
                       status = _DeliveryStatus.doing;
                       indicatorSize = Adapt.px(50);
                     } else if (index > bloc.state.currentStep) {
@@ -57,9 +61,6 @@ class _StepperViewState extends State<StepperView> {
                       beforeLineStyle = const LineStyle(
                         color: Color(0xFF747888),
                       );
-                    } else if (bloc.state.isLastStep) {
-                      status = _DeliveryStatus.done;
-                      indicatorSize = 30;
                     } else {
                       status = _DeliveryStatus.done;
                       indicatorSize = Adapt.px(50);
@@ -141,7 +142,6 @@ class _StepperContent extends StatelessWidget {
     final bloc = BlocProvider.of<PaymentsBloc>(context);
     return SingleChildScrollView(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
         children: [
           content,
           Container(
@@ -151,7 +151,6 @@ class _StepperContent extends StatelessWidget {
               vertical: 30,
             ),
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
                 bloc.state.currentStep > 0 && !bloc.state.isLastStep
                     ? FlatButton(

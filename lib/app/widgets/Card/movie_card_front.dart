@@ -21,6 +21,7 @@ class MovieCardFront extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData _theme = ThemeStyle.getTheme(context);
     return GestureDetector(
+      key: ValueKey('recommendation${movie.id}'),
       onTap: onTap,
       behavior: HitTestBehavior.translucent,
       child: Stack(

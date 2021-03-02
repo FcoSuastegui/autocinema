@@ -12,12 +12,16 @@ class PaymentsController extends GetxController {
   RxInt _vehiculo = 0.obs;
   int get vehiculo => _vehiculo.value;
 
+  RxInt _maxPersonXvehiculo = 0.obs;
+  int get maxPersonXvehiculo => _maxPersonXvehiculo.value;
+
   RxInt _persona = 0.obs;
   int get persona => _persona.value;
 
   incrementVehiculo(int v) {
     _vehiculo(v);
     _totalXvehiculo.value = double.parse(horary.tarifa) * _vehiculo.value;
+    _maxPersonXvehiculo.value = _vehiculo.value * 2;
     calculateTotal();
   }
 
