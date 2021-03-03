@@ -59,6 +59,13 @@ dependencies:
   share_extend: ^1.1.9
   share: ^0.6.5+4
 
+  firebase_core: ^0.7.0
+  firebase_auth: ^0.20.0
+  google_sign_in: ^4.5.9
+  flutter_facebook_auth: ^2.0.0
+  sign_in_with_apple: ^2.5.4
+  crypto: ^2.1.5
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -3,6 +3,7 @@ import 'package:autocinema/app/data/models/configuration_model.dart';
 import 'package:autocinema/app/data/models/horary_model.dart';
 import 'package:autocinema/app/data/models/list_page.dart';
 import 'package:autocinema/app/data/models/movie_model.dart';
+import 'package:autocinema/app/data/models/response_model.dart';
 import 'package:autocinema/app/data/models/state_model.dart';
 
 class AutoCinemaService {
@@ -80,5 +81,12 @@ class AutoCinemaService {
       );
     }
     return list;
+  }
+
+  static Future<ResponseModel> processPagoBackend(Map<String, dynamic> datos) async {
+    return await Network.i.post(
+      route: '/v1/app/states',
+      data: datos,
+    );
   }
 }

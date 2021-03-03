@@ -1,5 +1,9 @@
+import 'dart:io';
+
+import 'package:autocinema/app/data/domian/network.dart';
 import 'package:autocinema/app/globals/SrPago/sr_pago_card_model.dart';
 import 'package:autocinema/app/globals/SrPago/permission.dart';
+import 'package:autocinema/app/globals/SrPago/sr_pago_key.dart';
 import 'package:autocinema/app/globals/SrPago/sr_pago_response.dart';
 import 'package:flutter/services.dart';
 
@@ -18,7 +22,12 @@ class SrPagoFlutter {
   static set publicKey(String v) => _publicKey = v;
 
   static Future<SrPagoResponse> createCardToken(SrPagoCardModel card) async {
-    final SrPagoResponse response = SrPagoResponse(status: false, message: '');
+    await _getPublicKey();
+    final SrPagoResponse response = SrPagoResponse(
+      status: false,
+      message: '',
+      type: PermissionStatus.denied,
+    );
 
     if (_publicKey == null || _publicKey.isEmpty) {
       response.message = "Se necesita la llave pública de la aplicación SrPago";
@@ -30,6 +39,7 @@ class SrPagoFlutter {
     if (permission == PermissionStatus.denied) {
       final p = await _requestPermissions();
       if (p == PermissionStatus.denied) {
+        response.type = p;
         response.message = "Es necesario aceptar el permiso de localización para realizar el pago";
         return response;
       }
@@ -38,6 +48,7 @@ class SrPagoFlutter {
     if (permission == PermissionStatus.restricted) {
       final p = await _requestPermissions();
       if (p == PermissionStatus.restricted) {
+        response.type = p;
         response.message = "Es necesario aceptar el permiso de localización para realizar el pago";
         return response;
       }
@@ -46,11 +57,13 @@ class SrPagoFlutter {
     if (permission == PermissionStatus.unknown) {
       final p = await _requestPermissions();
       if (p == PermissionStatus.restricted) {
+        response.type = p;
         response.message = "Es necesario aceptar el permiso de localización para realizar el pago";
         return response;
       }
     }
 
+    response.type = PermissionStatus.granted;
     final Map<String, dynamic> arguments = {
       "liveMode": _liveMode,
       "publicKey": _publicKey,
@@ -95,5 +108,19 @@ class SrPagoFlutter {
         _status = PermissionStatus.unknown;
     }
     return _status;
+  }
+
+  static Future<void> _getPublicKey() async {
+    final response = await Network.i.post(
+      route: '/v1/app/publicKey',
+      data: {
+        "env": 1,
+      },
+    );
+    if (response.status) {
+      final SrPagoKey key = SrPagoKey.fromJson(response.data);
+      SrPagoFlutter.publicKey = Platform.isAndroid ? key.publicKeyAndroid : key.publicKeyIos;
+      SrPagoFlutter.liveMode = key.liveMode;
+    }
   }
 }

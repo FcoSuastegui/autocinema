@@ -26,6 +26,7 @@ class I18 extends Translations {
           'method-not-allowed': 'Method Not Allowed',
           'required': 'The field is required',
           'email-format': 'The email format is wrong',
+          'share': 'Share',
         },
         'es': {
           'home': 'Inicio',
@@ -51,6 +52,7 @@ class I18 extends Translations {
           'method-not-allowed': 'Método no permitido',
           'required': 'El campo es requerido',
           'email-format': 'El formato de correo electrónico es incorrecto',
+          'share': 'Compartir',
         }
       };
 }

@@ -1,6 +1,7 @@
 import 'package:autocinema/app/data/models/movie_model.dart';
 import 'package:autocinema/app/routes/routes.dart';
 import 'package:autocinema/app/themes/adapt.dart';
+import 'package:autocinema/app/widgets/Card/card_refresh.dart';
 import 'package:autocinema/app/widgets/Card/movie_card_front.dart';
 import 'package:autocinema/app/widgets/Movie/list_movie_front/controller/list_movie_controller.dart';
 import 'package:autocinema/app/widgets/Shimmer/shimmer_list_movie.dart';
@@ -64,6 +65,12 @@ class ListMovieFront extends StatelessWidget {
                       builderDelegate: PagedChildBuilderDelegate<MovieModel>(
                         firstPageProgressIndicatorBuilder: (context) => ShimmerListMovie(
                           scrollDirection: Axis.horizontal,
+                        ),
+                        noItemsFoundIndicatorBuilder: (context) => CardRefresh(
+                          title: Text("No hay peliculas disponibles"),
+                        ),
+                        firstPageErrorIndicatorBuilder: (context) => CardRefresh(
+                          title: Text("Hubo un error al cargar las peliculas"),
                         ),
                         itemBuilder: (context, movie, index) => MovieCardFront(
                           onTap: () => Routes.goToPage(

@@ -2,8 +2,10 @@ import 'package:autocinema/app/themes/adapt.dart';
 import 'package:autocinema/app/themes/app_theme.dart';
 import 'package:autocinema/app/utils/helper.dart';
 import 'package:autocinema/app/views/payments/bloc/payments_bloc.dart';
+import 'package:autocinema/app/widgets/Qr/qr_shared/share_qr_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
+import 'package:get/get.dart';
 
 class SuccessPayments extends StatelessWidget {
   const SuccessPayments({Key key}) : super(key: key);
@@ -422,7 +424,11 @@ class SuccessPayments extends StatelessWidget {
                 "Ver boleto",
                 style: TextStyle(color: Colors.white),
               ),
-              onPressed: () {},
+              onPressed: () => Get.dialog(
+                ShareQrCard(
+                  qrValue: "holasdkasj",
+                ),
+              ),
               color: AppTheme.kPrimaryColor,
             ),
           )

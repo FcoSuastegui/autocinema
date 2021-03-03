@@ -1,5 +1,6 @@
 import 'package:autocinema/app/app.dart';
 import 'package:autocinema/app/utils/get_storage.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -10,6 +11,7 @@ void main() async {
 
 Future<void> initServices() async {
   print('starting services ...');
-  await GetStorages.i.init();
+  await GetStorages.init();
+  await Firebase.initializeApp();
   print('All services started...');
 }

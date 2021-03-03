@@ -1,9 +1,13 @@
 import 'package:autocinema/app/data/models/state_model.dart';
 import 'package:autocinema/app/data/services/autocinema_service.dart';
+import 'package:autocinema/app/globals/SrPago/permission.dart';
+import 'package:autocinema/app/globals/SrPago/sr_pago_card_model.dart';
+import 'package:autocinema/app/globals/SrPago/sr_pago_flutter.dart';
 import 'package:autocinema/app/utils/validator_string.dart';
 import 'package:autocinema/app/views/payments/controller/payments_controller.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:get/get.dart';
 
@@ -55,7 +59,11 @@ class PaymentsBloc extends FormBloc<String, String> {
     ],
   );
   final codigoPostal = TextFieldBloc(
-    validators: [ValidatorString.validateOnlyNumber, ValidatorString.required],
+    validators: [
+      ValidatorString.validateOnlyNumber,
+      ValidatorString.validateCodigoPostal,
+      ValidatorString.required,
+    ],
   );
   final states = SelectFieldBloc<String, Object>(
     items: [],
@@ -122,8 +130,36 @@ class PaymentsBloc extends FormBloc<String, String> {
       await Future.delayed(const Duration(seconds: 1));
       next();
     } else if (state.currentStep == 2) {
-      await Future.delayed(const Duration(seconds: 1));
-      next();
+      //await Future.delayed(const Duration(seconds: 1));
+      try {
+        final expire = expired.value.split('/');
+        final r = await SrPagoFlutter.createCardToken(
+          SrPagoCardModel(
+            name: titular.value,
+            number: cardNumber.value.replaceAll(" ", ""),
+            cvv: cvv.value,
+            month: expire[0],
+            year: expire[1],
+          ),
+        );
+
+        if (r.type != PermissionStatus.granted) {
+          return emitFailure(
+            failureResponse: r.message,
+          );
+        } else {
+          print(r.message);
+          next();
+        }
+      } on PlatformException catch (e) {
+        return emitFailure(
+          failureResponse: "${e.message}",
+        );
+      } catch (e) {
+        return emitFailure(
+          failureResponse: "${e.message}",
+        );
+      }
     } else {
       await Future.delayed(const Duration(seconds: 1));
       emitSuccess();

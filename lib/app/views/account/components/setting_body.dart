@@ -53,7 +53,7 @@ class SettingBody extends StatelessWidget {
 }
 /* 
   Future<void> _activarMembresia() async {
-    GetStorages.inst.membresia
+    GetStoragesnst.membresia
         ? Helper.success(message: "¡Su membresía ya esta activida!")
         : await Get.dialog(
             WillPopScope(
@@ -65,11 +65,11 @@ class SettingBody extends StatelessWidget {
 
   Future<void> _contrasena() async {
     List social = ["Google", "Facebook", "Apple"];
-    GetStorages.inst.signIn > 0
+    GetStoragesnst.signIn > 0
         ? await Get.dialog(
             AlertAction(
               title:
-                  "Ha iniciado sesión con ${social[GetStorages.inst.signIn - 1]}, no se puede cambiar la contraseña",
+                  "Ha iniciado sesión con ${social[GetStoragesnst.signIn - 1]}, no se puede cambiar la contraseña",
               buttonLabelNo: 'Aceptar',
             ),
           )
@@ -82,7 +82,7 @@ class SettingBody extends StatelessWidget {
         title: "¿Deseas salir de la aplicación?",
         onPressYes: () {
           FirebaseAuthController.i.signOut();
-          GetStorages.inst.clear();
+          GetStoragesnst.clear();
           Get.offAllNamed('/');
         },
       ),

@@ -36,10 +36,10 @@ class ConnectivityController extends GetxController {
     switch (result) {
       case ConnectivityResult.wifi:
       case ConnectivityResult.mobile:
-        GetStorages.i.page = '/nav-bar';
+        GetStorages.page = '/nav-bar';
         break;
       case ConnectivityResult.none:
-        GetStorages.i.page = '/no-wifi';
+        GetStorages.page = '/no-wifi';
         break;
     }
   }
@@ -49,16 +49,16 @@ class ConnectivityController extends GetxController {
     switch (result) {
       case ConnectivityResult.wifi:
       case ConnectivityResult.mobile:
-        GetStorages.i.page = '/nav-bar';
-        Get.offAllNamed(GetStorages.i.page);
+        GetStorages.page = '/nav-bar';
+        Get.offAllNamed(GetStorages.page);
         Helper.success(
           message: 'wifi'.tr,
         );
         break;
       case ConnectivityResult.none:
-        GetStorages.i.page = '/no-wifi';
+        GetStorages.page = '/no-wifi';
         Get.offAllNamed(
-          GetStorages.i.page,
+          GetStorages.page,
         );
         break;
     }

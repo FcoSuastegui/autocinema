@@ -45,19 +45,14 @@ class PersonalDataView extends StatelessWidget {
               ),
             ],
           ),
+          InputTextCupertino(
+            textFieldBloc: bloc.email,
+            placeholder: 'Correo',
+            keyboardType: TextInputType.emailAddress,
+          ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                child: InputTextCupertino(
-                  textFieldBloc: bloc.email,
-                  placeholder: 'Correo',
-                  keyboardType: TextInputType.emailAddress,
-                ),
-              ),
-              SizedBox(
-                width: 10,
-              ),
               Expanded(
                 child: InputTextCupertino(
                   textFieldBloc: bloc.address,

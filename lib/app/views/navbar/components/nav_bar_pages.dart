@@ -16,7 +16,7 @@ class NavBarPages extends GetView<NavBarController> {
   }
 
   Widget getPages(int index) {
-    /* final user = GetStorages.i.user; */
+    /* final user = GetStorages.user; */
     List<Widget> pages = [
       HomeView(),
       BillBoardView(),

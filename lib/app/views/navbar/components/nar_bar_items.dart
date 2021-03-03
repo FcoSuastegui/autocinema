@@ -33,7 +33,7 @@ class NavBarItems extends GetView<NavBarController> {
   }
 
   List<CustomNavigationBarItem> getItems() {
-    final user = GetStorages.i.user;
+    final user = GetStorages.user;
     List<CustomNavigationBarItem> item = [
       CustomNavigationBarItem(
         title: Text(
@@ -80,7 +80,7 @@ class NavBarItems extends GetView<NavBarController> {
         icon: user.photo != null && user.photo.isNotEmpty
             ? CircleAvatar(
                 backgroundImage: CachedNetworkImageProvider(
-                  GetStorages.i.user.photo,
+                  GetStorages.user.photo,
                 ),
               )
             : Icon(Icons.account_circle),

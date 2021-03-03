@@ -122,29 +122,35 @@ class MovieCardFront extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Transform(
-                          transform: new Matrix4.identity()..scale(0.7),
-                          child: Chip(
-                            padding: EdgeInsets.all(5),
-                            backgroundColor: const Color(0xFF9E9E9E),
-                            label: Row(
-                              children: [
-                                Icon(
-                                  Icons.query_builder,
-                                  color: Colors.white,
-                                  size: Adapt.px(40),
-                                ),
-                                SizedBox(
-                                  width: Adapt.px(5),
-                                ),
-                                Text(
-                                  "${movie.duracion} min",
-                                  style: TextStyle(
+                        Expanded(
+                          child: Transform(
+                            transform: new Matrix4.identity()..scale(0.7),
+                            child: Chip(
+                              padding: EdgeInsets.all(5),
+                              backgroundColor: const Color(0xFF9E9E9E),
+                              label: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Icon(
+                                    Icons.query_builder,
                                     color: Colors.white,
-                                    fontSize: Adapt.px(30),
+                                    size: Adapt.px(40),
                                   ),
-                                ),
-                              ],
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      "${movie.duracion} min",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: Adapt.px(30),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),

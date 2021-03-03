@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "717552221344",
+    "project_id": "autocinema-db29e",
+    "storage_bucket": "autocinema-db29e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:717552221344:android:3a2b89bd89936e12f55dc5",
+        "android_client_info": {
+          "package_name": "com.apleeks.autocinema"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "717552221344-k2g22d7hurav3omp60ce6rfnmsakuk9g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.apleeks.autocinema",
+            "certificate_hash": "f69bca265b5e0fb60052f070d52937ff0615fdfd"
+          }
+        },
+        {
+          "client_id": "717552221344-1imvtuda8ur2tctf99575smo2kr50cvk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZBh4WMMD_sR9sTGhJ_8sYNn7oN7mFTgQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "717552221344-1imvtuda8ur2tctf99575smo2kr50cvk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "717552221344-00mes4ac0p6sq056ft3ae63ja8ian3dj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.apleeks.autocinema"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
