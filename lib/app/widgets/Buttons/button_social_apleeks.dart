@@ -28,7 +28,7 @@ class ButtonSocialApleeks extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Image.asset(
-                "assets/images/social/google.png",
+                "assets/social/google.png",
                 height: Adapt.px(40),
               ),
               Text(
@@ -52,7 +52,7 @@ class ButtonSocialApleeks extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Image.asset(
-                "assets/images/social/facebook.png",
+                "assets/social/facebook.png",
                 height: Adapt.px(40),
               ),
               Text(

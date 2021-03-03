@@ -28,7 +28,9 @@ class HorariesMovies extends GetView<MovieDetailController> {
                   style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
                 ),
               ),
-              Divider(),
+              SizedBox(
+                height: 20,
+              ),
               AnimatedSwitcher(
                 transitionBuilder: (widget, animated) => SlideTransition(
                   position: animated.drive(
@@ -121,13 +123,12 @@ class HorariesMovies extends GetView<MovieDetailController> {
                         ),
                       )
                     : Container(
-                        height: Adapt.px(50),
-                        child: Center(
-                          child: Text(
-                            "Sin funciones por el momento.",
-                            style: TextStyle(
-                              color: AppTheme.kPrimaryColor,
-                            ),
+                        width: double.infinity,
+                        height: Adapt.px(300),
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: Image.asset("assets/images/sin-funciones.png").image,
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),

@@ -25,7 +25,7 @@ class App extends StatelessWidget {
     return GetMaterialApp(
       title: 'AutoCinema',
       getPages: Routes.pages,
-      initialRoute: '/nav-bar',
+      initialRoute: '/login',
       debugShowCheckedModeBanner: false,
       theme: ThemeStyle.lightTheme,
       darkTheme: ThemeStyle.darkTheme,

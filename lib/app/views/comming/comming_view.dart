@@ -22,9 +22,6 @@ class CommingView extends StatelessWidget {
           child: GetBuilder<CommingController>(
             init: CommingController.i,
             builder: (c) => SliverScrollBarView(
-              onRefresh: () => Future.sync(
-                () => c.commingController.refresh(),
-              ),
               slivers: [
                 SliverPersistentHeader(
                   floating: true,

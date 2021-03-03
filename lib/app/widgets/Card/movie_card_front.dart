@@ -63,12 +63,24 @@ class MovieCardFront extends StatelessWidget {
                       ),
                     ),
                     placeholder: (context, url) => Container(
-                      color: const Color(0xFFAABBCC),
                       height: height * 1.2,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFAABBCC),
+                        image: DecorationImage(
+                          image: Image.asset("assets/images/imagen-no-disponible.png").image,
+                          fit: BoxFit.contain,
+                        ),
+                      ),
                     ),
                     errorWidget: (context, url, error) => Container(
-                      color: const Color(0xFFAABBCC),
                       height: height * 1.2,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFAABBCC),
+                        image: DecorationImage(
+                          image: Image.asset("assets/images/imagen-no-disponible.png").image,
+                          fit: BoxFit.contain,
+                        ),
+                      ),
                     ),
                     fadeOutDuration: const Duration(milliseconds: 400),
                     fadeInDuration: const Duration(milliseconds: 800),

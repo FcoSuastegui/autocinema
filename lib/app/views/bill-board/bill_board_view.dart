@@ -23,9 +23,6 @@ class BillBoardView extends StatelessWidget {
             init: BillBoardController.i,
             builder: (controller) => SliverScrollBarView(
               physics: AlwaysScrollableScrollPhysics(),
-              onRefresh: () => Future.sync(
-                () => controller.carteleraController.refresh(),
-              ),
               slivers: [
                 SliverPersistentHeader(
                   floating: true,

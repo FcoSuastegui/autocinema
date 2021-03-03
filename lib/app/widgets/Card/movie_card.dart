@@ -78,12 +78,24 @@ class MovieCard extends StatelessWidget {
                     placeholder: (context, url) => Container(
                       width: Adapt.px(200),
                       height: height ?? Adapt.px(330),
-                      color: const Color(0xFFAABBCC),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFAABBCC),
+                        image: DecorationImage(
+                          image: Image.asset("assets/images/imagen-no-disponible.png").image,
+                          fit: BoxFit.contain,
+                        ),
+                      ),
                     ),
                     errorWidget: (context, url, error) => Container(
                       width: Adapt.px(200),
                       height: height ?? Adapt.px(330),
-                      color: const Color(0xFFAABBCC),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFAABBCC),
+                        image: DecorationImage(
+                          image: Image.asset("assets/images/imagen-no-disponible.png").image,
+                          fit: BoxFit.contain,
+                        ),
+                      ),
                     ),
                     fadeOutDuration: const Duration(milliseconds: 400),
                     fadeInDuration: const Duration(milliseconds: 800),
@@ -190,7 +202,7 @@ class MovieCard extends StatelessWidget {
                                   overflow: TextOverflow.ellipsis,
                                   textAlign: TextAlign.justify,
                                   style: TextStyle(
-                                    fontSize: Adapt.px(28),
+                                    fontSize: Adapt.px(25),
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),

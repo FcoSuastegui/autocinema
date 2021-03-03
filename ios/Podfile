@@ -4,6 +4,7 @@ platform :ios, '10.0'
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
 
+
 project 'Runner', {
   'Debug' => :debug,
   'Profile' => :release,
@@ -32,14 +33,17 @@ target 'Runner' do
   use_modular_headers!
   pod 'SrPago', :path=>'./SrPagoFramework'
   pod 'SwiftTryCatch'
+  pod 'Firebase/Analytics'
+  pod 'GoogleUtilities', '7.0.0'
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
 end
 
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_ios_build_settings(target)
+    target.build_configurations.each do |config|
+      config.build_settings.delete 'IPHONEOS_DEPLOYMENT_TARGET'
+      config.build_settings['ENABLE_BITCODE'] = 'YES'
+    end
   end
 end
-
-
-pod 'Firebase/Analytics'
