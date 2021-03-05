@@ -1,3 +1,4 @@
+import 'package:autocinema/app/themes/adapt.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,12 +17,17 @@ class LoadingApleeks extends StatelessWidget {
       onWillPop: () async => false,
       child: Center(
         child: Card(
+          shadowColor: Colors.transparent,
+          elevation: 0.0,
           color: Colors.transparent,
           child: Container(
             width: 80,
             height: 80,
             padding: EdgeInsets.all(12.0),
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(
+              strokeWidth: Adapt.px(3),
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+            ),
           ),
         ),
       ),

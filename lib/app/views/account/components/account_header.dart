@@ -1,10 +1,13 @@
 import 'package:autocinema/app/themes/adapt.dart';
+import 'package:autocinema/app/utils/get_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SettingHeader extends StatelessWidget {
+class AccountHeader extends StatelessWidget {
+  const AccountHeader();
   @override
   Widget build(BuildContext context) {
+    final user = GetStorages.user;
     return Container(
       margin: EdgeInsets.only(top: 30, left: 20, right: 20),
       child: Row(
@@ -19,11 +22,23 @@ class SettingHeader extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     margin: EdgeInsets.only(top: 0, left: 0),
                     child: Text(
-                      "guess".tr,
+                      user.name.isEmpty ? "guess".tr : user.name,
                       textAlign: TextAlign.start,
                       style: TextStyle(
                         color: Colors.black,
-                        fontSize: Adapt.px(20),
+                        fontSize: Adapt.px(30),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    margin: EdgeInsets.only(top: 0, left: 0),
+                    child: Text(
+                      user.email ?? '',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: Adapt.px(25),
                       ),
                     ),
                   ),
@@ -36,11 +51,11 @@ class SettingHeader extends StatelessWidget {
               margin: EdgeInsets.only(right: 0, top: 0),
               padding: EdgeInsets.all(1.0),
               child: CircleAvatar(
-                radius: Adapt.px(40),
+                radius: Adapt.px(70),
                 backgroundColor: Colors.white,
-                backgroundImage: NetworkImage(
-                  'https://img2.freepng.es/20180402/bje/kisspng-computer-icons-avatar-login-user-avatar-5ac207e69ecd41.2588125315226654466505.jpg',
-                ),
+                backgroundImage: user.photo.isNotEmpty
+                    ? Image.network(user.photo).image
+                    : Image.asset("assets/images/user_avatar.png").image,
               ),
               decoration: BoxDecoration(
                 color: Colors.grey[200], // border color

@@ -40,8 +40,8 @@ class FirebaseAuthController {
       );
 
       final response = await _handleService(user);
-
       user.id = response.data['id'];
+
       //handlerLogDevice(user);
 
       return user;
@@ -74,8 +74,8 @@ class FirebaseAuthController {
       );
 
       final response = await _handleService(user);
-
       user.id = response.data['id'];
+
       //handlerLogDevice(user);
 
       return user;
@@ -113,9 +113,9 @@ class FirebaseAuthController {
         signIn: 3,
       );
 
-      //final response = await _handleService(user);
+      final response = await _handleService(user);
+      user.id = response.data['id'];
 
-      //user.id = response.data['id'];
       //handlerLogDevice(user);
 
       return user;

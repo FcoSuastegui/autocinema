@@ -48,7 +48,6 @@ class _StepperViewState extends State<StepperView> {
                     );
                     _DeliveryStatus status;
                     LineStyle afterLineStyle;
-                    print(index > bloc.state.currentStep);
                     if (bloc.state.isLastStep) {
                       status = _DeliveryStatus.done;
                       indicatorSize = 30;
@@ -152,7 +151,7 @@ class _StepperContent extends StatelessWidget {
             ),
             child: Row(
               children: <Widget>[
-                bloc.state.currentStep > 0 && !bloc.state.isLastStep
+                bloc.state.currentStep > 0
                     ? FlatButton(
                         color: AppTheme.kPrimaryColor,
                         onPressed: () {

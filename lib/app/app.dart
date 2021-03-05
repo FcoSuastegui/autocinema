@@ -1,6 +1,7 @@
 import 'package:autocinema/app/globals/bindings/global_binding.dart';
 import 'package:autocinema/app/shared/logger/logger_utils.dart';
 import 'package:autocinema/app/themes/theme_style.dart';
+import 'package:autocinema/app/utils/get_storage.dart';
 import 'package:autocinema/app/utils/i18.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +26,7 @@ class App extends StatelessWidget {
     return GetMaterialApp(
       title: 'AutoCinema',
       getPages: Routes.pages,
-      initialRoute: '/login',
+      initialRoute: GetStorages.page,
       debugShowCheckedModeBanner: false,
       theme: ThemeStyle.lightTheme,
       darkTheme: ThemeStyle.darkTheme,

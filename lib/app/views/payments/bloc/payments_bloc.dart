@@ -3,6 +3,7 @@ import 'package:autocinema/app/data/services/autocinema_service.dart';
 import 'package:autocinema/app/globals/SrPago/permission.dart';
 import 'package:autocinema/app/globals/SrPago/sr_pago_card_model.dart';
 import 'package:autocinema/app/globals/SrPago/sr_pago_flutter.dart';
+import 'package:autocinema/app/utils/get_storage.dart';
 import 'package:autocinema/app/utils/validator_string.dart';
 import 'package:autocinema/app/views/payments/controller/payments_controller.dart';
 import 'package:flutter/foundation.dart';
@@ -14,6 +15,10 @@ import 'package:get/get.dart';
 class PaymentsBloc extends FormBloc<String, String> {
   double total = 00;
   final PaymentsController controller;
+  Map<String, String> folios = {
+    'SrPagoFolio': '',
+    'folioQr': '',
+  };
 
   final PaymentsController c = Get.find<PaymentsController>();
   final PageController pageViewController;
@@ -21,6 +26,8 @@ class PaymentsBloc extends FormBloc<String, String> {
   List<StateModel> listStates = [];
 
   final none = TextFieldBloc();
+
+  final terminos = BooleanFieldBloc();
 
   final name = TextFieldBloc(
     validators: [
@@ -110,7 +117,7 @@ class PaymentsBloc extends FormBloc<String, String> {
     );
     addFieldBlocs(
       step: 2,
-      fieldBlocs: [titular, cardNumber, expired, cvv],
+      fieldBlocs: [titular, cardNumber, expired, cvv, terminos],
     );
     addFieldBlocs(
       step: 3,
@@ -120,9 +127,6 @@ class PaymentsBloc extends FormBloc<String, String> {
 
   @override
   void onSubmitting() async {
-    total = c.totalC;
-    print(c.totalC);
-
     if (state.currentStep == 0) {
       await Future.delayed(const Duration(seconds: 1));
       next();
@@ -130,10 +134,14 @@ class PaymentsBloc extends FormBloc<String, String> {
       await Future.delayed(const Duration(seconds: 1));
       next();
     } else if (state.currentStep == 2) {
-      //await Future.delayed(const Duration(seconds: 1));
+      if (!terminos.value) {
+        return emitFailure(
+          failureResponse: "Acepta terminos y condiciones para continuar",
+        );
+      }
       try {
         final expire = expired.value.split('/');
-        final r = await SrPagoFlutter.createCardToken(
+        final sr = await SrPagoFlutter.createCardToken(
           SrPagoCardModel(
             name: titular.value,
             number: cardNumber.value.replaceAll(" ", ""),
@@ -143,13 +151,61 @@ class PaymentsBloc extends FormBloc<String, String> {
           ),
         );
 
-        if (r.type != PermissionStatus.granted) {
+        if (sr.type != PermissionStatus.granted) {
           return emitFailure(
-            failureResponse: r.message,
+            failureResponse: sr.message,
           );
         } else {
-          print(r.message);
-          next();
+          print(sr.token);
+          if (sr.status) {
+            final Map<String, dynamic> datos = {
+              "total": c.totalC,
+              "token": sr.token,
+              "email": email.value,
+              "primerApellido": firstName.value,
+              "segundoApellido": secondName.value,
+              "direccion": address.value,
+              "ciudad": city.value,
+              "estado": states.value,
+              "Codigopostal": codigoPostal.value,
+              "pais": "MX",
+              "funcion": c.horary.id,
+              "tarifa": c.horary.tarifa,
+              "cantidad": c.vehiculo + c.persona,
+              "id_user_client": GetStorages.user.id,
+              "titular": titular.value,
+              "items": [
+                {
+                  "idHorario": c.horary.id,
+                  "idUsuario": 0,
+                  "numCarros": c.vehiculo,
+                  "numExtras": c.persona,
+                  "tarifa": c.horary.tarifa,
+                  "tarifaExtras": c.horary.tarifaExtras,
+                  "tipoItem": 1,
+                  "idTarifa": c.horary.idTarifa,
+                  "idTarifaPersonasExtras": c.horary.idTarifaPersonasExtra
+                }
+              ]
+            };
+
+            final backend = await AutoCinemaService.processPagoBackend(datos);
+
+            if (backend.status) {
+              folios['SrPagoFolio'] = backend.data['Srpago'];
+              folios['folioQr'] = backend.data['folio'];
+              next();
+            } else {
+              emitFailure(
+                failureResponse:
+                    "Hubo un error en procesar la información contacte con el encargado de la plataforma.",
+              );
+            }
+          } else {
+            emitFailure(
+              failureResponse: messageSrPago(sr.message),
+            );
+          }
         }
       } on PlatformException catch (e) {
         return emitFailure(
@@ -174,6 +230,15 @@ class PaymentsBloc extends FormBloc<String, String> {
       duration: Duration(milliseconds: 500),
       curve: Curves.ease,
     );
+  }
+
+  String messageSrPago(String v) {
+    print(v);
+    Map<String, dynamic> message = {
+      'cardholder_name': "El campo titular debe ser legible",
+      'number': "El campo número de tarjeta debe ser correcta",
+    };
+    return message[v] ?? 'Unknow';
   }
 
   void next() {
@@ -210,6 +275,7 @@ class PaymentsBloc extends FormBloc<String, String> {
     cardNumber.close();
     expired.close();
     cvv.close();
+    terminos.close();
     return super.close();
   }
 }

@@ -4,26 +4,26 @@ class SrPagoResponse {
   SrPagoResponse({
     this.status,
     this.message,
-    this.data,
+    this.token,
     this.type,
   });
 
   bool status;
   String message;
   PermissionStatus type;
-  dynamic data;
+  String token;
 
   factory SrPagoResponse.fromJson(Map<String, dynamic> json) => SrPagoResponse(
         status: json["status"],
         message: json["message"],
         type: json["type"],
-        data: json["data"],
+        token: json["token"],
       );
 
   Map<String, dynamic> toJson() => {
         "status": status,
         "message": message,
         "type": type,
-        "data": data,
+        "token": token,
       };
 }

@@ -34,36 +34,18 @@ class SrPagoFlutter {
       return response;
     }
 
-    final PermissionStatus permission = await _checkPermissions();
+    PermissionStatus permission = await _checkPermissions();
 
-    if (permission == PermissionStatus.denied) {
-      final p = await _requestPermissions();
-      if (p == PermissionStatus.denied) {
-        response.type = p;
+    if (permission != PermissionStatus.granted) {
+      permission = await _requestPermissions();
+      if (permission != PermissionStatus.granted) {
+        response.type = permission;
         response.message = "Es necesario aceptar el permiso de localización para realizar el pago";
         return response;
       }
     }
 
-    if (permission == PermissionStatus.restricted) {
-      final p = await _requestPermissions();
-      if (p == PermissionStatus.restricted) {
-        response.type = p;
-        response.message = "Es necesario aceptar el permiso de localización para realizar el pago";
-        return response;
-      }
-    }
-
-    if (permission == PermissionStatus.unknown) {
-      final p = await _requestPermissions();
-      if (p == PermissionStatus.restricted) {
-        response.type = p;
-        response.message = "Es necesario aceptar el permiso de localización para realizar el pago";
-        return response;
-      }
-    }
-
-    response.type = PermissionStatus.granted;
+    response.type = permission;
     final Map<String, dynamic> arguments = {
       "liveMode": _liveMode,
       "publicKey": _publicKey,
@@ -74,7 +56,7 @@ class SrPagoFlutter {
 
     if (result['status']) {
       response.status = true;
-      response.message = result['token'];
+      response.token = result['token'];
     } else {
       response.message = result['message'];
     }

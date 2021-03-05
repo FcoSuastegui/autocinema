@@ -81,7 +81,7 @@ class MovieCard extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: const Color(0xFFAABBCC),
                         image: DecorationImage(
-                          image: Image.asset("assets/images/imagen-no-disponible.png").image,
+                          image: Image.asset("assets/images/cargando-imagen.png").image,
                           fit: BoxFit.contain,
                         ),
                       ),

@@ -8,18 +8,31 @@ import 'package:get/get.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:screenshot/screenshot.dart';
 
-class ShareQrCard extends StatelessWidget {
-  final String backgroundImage;
-  final String qrValue;
-  final Widget header;
-  final double headerHeight;
+class QrCardModel {
+  String pelicula;
+  String fecha;
+  String titular;
+  int numVehiculos;
+  int numPersonas;
+  double total;
+  String boletoQr;
 
+  QrCardModel({
+    this.pelicula,
+    this.fecha,
+    this.titular,
+    this.numPersonas,
+    this.numVehiculos,
+    this.total,
+    this.boletoQr,
+  });
+}
+
+class ShareQrCard extends StatelessWidget {
+  final QrCardModel qrValue;
   const ShareQrCard({
     Key key,
-    this.backgroundImage,
     this.qrValue,
-    this.header,
-    this.headerHeight,
   }) : super(key: key);
 
   @override
@@ -119,7 +132,7 @@ class ShareQrCard extends StatelessWidget {
                                           ),
                                           Container(
                                             child: Text(
-                                              "Película Película PelículaPelículaPelículaPelícula PelículaPelícula",
+                                              qrValue.pelicula,
                                               overflow: TextOverflow.ellipsis,
                                               maxLines: 1,
                                               style: TextStyle(
@@ -146,7 +159,7 @@ class ShareQrCard extends StatelessWidget {
                                             ),
                                           ),
                                           Text(
-                                            "LUN, 01, MAR",
+                                            qrValue.fecha,
                                             overflow: TextOverflow.ellipsis,
                                             maxLines: 1,
                                             style: TextStyle(
@@ -174,7 +187,7 @@ class ShareQrCard extends StatelessWidget {
                                 ),
                                 Container(
                                   child: Text(
-                                    "Francisco Javier Suastegui Rosales",
+                                    qrValue.titular,
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 1,
                                     style: TextStyle(
@@ -206,7 +219,7 @@ class ShareQrCard extends StatelessWidget {
                                           ),
                                           Container(
                                             child: Text(
-                                              "10000",
+                                              qrValue.numVehiculos.toString(),
                                               overflow: TextOverflow.ellipsis,
                                               maxLines: 1,
                                               style: TextStyle(
@@ -233,7 +246,7 @@ class ShareQrCard extends StatelessWidget {
                                             ),
                                           ),
                                           Text(
-                                            "200",
+                                            qrValue.numPersonas.toString(),
                                             overflow: TextOverflow.ellipsis,
                                             maxLines: 1,
                                             style: TextStyle(
@@ -269,7 +282,7 @@ class ShareQrCard extends StatelessWidget {
                                           ),
                                           Container(
                                             child: Text(
-                                              Helper.moneyFormat(300.00),
+                                              Helper.moneyFormat(qrValue.total),
                                               overflow: TextOverflow.ellipsis,
                                               maxLines: 1,
                                               style: TextStyle(
@@ -296,7 +309,7 @@ class ShareQrCard extends StatelessWidget {
                                             ),
                                           ),
                                           Text(
-                                            "2103Oh9cGJ",
+                                            qrValue.boletoQr,
                                             overflow: TextOverflow.ellipsis,
                                             maxLines: 1,
                                             style: TextStyle(
@@ -323,7 +336,7 @@ class ShareQrCard extends StatelessWidget {
                             alignment: Alignment.center,
                             child: QrImage(
                               backgroundColor: Colors.white,
-                              data: qrValue,
+                              data: qrValue.boletoQr,
                               size: Adapt.px(350),
                             ),
                           ),

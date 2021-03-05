@@ -1,28 +1,30 @@
-import 'package:autocinema/app/widgets/Dividers/divider_custom.dart';
+import 'package:autocinema/app/globals/controller/firebase_auth_controller.dart';
+import 'package:autocinema/app/routes/routes.dart';
+import 'package:autocinema/app/themes/adapt.dart';
+import 'package:autocinema/app/utils/get_storage.dart';
+import 'package:autocinema/app/widgets/Alerts/alert_actions.dart';
 import 'package:autocinema/app/widgets/ListTile/list_tile_default.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SettingBody extends StatelessWidget {
+class AccountBody extends StatelessWidget {
+  const AccountBody();
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        DividerCustom(
-          width: 0.9,
-          margin: 0.01,
-        ),
-        ListTileDefault(
+        /* ListTileDefault(
           title: 'change-password'.tr,
           trailing: Icon(
             Icons.lock,
             color: Colors.black26,
-            size: 18.0,
+            size: Adapt.px(40),
           ),
           onTap: () {},
-        ),
-        ListTileDefault(
+        ), */
+        /* ListTileDefault(
           top: 20.0,
           title: 'my-cards'.tr,
           trailing: Icon(
@@ -30,30 +32,57 @@ class SettingBody extends StatelessWidget {
             color: Colors.black26,
             size: 18.0,
           ),
-          onTap: () => Get.toNamed('/card'),
+          onTap: () => Routes.routeName('/card'),
         ),
         ListTileDefault.switchTile(
           title: "receive-notifications".tr,
           value: true,
           onChange: (e) {},
+        ), */
+        SizedBox(
+          height: Adapt.px(50),
         ),
         ListTileDefault(
-          top: 10.0,
+          title: 'Boletos'.tr,
+          trailing: Icon(
+            Icons.qr_code,
+            color: Colors.black26,
+            size: Adapt.px(40),
+          ),
+          onTap: () => Routes.goToPage('/boleto'),
+        ),
+        SizedBox(
+          height: Adapt.px(50),
+        ),
+        ListTileDefault(
           title: 'logout'.tr,
           trailing: Icon(
             Icons.chevron_right,
             color: Colors.black26,
-            size: 18.0,
+            size: Adapt.px(40),
           ),
-          onTap: () {},
+          onTap: _logout,
         ),
       ],
+    );
+  }
+
+  Future<void> _logout() async {
+    await Get.dialog(
+      AlertAction(
+        title: "¿Deseas salir de la aplicación?",
+        onPressYes: () {
+          FirebaseAuthController.i.signOut();
+          GetStorages.clear();
+          Get.offAllNamed('/login');
+        },
+      ),
     );
   }
 }
 /* 
   Future<void> _activarMembresia() async {
-    GetStoragesnst.membresia
+    GetStorages.inst.membresia
         ? Helper.success(message: "¡Su membresía ya esta activida!")
         : await Get.dialog(
             WillPopScope(
@@ -65,15 +94,15 @@ class SettingBody extends StatelessWidget {
 
   Future<void> _contrasena() async {
     List social = ["Google", "Facebook", "Apple"];
-    GetStoragesnst.signIn > 0
+    GetStorages.inst.signIn > 0
         ? await Get.dialog(
             AlertAction(
               title:
-                  "Ha iniciado sesión con ${social[GetStoragesnst.signIn - 1]}, no se puede cambiar la contraseña",
+                  "Ha iniciado sesión con ${social[GetStorages.inst.signIn - 1]}, no se puede cambiar la contraseña",
               buttonLabelNo: 'Aceptar',
             ),
           )
-        : Get.toNamed('/password');
+        : Routes.routeNamed('/password');
   }
 
   Future<void> _logout() async {
@@ -82,7 +111,7 @@ class SettingBody extends StatelessWidget {
         title: "¿Deseas salir de la aplicación?",
         onPressYes: () {
           FirebaseAuthController.i.signOut();
-          GetStoragesnst.clear();
+          GetStorages.inst.clear();
           Get.offAllNamed('/');
         },
       ),

@@ -41,11 +41,23 @@ class CarouselWithIndicator extends StatelessWidget {
                     ),
                     placeholder: (context, url) => Container(
                       width: MediaQuery.of(context).size.width,
-                      color: const Color(0xFFAABBCC),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFAABBCC),
+                        image: DecorationImage(
+                          image: Image.asset("assets/images/cargando-imagen.png").image,
+                          fit: BoxFit.contain,
+                        ),
+                      ),
                     ),
                     errorWidget: (context, url, error) => Container(
                       width: MediaQuery.of(context).size.width,
-                      color: const Color(0xFFAABBCC),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFAABBCC),
+                        image: DecorationImage(
+                          image: Image.asset("assets/images/imagen-no-disponible.png").image,
+                          fit: BoxFit.contain,
+                        ),
+                      ),
                     ),
                     fadeOutDuration: const Duration(milliseconds: 400),
                     fadeInDuration: const Duration(milliseconds: 800),

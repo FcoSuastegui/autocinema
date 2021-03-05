@@ -426,7 +426,15 @@ class SuccessPayments extends StatelessWidget {
               ),
               onPressed: () => Get.dialog(
                 ShareQrCard(
-                  qrValue: "holasdkasj",
+                  qrValue: QrCardModel(
+                    pelicula: bloc.c.movie.titulo,
+                    fecha: bloc.c.horary.fechaCorta,
+                    numPersonas: bloc.c.persona,
+                    numVehiculos: bloc.c.vehiculo,
+                    titular: bloc.titular.value,
+                    total: bloc.c.totalC,
+                    boletoQr: bloc.folios['folioQr'] ?? '',
+                  ),
                 ),
               ),
               color: AppTheme.kPrimaryColor,

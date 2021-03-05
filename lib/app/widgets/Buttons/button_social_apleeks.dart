@@ -21,15 +21,16 @@ class ButtonSocialApleeks extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (button) {
       case ButtonsApleeks.Google:
-        return FlatButton(
+        return OutlineButton(
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Image.asset(
-                "assets/social/google.png",
-                height: Adapt.px(40),
+              Icon(
+                FontAwesomeIcons.google,
+                color: Colors.white,
+                size: Adapt.px(40),
               ),
               Text(
                 text ?? 'Sign up with Google',
@@ -42,18 +43,23 @@ class ButtonSocialApleeks extends StatelessWidget {
               ),
             ],
           ),
-          color: Color(0xFF4285F4),
+          color: Colors.transparent,
+          splashColor: Colors.white30,
+          highlightedBorderColor: Colors.white,
+          borderSide: BorderSide(color: Colors.white),
           onPressed: onPressed ?? () {},
         );
       case ButtonsApleeks.Facebook:
-        return FlatButton(
+        return OutlineButton(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Image.asset(
-                "assets/social/facebook.png",
-                height: Adapt.px(40),
+              Icon(
+                FontAwesomeIcons.facebook,
+                color: Colors.white,
+                size: Adapt.px(40),
               ),
               Text(
                 text ?? 'Sign up with Facebook',
@@ -66,19 +72,23 @@ class ButtonSocialApleeks extends StatelessWidget {
               ),
             ],
           ),
-          color: Color(0xFF3B5998),
+          color: Colors.transparent,
+          splashColor: Colors.white30,
+          highlightedBorderColor: Colors.white,
+          borderSide: BorderSide(color: Colors.white),
           onPressed: onPressed ?? () {},
         );
       case ButtonsApleeks.Apple:
-        return FlatButton(
+        return OutlineButton(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Icon(
                 FontAwesomeIcons.apple,
                 color: Colors.white,
-                size: Adapt.px(40),
+                size: Adapt.px(50),
               ),
               Text(
                 text ?? 'Sign up with Apple',
@@ -91,7 +101,10 @@ class ButtonSocialApleeks extends StatelessWidget {
               ),
             ],
           ),
-          color: Color(0xFF000000),
+          color: Colors.transparent,
+          splashColor: Colors.white30,
+          highlightedBorderColor: Colors.white,
+          borderSide: BorderSide(color: Colors.white),
           onPressed: onPressed ?? () {},
         );
     }

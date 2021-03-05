@@ -42,8 +42,13 @@ class TrailerApleeks extends StatelessWidget {
                     ),
                   ),
                   placeholder: (context, url) => Container(
-                    color: const Color(0xFFAABBCC),
-                    height: height ?? Adapt.px(800),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFAABBCC),
+                      image: DecorationImage(
+                        image: Image.asset("assets/images/cargando-imagen.png").image,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
                   ),
                   errorWidget: (context, url, error) => Container(
                     height: height ?? Adapt.px(800),

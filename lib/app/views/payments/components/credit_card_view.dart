@@ -1,8 +1,13 @@
+import 'package:autocinema/app/themes/adapt.dart';
+import 'package:autocinema/app/themes/app_theme.dart';
 import 'package:autocinema/app/utils/formatters.dart';
+import 'package:autocinema/app/utils/get_storage.dart';
 import 'package:autocinema/app/views/payments/bloc/payments_bloc.dart';
 import 'package:autocinema/app/widgets/TextField/input_text_cupertino.dart';
+import 'package:autocinema/app/widgets/WebView/web_view_apleeks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
+import 'package:get/get.dart';
 
 class CreditCardView extends StatelessWidget {
   const CreditCardView({Key key}) : super(key: key);
@@ -17,6 +22,8 @@ class CreditCardView extends StatelessWidget {
         vertical: 10,
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           InputTextCupertino(
             textFieldBloc: bloc.titular,
@@ -70,7 +77,45 @@ class CreditCardView extends StatelessWidget {
                 ),
               ),
             ],
-          )
+          ),
+          CheckboxFieldBlocBuilder(
+              booleanFieldBloc: bloc.terminos,
+              controlAffinity: FieldBlocBuilderControlAffinity.leading,
+              padding: EdgeInsets.zero,
+              body: Container(
+                alignment: Alignment.center,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        "Acepto términos y condiciones.",
+                        style: TextStyle(
+                          fontSize: Adapt.px(30),
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () => Get.to(
+                        WebViewApleeks(
+                          url: "${GetStorages.server}/terminos",
+                          title: "Términos y condiciones",
+                        ),
+                        fullscreenDialog: true,
+                      ),
+                      child: Text(
+                        "Ver Términos",
+                        style: TextStyle(
+                          color: AppTheme.kPrimaryColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: Adapt.px(30),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ))
         ],
       ),
     );

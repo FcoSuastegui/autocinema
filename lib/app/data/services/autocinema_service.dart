@@ -1,4 +1,5 @@
 import 'package:autocinema/app/data/domian/network.dart';
+import 'package:autocinema/app/data/models/boleto_model.dart';
 import 'package:autocinema/app/data/models/configuration_model.dart';
 import 'package:autocinema/app/data/models/horary_model.dart';
 import 'package:autocinema/app/data/models/list_page.dart';
@@ -85,8 +86,29 @@ class AutoCinemaService {
 
   static Future<ResponseModel> processPagoBackend(Map<String, dynamic> datos) async {
     return await Network.i.post(
-      route: '/v1/app/states',
+      route: '/v1/app/comprar-boleto',
       data: datos,
+    );
+  }
+
+  static Future<ListPage<BoletoModel>> boletos({int cliente = 0, int page = 1}) async {
+    final List<BoletoModel> list = List<BoletoModel>();
+    String message = "";
+    final response = await Network.i.post(
+      route: '/v1/app/boletos',
+      data: {
+        "cliente": cliente,
+        "page": page,
+      },
+    );
+    response.status
+        ? response.data.forEach((e) => list.add(BoletoModel.fromJson(e)))
+        : message = response.message;
+
+    return ListPage<BoletoModel>(
+      itemList: list,
+      totalCount: list.length,
+      message: message,
     );
   }
 }

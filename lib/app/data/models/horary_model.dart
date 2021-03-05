@@ -13,6 +13,7 @@ class HoraryModel {
     this.tarifa,
     this.tarifaExtras,
     this.idTarifa,
+    this.idTarifaPersonasExtra,
   });
 
   int id;
@@ -28,6 +29,7 @@ class HoraryModel {
   String tarifa;
   String tarifaExtras;
   int idTarifa;
+  int idTarifaPersonasExtra;
 
   factory HoraryModel.fromJson(Map<String, dynamic> json) => HoraryModel(
         id: json["id"] ?? 0,
@@ -43,6 +45,7 @@ class HoraryModel {
         tarifa: json["tarifa"] ?? '0.0',
         tarifaExtras: json["tarifaExtras"] ?? '0.0',
         idTarifa: json["idTarifa"] ?? 0,
+        idTarifaPersonasExtra: json["idTarifaPersonasExtra"] ?? 0,
       );
 
   Map<String, dynamic> toJson() => {
@@ -59,5 +62,6 @@ class HoraryModel {
         "tarifa": tarifa,
         "tarifaExtras": tarifaExtras,
         "idTarifa": idTarifa,
+        "idTarifaPersonasExtra": idTarifaPersonasExtra,
       };
 }

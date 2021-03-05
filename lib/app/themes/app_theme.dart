@@ -14,6 +14,8 @@ class AppTheme {
   static const kTextColor = Color(0xFFA3886C);
   static const kIconColor = Color(0xFFA3886C);
 
+  static const kCancel = Color(0xFFFF4040);
+
   static const kHeaderCircle = Color.fromRGBO(255, 255, 255, 0.17);
   static const kHeaderBlueDark = Color.fromRGBO(255, 255, 255, 0.17);
   static const kHeaderBlueLight = Color.fromRGBO(255, 255, 255, 0.17);

@@ -80,6 +80,8 @@ flutter:
     - assets/images/facebook_circle.png
     - assets/images/sin-funciones.png
     - assets/images/imagen-no-disponible.png
+    - assets/images/cargando-imagen.png
+    - assets/images/splash-login.gif
     #- assets/images-card/chip.png
     #- assets/images-card/visa_basic.png
     #- assets/images-card/kotak_logo.png
@@ -97,9 +99,6 @@ flutter:
     - assets/credit-card-chip-silver.png
     - assets/card_band.jpg
     - assets/card_back.jpg
-    - assets/social/apple.png
-    - assets/social/facebook.png
-    - assets/social/google.png
     - assets/slides/slide-01.png
     - assets/slides/slide-02.png
     - assets/slides/slide-03.png
