@@ -4,7 +4,6 @@ import 'package:autocinema/app/themes/adapt.dart';
 import 'package:autocinema/app/utils/get_storage.dart';
 import 'package:autocinema/app/widgets/Alerts/alert_actions.dart';
 import 'package:autocinema/app/widgets/ListTile/list_tile_default.dart';
-import 'package:autocinema/app/widgets/PdfViewer/pdf_viewer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
