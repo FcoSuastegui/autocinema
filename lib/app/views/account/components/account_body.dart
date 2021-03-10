@@ -4,6 +4,7 @@ import 'package:autocinema/app/themes/adapt.dart';
 import 'package:autocinema/app/utils/get_storage.dart';
 import 'package:autocinema/app/widgets/Alerts/alert_actions.dart';
 import 'package:autocinema/app/widgets/ListTile/list_tile_default.dart';
+import 'package:autocinema/app/widgets/PdfViewer/pdf_viewer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,57 +14,65 @@ class AccountBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        /* ListTileDefault(
-          title: 'change-password'.tr,
-          trailing: Icon(
-            Icons.lock,
-            color: Colors.black26,
-            size: Adapt.px(40),
+    return Container(
+      margin: EdgeInsets.only(top: 30, left: 20, right: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          ListTileDefault(
+            title: 'Boletos'.tr,
+            trailing: Icon(
+              Icons.qr_code,
+              color: Colors.black26,
+              size: Adapt.px(40),
+            ),
+            onTap: () => Routes.goToPage('/boleto'),
           ),
-          onTap: () {},
-        ), */
-        /* ListTileDefault(
-          top: 20.0,
-          title: 'my-cards'.tr,
-          trailing: Icon(
-            Icons.payment,
-            color: Colors.black26,
-            size: 18.0,
+          SizedBox(
+            height: Adapt.px(50),
           ),
-          onTap: () => Routes.routeName('/card'),
-        ),
-        ListTileDefault.switchTile(
-          title: "receive-notifications".tr,
-          value: true,
-          onChange: (e) {},
-        ), */
-        SizedBox(
-          height: Adapt.px(50),
-        ),
-        ListTileDefault(
-          title: 'Boletos'.tr,
-          trailing: Icon(
-            Icons.qr_code,
-            color: Colors.black26,
-            size: Adapt.px(40),
+          /* ListTileDefault(
+            title: 'card'.tr,
+            trailing: Icon(
+              Icons.credit_card,
+              color: Colors.black26,
+              size: Adapt.px(40),
+            ),
+            onTap: () => Routes.goToPage('/card'),
           ),
-          onTap: () => Routes.goToPage('/boleto'),
-        ),
-        SizedBox(
-          height: Adapt.px(50),
-        ),
-        ListTileDefault(
-          title: 'logout'.tr,
-          trailing: Icon(
-            Icons.chevron_right,
-            color: Colors.black26,
-            size: Adapt.px(40),
+          SizedBox(
+            height: Adapt.px(50),
           ),
-          onTap: _logout,
-        ),
-      ],
+          ListTileDefault(
+            title: 'card'.tr,
+            trailing: Icon(
+              Icons.credit_card,
+              color: Colors.black26,
+              size: Adapt.px(40),
+            ),
+            onTap: () => Get.to(
+              PdfViewer(
+                path: GetStorages.config.aviso,
+                title: GetStorages.config.aviso,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: Adapt.px(50),
+          ), */
+          ListTileDefault(
+            title: 'logout'.tr,
+            trailing: Icon(
+              Icons.chevron_right,
+              color: Colors.black26,
+              size: Adapt.px(40),
+            ),
+            onTap: _logout,
+            border: false,
+          ),
+        ],
+      ),
     );
   }
 

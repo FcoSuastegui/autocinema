@@ -38,7 +38,7 @@ class ListMovie extends StatelessWidget {
             title: Text("Hubo un error al cargar las peliculas"),
           ),
           itemBuilder: (context, movie, index) => MovieCard(
-            height: Adapt.px(350),
+            height: Adapt.px(380),
             movie: movie,
             onTap: () => Routes.goToPage(
               '/movie-details',

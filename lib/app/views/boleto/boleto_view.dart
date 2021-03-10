@@ -19,10 +19,11 @@ class BoletoView extends GetView<BoletoController> {
       appBar: AppBar(
         elevation: 0.0,
         title: Text(
-          "boletos".tr,
+          "Boletos".tr,
         ),
       ),
       body: SliverScrollView(
+        physics: AlwaysScrollableScrollPhysics(),
         onRefresh: () => Future.sync(
           () => controller.boletoController.refresh(),
         ),

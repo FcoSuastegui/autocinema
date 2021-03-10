@@ -1,9 +1,10 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:autocinema/app/widgets/Loading/loading_apleeks.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class WebViewApleeks extends StatelessWidget {
+class WebViewApleeks extends StatefulWidget {
   final String url;
   final String title;
 
@@ -14,11 +15,23 @@ class WebViewApleeks extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  _WebViewApleeksState createState() => _WebViewApleeksState();
+}
+
+class _WebViewApleeksState extends State<WebViewApleeks> {
+  @override
+  void initState() {
+    super.initState();
+    // Enable hybrid composition.
+    if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
+  }
+
+  @override
   Widget build(BuildContext context) {
     Completer<WebViewController> _webcontroller = Completer<WebViewController>();
     return Scaffold(
       appBar: AppBar(
-        title: Text(title ?? 'Titulo no disponible'),
+        title: Text(widget.title ?? 'Titulo no disponible'),
         actions: <Widget>[
           _NavigationControls(_webcontroller.future),
         ],
@@ -29,7 +42,7 @@ class WebViewApleeks extends StatelessWidget {
             return Stack(
               children: [
                 WebView(
-                  initialUrl: url,
+                  initialUrl: widget.url,
                   javascriptMode: JavascriptMode.unrestricted,
                   onWebViewCreated: (WebViewController webViewController) {
                     _webcontroller.complete(webViewController);

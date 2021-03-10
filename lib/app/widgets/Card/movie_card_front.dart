@@ -6,13 +6,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class MovieCardFront extends StatelessWidget {
-  final double height;
   final MovieModel movie;
   final Function onTap;
 
   const MovieCardFront({
     Key key,
-    this.height = 200,
     this.movie,
     this.onTap,
   }) : super(key: key);
@@ -20,6 +18,7 @@ class MovieCardFront extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData _theme = ThemeStyle.getTheme(context);
+    final height = Adapt.px(350);
     return GestureDetector(
       key: ValueKey('recommendation${movie.id}'),
       onTap: onTap,

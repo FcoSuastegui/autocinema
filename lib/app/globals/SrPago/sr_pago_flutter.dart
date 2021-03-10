@@ -99,7 +99,9 @@ class SrPagoFlutter {
         "env": 1,
       },
     );
+
     if (response.status) {
+      print(response.data);
       final SrPagoKey key = SrPagoKey.fromJson(response.data);
       SrPagoFlutter.publicKey = Platform.isAndroid ? key.publicKeyAndroid : key.publicKeyIos;
       SrPagoFlutter.liveMode = key.liveMode;

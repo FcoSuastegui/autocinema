@@ -27,6 +27,7 @@ class I18 extends Translations {
           'required': 'The field is required',
           'email-format': 'The email format is wrong',
           'share': 'Share',
+          'card': 'Card',
         },
         'es': {
           'home': 'Inicio',
@@ -53,6 +54,7 @@ class I18 extends Translations {
           'required': 'El campo es requerido',
           'email-format': 'El formato de correo electrónico es incorrecto',
           'share': 'Compartir',
+          'card': 'Tarjeta',
         }
       };
 }

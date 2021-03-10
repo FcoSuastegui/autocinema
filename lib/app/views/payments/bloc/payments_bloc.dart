@@ -127,6 +127,7 @@ class PaymentsBloc extends FormBloc<String, String> {
 
   @override
   void onSubmitting() async {
+    total = c.totalC;
     if (state.currentStep == 0) {
       await Future.delayed(const Duration(seconds: 1));
       next();
@@ -162,6 +163,7 @@ class PaymentsBloc extends FormBloc<String, String> {
               "total": c.totalC,
               "token": sr.token,
               "email": email.value,
+              "nombre": name.value,
               "primerApellido": firstName.value,
               "segundoApellido": secondName.value,
               "direccion": address.value,
@@ -169,6 +171,7 @@ class PaymentsBloc extends FormBloc<String, String> {
               "estado": states.value,
               "Codigopostal": codigoPostal.value,
               "pais": "MX",
+              "telefono": phone.value,
               "funcion": c.horary.id,
               "tarifa": c.horary.tarifa,
               "cantidad": c.vehiculo + c.persona,
@@ -196,6 +199,7 @@ class PaymentsBloc extends FormBloc<String, String> {
               folios['folioQr'] = backend.data['folio'];
               next();
             } else {
+              print(backend.message);
               emitFailure(
                 failureResponse:
                     "Hubo un error en procesar la información contacte con el encargado de la plataforma.",
@@ -232,6 +236,14 @@ class PaymentsBloc extends FormBloc<String, String> {
     );
   }
 
+  void next() {
+    emitSuccess();
+    pageViewController.nextPage(
+      duration: Duration(milliseconds: 500),
+      curve: Curves.ease,
+    );
+  }
+
   String messageSrPago(String v) {
     print(v);
     Map<String, dynamic> message = {
@@ -239,14 +251,6 @@ class PaymentsBloc extends FormBloc<String, String> {
       'number': "El campo número de tarjeta debe ser correcta",
     };
     return message[v] ?? 'Unknow';
-  }
-
-  void next() {
-    emitSuccess();
-    pageViewController.nextPage(
-      duration: Duration(milliseconds: 500),
-      curve: Curves.ease,
-    );
   }
 
   Future<void> getStates() async {

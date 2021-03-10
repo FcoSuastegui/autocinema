@@ -23,7 +23,7 @@ class ListMovieFront extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double heightCard = Adapt.px(740);
+    final double heightCard = Adapt.px(700);
     return GetBuilder<ListMovieController>(
       tag: UniqueKey().toString(),
       init: ListMovieController(

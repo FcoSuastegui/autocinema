@@ -23,29 +23,32 @@ class App extends StatelessWidget {
       systemNavigationBarIconBrightness: Brightness.dark, //navigation bar icon
     ));
 
-    return GetMaterialApp(
-      title: 'AutoCinema',
-      getPages: Routes.pages,
-      initialRoute: GetStorages.page,
-      debugShowCheckedModeBanner: false,
-      theme: ThemeStyle.lightTheme,
-      darkTheme: ThemeStyle.darkTheme,
-      locale: Get.deviceLocale,
-      translations: I18(),
-      initialBinding: GlobalBinding(),
-      defaultTransition: Transition.fadeIn,
-      localizationsDelegates: [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      localeResolutionCallback: (deviceLocale, supporteLocate) => supporteLocate.first,
-      supportedLocales: [
-        const Locale('es'), // Español
-        const Locale('en'), // English
-      ],
-      enableLog: true,
-      logWriterCallback: Logger.write,
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.light,
+      child: GetMaterialApp(
+        title: 'AutoCinema',
+        getPages: Routes.pages,
+        initialRoute: GetStorages.page,
+        debugShowCheckedModeBanner: false,
+        theme: ThemeStyle.lightTheme,
+        darkTheme: ThemeStyle.darkTheme,
+        locale: Get.deviceLocale,
+        translations: I18(),
+        initialBinding: GlobalBinding(),
+        defaultTransition: Transition.fadeIn,
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        localeResolutionCallback: (deviceLocale, supporteLocate) => supporteLocate.first,
+        supportedLocales: [
+          const Locale('es'), // Español
+          const Locale('en'), // English
+        ],
+        enableLog: true,
+        logWriterCallback: Logger.write,
+      ),
     );
   }
 }

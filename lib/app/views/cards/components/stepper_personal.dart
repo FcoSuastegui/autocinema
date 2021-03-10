@@ -1,17 +1,16 @@
 import 'package:autocinema/app/utils/formatters.dart';
-import 'package:autocinema/app/views/payments/bloc/payments_bloc.dart';
+import 'package:autocinema/app/views/cards/bloc/card_bloc.dart';
 import 'package:autocinema/app/widgets/TextField/input_text_cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 
-class PersonalDataView extends StatelessWidget {
-  const PersonalDataView({Key key}) : super(key: key);
+class StepperPersonal extends StatelessWidget {
+  const StepperPersonal({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     // ignore: close_sinks
-    final bloc = BlocProvider.of<PaymentsBloc>(context);
+    final bloc = BlocProvider.of<CardBloc>(context);
     return Container(
       margin: EdgeInsets.symmetric(
         horizontal: 10,
@@ -29,7 +28,7 @@ class PersonalDataView extends StatelessWidget {
             children: [
               Expanded(
                 child: InputTextCupertino(
-                  textFieldBloc: bloc.firstName,
+                  textFieldBloc: bloc.firstSurname,
                   placeholder: 'Primer apellido',
                   keyboardType: TextInputType.text,
                 ),
@@ -39,7 +38,7 @@ class PersonalDataView extends StatelessWidget {
               ),
               Expanded(
                 child: InputTextCupertino(
-                  textFieldBloc: bloc.secondName,
+                  textFieldBloc: bloc.secondSurname,
                   placeholder: 'Segundo apellido',
                   keyboardType: TextInputType.text,
                 ),

@@ -21,6 +21,7 @@ class InputTextCupertino extends StatefulWidget {
   final Widget suffix;
   final TextInputType keyboardType;
   final TextInputAction textInputAction;
+  final Function onSubmitted;
   final FieldBlocErrorBuilder errorBuilder;
   final TextCapitalization textCapitalization;
   final bool readOnly;
@@ -44,6 +45,8 @@ class InputTextCupertino extends StatefulWidget {
       Icons.visibility,
     ),
     this.obscureTextFalseIcon = const Icon(Icons.visibility_off),
+    this.textInputAction = TextInputAction.next,
+    this.onSubmitted,
     this.clearTextIcon = const Icon(Icons.clear),
     this.asyncValidatingIcon = const SizedBox(
       height: 24,
@@ -58,7 +61,6 @@ class InputTextCupertino extends StatefulWidget {
     this.obscureText,
     this.decoration = const InputDecoration(),
     this.keyboardType,
-    this.textInputAction,
     this.textCapitalization = TextCapitalization.none,
     this.errorBuilder,
     this.readOnly = false,
@@ -214,6 +216,13 @@ class _InputTextCupertinoState extends State<InputTextCupertino> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CupertinoTextField(
+          textInputAction: widget.textInputAction,
+          onEditingComplete: widget.textInputAction == TextInputAction.next
+              ? () => FocusScope.of(context).nextFocus()
+              : () => false,
+          onSubmitted: widget.textInputAction == TextInputAction.done
+              ? (_) => FocusScope.of(context).unfocus()
+              : (_) => false,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(6),

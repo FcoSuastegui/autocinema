@@ -248,6 +248,7 @@ class ShareQrCard extends StatelessWidget {
                                           Text(
                                             qrValue.numPersonas.toString(),
                                             overflow: TextOverflow.ellipsis,
+                                            textAlign: TextAlign.end,
                                             maxLines: 1,
                                             style: TextStyle(
                                               color: Colors.black.withOpacity(0.5),

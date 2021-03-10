@@ -53,9 +53,7 @@ class AccountHeader extends StatelessWidget {
               child: CircleAvatar(
                 radius: Adapt.px(70),
                 backgroundColor: Colors.white,
-                backgroundImage: user.photo.isNotEmpty
-                    ? Image.network(user.photo).image
-                    : Image.asset("assets/images/user_avatar.png").image,
+                backgroundImage: Image.network(user.photo).image,
               ),
               decoration: BoxDecoration(
                 color: Colors.grey[200], // border color

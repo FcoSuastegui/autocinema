@@ -7,8 +7,7 @@ class ListTileDefault extends StatelessWidget {
   final Widget widget, trailing;
   final Function onTap;
   final Function(bool value) onChange;
-  final double top, bottom, left, right;
-  final bool boxshadow, _isSwitch, value;
+  final bool boxshadow, _isSwitch, value, border;
 
   const ListTileDefault({
     Key key,
@@ -18,13 +17,10 @@ class ListTileDefault extends StatelessWidget {
     this.trailing,
     this.widget,
     this.subtitle,
-    this.top = 0.0,
-    this.bottom = 0.0,
-    this.left = 20.0,
-    this.right = 0.0,
     this.boxshadow = true,
     this.color = Colors.black38,
     this.value,
+    this.border = true,
   })  : this.onChange = null,
         _isSwitch = false,
         super(key: key);
@@ -37,13 +33,10 @@ class ListTileDefault extends StatelessWidget {
     this.trailing,
     this.widget,
     this.subtitle,
-    this.top = 10.0,
-    this.bottom = 0.0,
-    this.left = 20.0,
-    this.right = 0.0,
     this.boxshadow = true,
     this.color = Colors.black38,
     @required this.value,
+    this.border = true,
   })  : this.onTap = null,
         _isSwitch = true,
         super(key: key);
@@ -52,13 +45,17 @@ class ListTileDefault extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     return Container(
-      margin: EdgeInsets.only(
-        left: left,
-        right: right,
-        top: top,
-        bottom: bottom,
-      ),
       width: width,
+      decoration: BoxDecoration(
+        border: border
+            ? Border(
+                bottom: BorderSide(
+                  color: Colors.black.withOpacity(0.3),
+                  width: 0.5,
+                ),
+              )
+            : null,
+      ),
       child: Container(
         child: _isSwitch
             ? Row(
@@ -95,20 +92,21 @@ class ListTileDefault extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text(
-                      title ?? '',
-                      textAlign: TextAlign.start,
-                      style: TextStyle(
-                        color: Colors.black38,
-                        fontSize: 14,
-                        fontFamily: 'Oswald',
-                        fontWeight: FontWeight.w400,
+                    Expanded(
+                      child: Text(
+                        title ?? '',
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          color: Colors.black38,
+                          fontSize: 14,
+                          fontFamily: 'Oswald',
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(right: 20.0),
                       child: trailing,
-                    )
+                    ),
                   ],
                 ),
               ),

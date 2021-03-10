@@ -1,6 +1,7 @@
 import 'package:autocinema/app/utils/helper.dart';
 import 'package:autocinema/app/views/boleto/binding/boleto_binding.dart';
 import 'package:autocinema/app/views/boleto/boleto_view.dart';
+import 'package:autocinema/app/views/cards/card_view.dart';
 import 'package:autocinema/app/views/login/login_view.dart';
 import 'package:autocinema/app/views/movie-details/binding/movie_detail_binding.dart';
 import 'package:autocinema/app/views/movie-details/movie_detail_detail.dart';
@@ -28,6 +29,10 @@ class Routes {
       name: OnBoardingView.routeName,
       page: () => OnBoardingView(),
       binding: OnBoardingBinding(),
+    ),
+    GetPage(
+      name: CardView.routeName,
+      page: () => CardView(),
     ),
     GetPage(
       name: BoletoView.routeName,

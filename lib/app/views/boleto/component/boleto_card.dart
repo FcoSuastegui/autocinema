@@ -1,6 +1,5 @@
 import 'package:autocinema/app/data/models/boleto_model.dart';
 import 'package:autocinema/app/themes/adapt.dart';
-import 'package:autocinema/app/themes/app_theme.dart';
 import 'package:autocinema/app/utils/helper.dart';
 import 'package:autocinema/app/widgets/Qr/qr_shared/share_qr_card.dart';
 import 'package:cached_network_image/cached_network_image.dart';

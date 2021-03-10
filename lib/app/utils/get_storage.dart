@@ -1,3 +1,4 @@
+import 'package:autocinema/app/data/models/app_config_model.dart';
 import 'package:autocinema/app/data/models/user_model.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -25,8 +26,9 @@ class GetStorages {
   static bool get onBoarding => _storage.read('onBoarding') ?? true;
 
   static set page(String valor) => _storage.write('page', valor);
-  static String get page => _storage.read('page') ?? '/nav-bar';
+  static String get page => _storage.read('page') ?? '/login';
 
+  static UserModel get user => UserModel.fromJson(_storage.read('user') ?? {});
   static set user(UserModel userModel) {
     userModel.photo == null || userModel.photo.isEmpty
         ? userModel.photo = "$server/images/avatar-masculino.png"
@@ -34,5 +36,6 @@ class GetStorages {
     _storage.write('user', userModel.toJson());
   }
 
-  static UserModel get user => UserModel.fromJson(_storage.read('user') ?? {});
+  static set config(AppConfigModel config) => _storage.write('config', config.toJson());
+  static AppConfigModel get config => AppConfigModel.fromJson(_storage.read('config') ?? {});
 }

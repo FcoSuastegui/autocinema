@@ -66,12 +66,15 @@ class FirebaseAuthController {
 
       final FirebaseUserModel user = FirebaseUserModel(
         uid: data.user.uid,
-        name: data.user.displayName,
-        alias: data.additionalUserInfo.profile['given_name'],
-        email: data.user.email,
+        name: data.user.displayName ?? data.user.providerData.first.displayName,
+        alias: data.additionalUserInfo.profile['given_name'] ??
+            data.user.providerData.first.displayName,
+        email: data.user.email ?? data.user.providerData.first.email,
         photo: data.additionalUserInfo.profile['picture']['data']['url'],
         signIn: 2,
       );
+
+      print(user.toJson());
 
       final response = await _handleService(user);
       user.id = response.data['id'];
@@ -80,6 +83,7 @@ class FirebaseAuthController {
 
       return user;
     } catch (e) {
+      print(e);
       return null;
     }
   }

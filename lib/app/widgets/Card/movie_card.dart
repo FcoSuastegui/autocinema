@@ -66,7 +66,7 @@ class MovieCard extends StatelessWidget {
                     imageUrl: movie.image,
                     imageBuilder: (context, image) => Container(
                       height: height ?? Adapt.px(330),
-                      width: Adapt.px(200),
+                      width: Adapt.px(230),
                       decoration: BoxDecoration(
                         color: const Color(0xFFAABBCC),
                         image: DecorationImage(
@@ -76,7 +76,7 @@ class MovieCard extends StatelessWidget {
                       ),
                     ),
                     placeholder: (context, url) => Container(
-                      width: Adapt.px(200),
+                      width: Adapt.px(230),
                       height: height ?? Adapt.px(330),
                       decoration: BoxDecoration(
                         color: const Color(0xFFAABBCC),
@@ -87,7 +87,7 @@ class MovieCard extends StatelessWidget {
                       ),
                     ),
                     errorWidget: (context, url, error) => Container(
-                      width: Adapt.px(200),
+                      width: Adapt.px(230),
                       height: height ?? Adapt.px(330),
                       decoration: BoxDecoration(
                         color: const Color(0xFFAABBCC),
@@ -120,7 +120,7 @@ class MovieCard extends StatelessWidget {
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                   color: Colors.black.withOpacity(0.8),
-                                  fontSize: Adapt.px(35),
+                                  fontSize: Adapt.px(28),
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),

@@ -1,22 +1,17 @@
 import 'package:autocinema/app/themes/adapt.dart';
-import 'package:autocinema/app/themes/app_theme.dart';
 import 'package:autocinema/app/utils/formatters.dart';
-import 'package:autocinema/app/utils/get_storage.dart';
-import 'package:autocinema/app/views/payments/bloc/payments_bloc.dart';
-import 'package:autocinema/app/widgets/PdfViewer/pdf_viewer.dart';
+import 'package:autocinema/app/views/cards/bloc/card_bloc.dart';
 import 'package:autocinema/app/widgets/TextField/input_text_cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
-import 'package:get/get.dart';
 
-class CreditCardView extends StatelessWidget {
-  const CreditCardView({Key key}) : super(key: key);
+class StepperCard extends StatelessWidget {
+  const StepperCard({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     // ignore: close_sinks
-    final bloc = BlocProvider.of<PaymentsBloc>(context);
+    final bloc = BlocProvider.of<CardBloc>(context);
     return Container(
       margin: EdgeInsets.symmetric(
         horizontal: 10,
@@ -80,44 +75,19 @@ class CreditCardView extends StatelessWidget {
               ),
             ],
           ),
-          CheckboxFieldBlocBuilder(
-              booleanFieldBloc: bloc.terminos,
-              controlAffinity: FieldBlocBuilderControlAffinity.leading,
-              padding: EdgeInsets.zero,
-              body: Container(
-                alignment: Alignment.center,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        "Acepto términos y condiciones.",
-                        style: TextStyle(
-                          fontSize: Adapt.px(30),
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () => Get.to(
-                        PdfViewer(
-                          path: GetStorages.config.terminos,
-                          title: "Términos y condiciones",
-                        ),
-                        fullscreenDialog: true,
-                      ),
-                      child: Text(
-                        "Ver Términos",
-                        style: TextStyle(
-                          color: AppTheme.kPrimaryColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: Adapt.px(30),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ))
+          SizedBox(
+            height: 10,
+          ),
+          Image.asset(
+            "assets/images/card_scanner.png",
+            height: Adapt.px(100),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Text(
+            "Escanear tarjeta",
+          ),
         ],
       ),
     );
