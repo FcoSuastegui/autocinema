@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 
 class MainActivity : FlutterActivity() {
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
-        SrPagoApleeks(this, flutterEngine)
         super.configureFlutterEngine(flutterEngine)
+        SrPagoApleeks(this, flutterEngine)
     }
 }

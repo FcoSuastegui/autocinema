@@ -67,10 +67,13 @@ class PersonalDataView extends StatelessWidget {
               Expanded(
                 child: InputTextCupertino(
                   textFieldBloc: bloc.phone,
-                  placeholder: 'Telefono',
+                  placeholder: 'Teléfono',
                   keyboardType: TextInputType.phone,
                   inputFormatters: [
-                    MaskedTextInputFormatter(mask: "### #### ###", separator: " "),
+                    MaskedTextInputFormatter(
+                      mask: "### #### ###",
+                      separator: " ",
+                    ),
                   ],
                 ),
               ),
@@ -87,7 +90,7 @@ class PersonalDataView extends StatelessWidget {
             child: DropdownFieldBlocBuilder<String>(
               selectFieldBloc: bloc.states,
               decoration: InputDecoration(
-                labelText: 'Estados',
+                labelText: 'Estado',
                 border: InputBorder.none,
               ),
               itemBuilder: (context, value) => value,

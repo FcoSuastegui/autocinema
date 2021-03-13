@@ -383,7 +383,7 @@ class ShareQrCard extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  "4. Recue3rda sintonizar en tu radio la estacion 88.5 FM para escuchar la pelicula.",
+                                  "4. Recuerda sintonizar en tu radio la estación 88.5 FM para escuchar la película.",
                                   textAlign: TextAlign.start,
                                   style: TextStyle(
                                     fontSize: Adapt.px(22),

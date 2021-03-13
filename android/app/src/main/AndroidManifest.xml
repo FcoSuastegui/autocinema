@@ -16,7 +16,7 @@
 
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="Autocinema Imperial"
+        android:label="Autocinema Acapulco"
         android:allowBackup="true"
         tools:replace="android:label"
         android:requestLegacyExternalStorage="true"

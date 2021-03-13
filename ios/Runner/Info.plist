@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Autocinema Imperial</string>
+	<string>Autocinema Acapulco</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Autocinema Imperial</string>
+	<string>Autocinema Acapulco</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -39,7 +39,7 @@
 	<key>FacebookAppID</key>
 	<string>2845448739026789</string>
 	<key>FacebookDisplayName</key>
-	<string>Autocinema Imperial</string>
+	<string>Autocinema Acapulco</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -63,11 +63,11 @@
 	<key>NSCameraUsageDescription</key>
 	<string>This app requires access to the camera.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Autocinema Imperial necesita acceder a tu ubicación para realizar la compra.</string>
+	<string>Autocinema Acapulco necesita acceder a tu ubicación para realizar la compra.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Autocinema Imperial necesita acceder a tu ubicación para realizar la compra.</string>
+	<string>Autocinema Acapulco necesita acceder a tu ubicación para realizar la compra.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Autocinema Imperial necesita acceder a tu ubicación para realizar la compra.</string>
+	<string>Autocinema Acapulco necesita acceder a tu ubicación para realizar la compra.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>This app does not require access to the microphone.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>

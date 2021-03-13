@@ -245,12 +245,13 @@ class PaymentsBloc extends FormBloc<String, String> {
   }
 
   String messageSrPago(String v) {
-    print(v);
+    print("SrPago $v");
     Map<String, dynamic> message = {
       'cardholder_name': "El campo titular debe ser legible",
       'number': "El campo número de tarjeta debe ser correcta",
+      'Número de tarjeta inválido': "Número de tarjeta inválido",
     };
-    return message[v] ?? 'Unknow';
+    return message[v] ?? v;
   }
 
   Future<void> getStates() async {
