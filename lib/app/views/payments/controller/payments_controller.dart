@@ -22,6 +22,9 @@ class PaymentsController extends GetxController {
     _vehiculo(v);
     _totalXvehiculo.value = double.parse(horary.tarifa) * _vehiculo.value;
     _maxPersonXvehiculo.value = _vehiculo.value * 2;
+    if (_persona > _maxPersonXvehiculo.value) {
+      _persona(_maxPersonXvehiculo.value);
+    }
     calculateTotal();
   }
 

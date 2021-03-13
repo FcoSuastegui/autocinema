@@ -63,12 +63,13 @@ class HorariesMovies extends GetView<MovieDetailController> {
                                 width: Adapt.px(200),
                                 decoration: BoxDecoration(
                                   color: _theme.cardColor,
+                                  border: Border.all(color: Colors.black.withOpacity(0.5)),
                                   borderRadius: BorderRadius.vertical(
                                     top: Radius.circular(
-                                      Adapt.px(20),
+                                      Adapt.px(30),
                                     ),
                                     bottom: Radius.circular(
-                                      Adapt.px(20),
+                                      Adapt.px(30),
                                     ),
                                   ),
                                 ),
