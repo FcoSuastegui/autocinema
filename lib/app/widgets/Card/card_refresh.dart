@@ -9,7 +9,7 @@ class CardRefresh extends StatelessWidget {
   const CardRefresh({
     Key key,
     this.title,
-    this.margin = 300,
+    this.margin = 200,
     this.content,
   }) : super(key: key);
 

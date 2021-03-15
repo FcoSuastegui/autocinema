@@ -35,86 +35,115 @@ class PaymentsView extends StatelessWidget {
         movie: movie,
         horary: horary,
       ),
-      builder: (c) => UnFocusForm(
-        child: Scaffold(
-          resizeToAvoidBottomPadding: true,
-          appBar: AppBar(
-            brightness: Brightness.light,
-            leading: IconButton(
-              color: Colors.black.withOpacity(0.3),
-              icon: Icon(Icons.clear),
-              onPressed: () => Navigator.pop(context),
-            ),
-            title: Text(
-              "Processo de pago",
-              style: TextStyle(
-                color: Colors.black.withOpacity(0.3),
+      builder: (c) => WillPopScope(
+        onWillPop: () async {
+          _closeProcess();
+          return Future.value(false);
+        },
+        child: UnFocusForm(
+          child: Scaffold(
+            resizeToAvoidBottomPadding: true,
+            appBar: AppBar(
+              brightness: Brightness.light,
+              title: Text(
+                "Processo de pago",
+                style: TextStyle(
+                  color: Colors.black.withOpacity(0.3),
+                ),
               ),
+              elevation: 0.0,
             ),
-            elevation: 0.0,
-          ),
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.9,
-                  child: BlocProvider(
-                    create: (context) => PaymentsBloc(
-                      controller: c,
-                      pageViewController: _pageViewController,
+            body: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    height: MediaQuery.of(context).size.height * 0.9,
+                    child: BlocProvider(
+                      create: (context) => PaymentsBloc(
+                        controller: c,
+                        pageViewController: _pageViewController,
+                      ),
+                      child: Builder(
+                        builder: (context) {
+                          final bloc = BlocProvider.of<PaymentsBloc>(context);
+                          return FormBlocListener<PaymentsBloc, String, String>(
+                            onSubmitting: (context, state) => LoadingApleeks.show(context),
+                            onSuccess: (context, state) {
+                              LoadingApleeks.hide(context);
+                              if (state.stepCompleted == state.lastStep) {
+                                Get.back();
+                                bloc.close();
+                              }
+                            },
+                            onFailure: (context, state) async {
+                              LoadingApleeks.hide(context);
+                              Helper.error(message: state.failureResponse);
+                            },
+                            child: StepperView(
+                              listSteps: [
+                                StepItem(
+                                  title: "Producto seleccionado",
+                                  icon: Icons.shopping_cart,
+                                ),
+                                StepItem(
+                                  title: "Información personal",
+                                  icon: Icons.person_add,
+                                ),
+                                StepItem(
+                                  title: "Tarjeta",
+                                  icon: Icons.credit_card,
+                                ),
+                                StepItem(
+                                  title: "Éxito",
+                                  icon: Icons.check,
+                                ),
+                              ],
+                              stepContents: [
+                                const ProductSelected(),
+                                const PersonalDataView(),
+                                const CreditCardView(),
+                                const SuccessPayments(),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
                     ),
-                    child: Builder(
-                      builder: (context) {
-                        final bloc = BlocProvider.of<PaymentsBloc>(context);
-                        return FormBlocListener<PaymentsBloc, String, String>(
-                          onSubmitting: (context, state) => LoadingApleeks.show(context),
-                          onSuccess: (context, state) {
-                            LoadingApleeks.hide(context);
-                            if (state.stepCompleted == state.lastStep) {
-                              Get.back();
-                              bloc.close();
-                            }
-                          },
-                          onFailure: (context, state) async {
-                            LoadingApleeks.hide(context);
-                            Helper.error(message: state.failureResponse);
-                          },
-                          child: StepperView(
-                            listSteps: [
-                              StepItem(
-                                title: "Producto seleccionado",
-                                icon: Icons.shopping_cart,
-                              ),
-                              StepItem(
-                                title: "Información personal",
-                                icon: Icons.person_add,
-                              ),
-                              StepItem(
-                                title: "Tarjeta",
-                                icon: Icons.credit_card,
-                              ),
-                              StepItem(
-                                title: "Éxito",
-                                icon: Icons.check,
-                              ),
-                            ],
-                            stepContents: [
-                              const ProductSelected(),
-                              const PersonalDataView(),
-                              const CreditCardView(),
-                              const SuccessPayments(),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           ),
         ),
       ),
     );
+  }
+
+  Future<void> _closeProcess() async {
+    final result = await Get.dialog(
+      AlertDialog(
+        content: Text("¿Deseas cancelar el proceso de pago?"),
+        actions: [
+          OutlineButton(
+            child: Text("No"),
+            onPressed: () => Get.back(result: false),
+          ),
+          OutlineButton(
+            child: Text(
+              "Si",
+              style: TextStyle(
+                color: Colors.red,
+              ),
+            ),
+            onPressed: () => Get.back(result: true),
+          )
+        ],
+      ),
+      barrierDismissible: false,
+      barrierColor: Colors.transparent.withOpacity(0.8),
+    );
+    if (result != null && result) {
+      Get.back();
+    }
   }
 }

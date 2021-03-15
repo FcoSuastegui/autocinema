@@ -3,7 +3,7 @@ import 'package:autocinema/app/data/services/autocinema_service.dart';
 import 'package:autocinema/app/globals/SrPago/permission.dart';
 import 'package:autocinema/app/globals/SrPago/sr_pago_card_model.dart';
 import 'package:autocinema/app/globals/SrPago/sr_pago_flutter.dart';
-import 'package:autocinema/app/utils/get_storage.dart';
+import 'package:autocinema/app/utils/storage.dart';
 import 'package:autocinema/app/utils/validator_string.dart';
 import 'package:autocinema/app/views/payments/controller/payments_controller.dart';
 import 'package:flutter/foundation.dart';
@@ -175,7 +175,7 @@ class PaymentsBloc extends FormBloc<String, String> {
               "funcion": c.horary.id,
               "tarifa": c.horary.tarifa,
               "cantidad": c.vehiculo + c.persona,
-              "id_user_client": GetStorages.user.id,
+              "id_user_client": Storage.user.id,
               "titular": titular.value,
               "items": [
                 {

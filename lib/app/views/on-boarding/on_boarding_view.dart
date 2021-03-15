@@ -1,6 +1,7 @@
+import 'package:autocinema/app/data/models/user_model.dart';
 import 'package:autocinema/app/themes/adapt.dart';
 import 'package:autocinema/app/themes/app_theme.dart';
-import 'package:autocinema/app/utils/get_storage.dart';
+import 'package:autocinema/app/utils/storage.dart';
 import 'package:autocinema/app/views/navbar/controller/nav_bar_controller.dart';
 import 'package:autocinema/app/views/on-boarding/components/on_boarding_content.dart';
 import 'package:autocinema/app/views/on-boarding/components/on_boarding_stepper.dart';
@@ -9,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class OnBoardingView extends GetView<OnBoardingController> {
-  static final String routeName = '/boarding';
+  static final String routeName = '/';
   const OnBoardingView({Key key}) : super(key: key);
 
   @override
@@ -65,8 +66,9 @@ class OnBoardingView extends GetView<OnBoardingController> {
                           if (respuesta) {
                             final nav = Get.find<NavBarController>();
                             nav.selectCurrentIndex(0);
-                            GetStorages.page = '/nav-bar';
-                            Get.offAllNamed(GetStorages.page);
+                            Storage.page = '/nav-bar';
+                            Storage.user = UserModel.fromJson({});
+                            Get.offAllNamed(Storage.page);
                           }
                         },
                         padding: EdgeInsets.all(13.0),

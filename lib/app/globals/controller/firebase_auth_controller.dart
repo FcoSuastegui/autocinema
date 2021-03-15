@@ -1,7 +1,7 @@
 import 'package:autocinema/app/data/models/fire_base_model.dart';
 import 'package:autocinema/app/data/models/response_model.dart';
 import 'package:autocinema/app/data/services/auth_service.dart';
-import 'package:autocinema/app/utils/get_storage.dart';
+import 'package:autocinema/app/utils/storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -156,7 +156,7 @@ class FirebaseAuthController {
   }
 
   Future<void> signOut() async {
-    final int singIn = GetStorages.user.signIn;
+    final int singIn = Storage.user.signIn;
 
     switch (singIn) {
       case 1:

@@ -1,2 +1,2 @@
 #import "GeneratedPluginRegistrant.h"
-#import "SrPago/SrPago.h"
+// #import "SrPago/SrPago.h"

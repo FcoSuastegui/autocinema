@@ -1,3 +1,8 @@
+import 'package:autocinema/app/globals/controller/firebase_auth_controller.dart';
+import 'package:autocinema/app/utils/storage.dart';
+import 'package:autocinema/app/views/login/login_view.dart';
+import 'package:autocinema/app/views/navbar/controller/nav_bar_controller.dart';
+import 'package:autocinema/app/widgets/Alerts/alert_actions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -62,6 +67,29 @@ class Helper {
         colorText: Colors.white,
       );
     }
+  }
+
+  static Future<void> logout() async {
+    await Get.dialog(
+      AlertAction(
+        title: "¿Deseas cerrar sesión?",
+        onPressYes: () {
+          FirebaseAuthController.i.signOut();
+          Storage.clear();
+          final nav = Get.find<NavBarController>();
+          nav.selectCurrentIndex(0);
+          Get.back();
+        },
+      ),
+    );
+  }
+
+  static Future<bool> login() async {
+    final result = await Get.to(
+      () => LoginView(),
+      fullscreenDialog: true,
+    );
+    return result != null ? result : false;
   }
 
   static String moneyFormat(dynamic money) {

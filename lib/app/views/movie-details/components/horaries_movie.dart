@@ -1,6 +1,10 @@
+import 'package:autocinema/app/data/models/horary_model.dart';
+import 'package:autocinema/app/data/models/movie_model.dart';
 import 'package:autocinema/app/themes/adapt.dart';
 import 'package:autocinema/app/themes/app_theme.dart';
 import 'package:autocinema/app/themes/theme_style.dart';
+import 'package:autocinema/app/utils/helper.dart';
+import 'package:autocinema/app/utils/storage.dart';
 import 'package:autocinema/app/views/movie-details/controller/movie_detail_controller.dart';
 import 'package:autocinema/app/views/payments/payments_view.dart';
 import 'package:flutter/material.dart';
@@ -52,13 +56,22 @@ class HorariesMovies extends GetView<MovieDetailController> {
                           itemBuilder: (_, index) {
                             final horary = controller.horaries[index];
                             return GestureDetector(
-                              onTap: () => Get.to(
-                                PaymentsView(
-                                  movie: controller.movie,
-                                  horary: horary,
-                                ),
-                                fullscreenDialog: true,
-                              ),
+                              onTap: () async {
+                                if (Storage.auth) {
+                                  payment(
+                                    controller.movie,
+                                    horary,
+                                  );
+                                } else {
+                                  final auth = await Helper.login();
+                                  if (auth) {
+                                    payment(
+                                      controller.movie,
+                                      horary,
+                                    );
+                                  }
+                                }
+                              },
                               child: Container(
                                 width: Adapt.px(200),
                                 decoration: BoxDecoration(
@@ -141,6 +154,16 @@ class HorariesMovies extends GetView<MovieDetailController> {
           ),
         ),
       ),
+    );
+  }
+
+  void payment(MovieModel movie, HoraryModel horary) {
+    Get.to(
+      () => PaymentsView(
+        movie: movie,
+        horary: horary,
+      ),
+      fullscreenDialog: true,
     );
   }
 }

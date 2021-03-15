@@ -1,7 +1,7 @@
 import 'package:autocinema/app/themes/adapt.dart';
 import 'package:autocinema/app/themes/app_theme.dart';
 import 'package:autocinema/app/utils/formatters.dart';
-import 'package:autocinema/app/utils/get_storage.dart';
+import 'package:autocinema/app/utils/storage.dart';
 import 'package:autocinema/app/views/payments/bloc/payments_bloc.dart';
 import 'package:autocinema/app/widgets/PdfViewer/pdf_viewer.dart';
 import 'package:autocinema/app/widgets/TextField/input_text_cupertino.dart';
@@ -101,7 +101,7 @@ class CreditCardView extends StatelessWidget {
                     GestureDetector(
                       onTap: () => Get.to(
                         PdfViewer(
-                          path: GetStorages.config.terminos,
+                          path: Storage.config.terminos,
                           title: "Términos y condiciones",
                         ),
                         fullscreenDialog: true,

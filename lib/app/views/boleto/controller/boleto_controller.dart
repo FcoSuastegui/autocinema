@@ -1,6 +1,6 @@
 import 'package:autocinema/app/data/models/boleto_model.dart';
 import 'package:autocinema/app/data/services/autocinema_service.dart';
-import 'package:autocinema/app/utils/get_storage.dart';
+import 'package:autocinema/app/utils/storage.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
@@ -18,7 +18,7 @@ class BoletoController extends GetxController {
 
   Future<void> getBoletos(int pageKey) async {
     final boletos = await AutoCinemaService.boletos(
-      cliente: GetStorages.user.id,
+      cliente: Storage.user.id,
       page: pageKey,
     );
     if (boletos.message.isEmpty) {

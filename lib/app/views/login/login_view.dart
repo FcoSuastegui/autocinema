@@ -1,5 +1,4 @@
 import 'package:autocinema/app/themes/adapt.dart';
-import 'package:autocinema/app/utils/get_storage.dart';
 import 'package:autocinema/app/utils/helper.dart';
 import 'package:autocinema/app/views/login/bloc/login_bloc.dart';
 import 'package:autocinema/app/widgets/Buttons/button_social_apleeks.dart';
@@ -21,6 +20,8 @@ class LoginView extends StatelessWidget {
         child: Builder(
           builder: (context) {
             return Stack(
+              alignment: AlignmentDirectional.topStart,
+              fit: StackFit.expand,
               children: [
                 Container(
                   decoration: BoxDecoration(
@@ -28,6 +29,14 @@ class LoginView extends StatelessWidget {
                       image: Image.asset("assets/images/splash-login.gif").image,
                       fit: BoxFit.cover,
                     ),
+                  ),
+                ),
+                Positioned(
+                  top: Adapt.px(100),
+                  left: Adapt.px(10),
+                  child: IconButton(
+                    onPressed: () => Get.back(result: false),
+                    icon: Icon(Icons.clear, color: Colors.white),
                   ),
                 ),
                 Positioned(
@@ -104,11 +113,6 @@ class LoginView extends StatelessWidget {
   }
 
   void validateLoginSocial({bool auth}) {
-    if (auth) {
-      GetStorages.page = GetStorages.onBoarding ? '/boarding' : '/nav-bar';
-      Get.offAllNamed(GetStorages.page);
-    } else {
-      Helper.error(message: "Acceso denegado");
-    }
+    auth ? Get.back(result: true) : Helper.error(message: "Acceso denegado");
   }
 }

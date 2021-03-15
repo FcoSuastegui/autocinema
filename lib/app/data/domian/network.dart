@@ -1,5 +1,5 @@
 import 'package:autocinema/app/data/models/response_model.dart';
-import 'package:autocinema/app/utils/get_storage.dart';
+import 'package:autocinema/app/utils/storage.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -11,7 +11,7 @@ class Network {
 
   Dio _dio = Dio(
     BaseOptions(
-      baseUrl: GetStorages.api,
+      baseUrl: Storage.api,
       connectTimeout: 10000,
       receiveTimeout: 10000,
       headers: _setHeaders,

@@ -1,6 +1,6 @@
 import 'package:autocinema/app/themes/adapt.dart';
 import 'package:autocinema/app/themes/app_theme.dart';
-import 'package:autocinema/app/utils/get_storage.dart';
+import 'package:autocinema/app/utils/storage.dart';
 import 'package:autocinema/app/views/navbar/controller/nav_bar_controller.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
@@ -33,7 +33,7 @@ class NavBarItems extends GetView<NavBarController> {
   }
 
   List<CustomNavigationBarItem> getItems() {
-    final user = GetStorages.user;
+    final user = Storage.user;
     List<CustomNavigationBarItem> item = [
       CustomNavigationBarItem(
         title: Text(
@@ -80,12 +80,16 @@ class NavBarItems extends GetView<NavBarController> {
         icon: user.photo != null && user.photo.isNotEmpty
             ? CircleAvatar(
                 backgroundImage: CachedNetworkImageProvider(
-                  GetStorages.user.photo,
+                  Storage.user.photo,
                 ),
               )
-            : Icon(Icons.account_circle),
+            : CircleAvatar(
+                backgroundImage:
+                    CachedNetworkImageProvider("${Storage.server}/images/avatar-masculino.png"),
+              ),
       ),
     ];
+
     /* 
     switch (user.rol) {
       case 'Admin':

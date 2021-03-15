@@ -17,11 +17,11 @@ class ButtonSocialApleeks extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  // ignore: missing_return
   Widget build(BuildContext context) {
+    Widget widget;
     switch (button) {
       case ButtonsApleeks.Google:
-        return OutlineButton(
+        widget = OutlineButton(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
@@ -49,8 +49,9 @@ class ButtonSocialApleeks extends StatelessWidget {
           borderSide: BorderSide(color: Colors.white),
           onPressed: onPressed ?? () {},
         );
+        break;
       case ButtonsApleeks.Facebook:
-        return OutlineButton(
+        widget = OutlineButton(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
@@ -78,8 +79,9 @@ class ButtonSocialApleeks extends StatelessWidget {
           borderSide: BorderSide(color: Colors.white),
           onPressed: onPressed ?? () {},
         );
+        break;
       case ButtonsApleeks.Apple:
-        return OutlineButton(
+        widget = OutlineButton(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
@@ -107,7 +109,9 @@ class ButtonSocialApleeks extends StatelessWidget {
           borderSide: BorderSide(color: Colors.white),
           onPressed: onPressed ?? () {},
         );
+        break;
     }
+    return widget;
   }
 }
 

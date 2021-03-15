@@ -5,7 +5,7 @@
 //  Created by Ing. Francisco Javier Suastegui Rosales 08/01/21.
 //
 
-import Foundation
+/** import Foundation
 import CoreLocation
 import SrPago
 import SwiftTryCatch
@@ -132,3 +132,4 @@ class SrPagoApleeks : NSObject, CLLocationManagerDelegate {
     }
     
 }
+ */

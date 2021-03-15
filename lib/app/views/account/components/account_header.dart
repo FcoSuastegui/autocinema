@@ -1,5 +1,5 @@
 import 'package:autocinema/app/themes/adapt.dart';
-import 'package:autocinema/app/utils/get_storage.dart';
+import 'package:autocinema/app/utils/storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -7,7 +7,7 @@ class AccountHeader extends StatelessWidget {
   const AccountHeader();
   @override
   Widget build(BuildContext context) {
-    final user = GetStorages.user;
+    final user = Storage.user;
     return Container(
       margin: EdgeInsets.only(top: 30, left: 20, right: 20),
       child: Row(
@@ -53,7 +53,9 @@ class AccountHeader extends StatelessWidget {
               child: CircleAvatar(
                 radius: Adapt.px(70),
                 backgroundColor: Colors.white,
-                backgroundImage: Image.network(user.photo).image,
+                backgroundImage: user.photo.isEmpty
+                    ? Image.network("${Storage.server}/images/avatar-masculino.png").image
+                    : Image.network(user.photo).image,
               ),
               decoration: BoxDecoration(
                 color: Colors.grey[200], // border color

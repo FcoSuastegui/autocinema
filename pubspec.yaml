@@ -35,7 +35,6 @@ dependencies:
   simple_animations: ^1.3.3
   custom_navigation_bar: ^0.7.0
 
-
   # paquetes actualizados y nuevos 
 
   # Paquetes de Fuentes de texto e iconos
@@ -52,14 +51,13 @@ dependencies:
   share: ^0.6.5+4
 
   firebase_core: ^0.7.0
-  firebase_auth: ^0.20.0
+  firebase_auth: ^0.20.1
   google_sign_in: ^4.5.9
-  flutter_facebook_auth: ^2.0.0
+  flutter_facebook_auth: ^2.0.2+1
   sign_in_with_apple: ^2.5.4
   crypto: ^2.1.5
-
-
-  advance_pdf_viewer: ^1.1.6
+  
+  advance_pdf_viewer: ^1.2.2
 
 
 dev_dependencies:

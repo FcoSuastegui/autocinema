@@ -1,5 +1,5 @@
 import 'package:autocinema/app/data/services/app_config_service.dart';
-import 'package:autocinema/app/utils/get_storage.dart';
+import 'package:autocinema/app/utils/storage.dart';
 import 'package:get/get.dart';
 
 class AppConfigController extends GetxController {
@@ -9,6 +9,6 @@ class AppConfigController extends GetxController {
   }
 
   void getConfigBackend() {
-    AppConfigService.getConfig().then((value) => GetStorages.config = value);
+    AppConfigService.getConfig().then((value) => Storage.config = value);
   }
 }
