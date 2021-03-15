@@ -125,12 +125,12 @@ class PaymentsView extends StatelessWidget {
         content: Text("¿Deseas cancelar el proceso de pago?"),
         actions: [
           OutlineButton(
-            child: Text("No"),
+            child: Text("Continuar"),
             onPressed: () => Get.back(result: false),
           ),
           OutlineButton(
             child: Text(
-              "Si",
+              "Cancelar",
               style: TextStyle(
                 color: Colors.red,
               ),

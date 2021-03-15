@@ -23,17 +23,19 @@ class AccountBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          ListTileDefault(
-            title: 'Boletos'.tr,
-            trailing: Icon(
-              Icons.qr_code,
-              color: Colors.black26,
-              size: Adapt.px(40),
-            ),
-            onTap: () => Routes.goToPage('/boleto'),
-          ),
+          Storage.auth
+              ? ListTileDefault(
+                  title: 'Boletos'.tr,
+                  trailing: Icon(
+                    Icons.qr_code,
+                    color: Colors.black26,
+                    size: Adapt.px(40),
+                  ),
+                  onTap: () => Routes.goToPage('/boleto'),
+                )
+              : SizedBox.shrink(),
           SizedBox(
-            height: Adapt.px(50),
+            height: Adapt.px(Storage.auth ? 50 : 0),
           ),
           /* ListTileDefault(
             title: 'card'.tr,
