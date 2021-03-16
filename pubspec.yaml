@@ -58,6 +58,8 @@ dependencies:
   crypto: ^2.1.5
   
   advance_pdf_viewer: ^1.2.2
+  package_info: ^0.4.3+4
+  html: ^0.14.0+4
 
 
 dev_dependencies:
@@ -68,32 +70,12 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/splash/splash_01.png
-    - assets/images/barcode.png
     - assets/images/wifi-offline.png
-    - assets/images/facebook_circle.png
     - assets/images/sin-funciones.png
     - assets/images/imagen-no-disponible.png
     - assets/images/cargando-imagen.png
     - assets/images/splash-login.gif
-    - assets/images/card_scanner.png
-    #- assets/images-card/chip.png
-    #- assets/images-card/visa_basic.png
-    #- assets/images-card/kotak_logo.png
-    #- assets/images-card/mastercard.png
-    #- assets/images-card/sbi.png
-    #- assets/images-card/virgin.png
-    #- assets/images-card/amex_logo.png
-    #- assets/images-card/yes_bank_logo.png
-    #- assets/images-card/union_pay.png
-    #- assets/images-card/discover.png
-    #- assets/images-card/sbi_card.gif
-    #- assets/images-card/rupay_logo.png
-    #- assets/images-card/background_sample.jpg
-    - assets/visa_logo.png
-    - assets/credit-card-chip-silver.png
-    - assets/card_band.jpg
-    - assets/card_back.jpg
+    - assets/images/google-play-logo.png
     - assets/slides/slide-01.png
     - assets/slides/slide-02.png
     - assets/slides/slide-03.png

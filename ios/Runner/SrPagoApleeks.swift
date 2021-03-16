@@ -5,10 +5,9 @@
 //  Created by Ing. Francisco Javier Suastegui Rosales 08/01/21.
 //
 
-/** import Foundation
+import Foundation
 import CoreLocation
 import SrPago
-import SwiftTryCatch
 
 class SrPagoApleeks : NSObject, CLLocationManagerDelegate {
     
@@ -50,41 +49,34 @@ class SrPagoApleeks : NSObject, CLLocationManagerDelegate {
         let data: [String:Any] =  call.arguments  as! [String:Any]
         let card: [String:Any] =  data["card"] as! [String:Any]
         
-        srPago = SrPago.sharedInstance() as? SrPago
-        srPago?.publisableKey = (data["publicKey"] as! String)
-        srPago?.liveMode = data["liveMode"] as! Bool
+        let srPago: SrPago = (SrPago.sharedInstance() as? SrPago)!
+        srPago.publishableKey = (data["publicKey"] as? String)
+        srPago.liveMode = data["liveMode"] as! Bool
         
         var resquest = ["status": false, "message":"", "token": ""] as [String : Any]
         
         let spCard = SPCard()
         
-        spCard.name = card["name"] as! String as NSString
-        spCard.number = card["number"] as! String as NSString //self.cardNumber.text;
-        spCard.expMonth = card["month"] as! String as NSString
-        spCard.expYear = card["year"] as! String as NSString
-        spCard.cvv = card["cvv"] as! String as NSString
+        spCard.name = card["name"] as? String
+        spCard.number = card["number"] as? String
+        spCard.expMonth = card["month"] as? String
+        spCard.expYear = card["year"] as? String
+        spCard.cvv = card["cvv"] as? String
         
-        SwiftTryCatch.try({ [self] in
-            srPago?.token.createToken(with: spCard, onSuccess: { response in
-                if let token = response?.token {
-                    resquest["status"] = true
-                    resquest["token"] = token
-                    print("El Token es: \(token)")
-                    result(resquest)
-                }
-                }, onFail: { error in
-                    if let message = error?.message {
-                        resquest["message"] = message
-                        print("Error: \(message)")
-                        result(resquest)
-                    }
-                })
-            }, catch: { e in
-                resquest["message"] = e?.reason
-                print("Hubo un error: \(String(describing: e?.reason))")
+        srPago.token.createToken(with: spCard, onSuccess: { (token) in
+            if let token = token?.token {
+                resquest["status"] = true
+                resquest["token"] = token
+                print("El Token es: \(token)")
                 result(resquest)
-            }, finally: {
-        })
+            }
+        }) { (error) in
+           if let error = error?.message {
+            resquest["message"] = error
+            print("Hubo un error: \(String(describing: error))")
+            result(resquest)
+           }
+        }
     }
     
     private func requestPermissions(call:FlutterMethodCall, result:@escaping FlutterResult ) {
@@ -132,4 +124,4 @@ class SrPagoApleeks : NSObject, CLLocationManagerDelegate {
     }
     
 }
- */
+

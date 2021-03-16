@@ -82,7 +82,7 @@ class CarouselWithIndicator extends StatelessWidget {
                 autoPlay: listImage.length > 1 ? true : false,
                 enableInfiniteScroll: listImage.length > 1 ? true : false,
                 enlargeCenterPage: true,
-                aspectRatio: 16 / 9,
+                aspectRatio: 15 / 9,
                 viewportFraction: 1.0,
                 autoPlayCurve: Curves.easeOut,
                 onPageChanged: (index, reason) {

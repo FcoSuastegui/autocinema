@@ -35,6 +35,7 @@ target 'Runner' do
   #pod 'SwiftTryCatch'
   #pod 'Firebase/Analytics'
   #pod 'GoogleUtilities', '7.0.0'
+  pod 'SrPago-Ecommerce'
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
 end
 
