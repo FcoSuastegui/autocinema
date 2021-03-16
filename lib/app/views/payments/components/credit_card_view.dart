@@ -16,7 +16,8 @@ class CreditCardView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ignore: close_sinks
-    final bloc = BlocProvider.of<PaymentsBloc>(context);
+    final bloc = BlocProvider.of<PaymentsBloc>(context, listen: false);
+
     return Container(
       margin: EdgeInsets.symmetric(
         horizontal: 10,
@@ -81,43 +82,44 @@ class CreditCardView extends StatelessWidget {
             ],
           ),
           CheckboxFieldBlocBuilder(
-              booleanFieldBloc: bloc.terminos,
-              controlAffinity: FieldBlocBuilderControlAffinity.leading,
-              padding: EdgeInsets.zero,
-              body: Container(
-                alignment: Alignment.center,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        "Acepto términos y condiciones.",
-                        style: TextStyle(
-                          fontSize: Adapt.px(30),
-                        ),
+            booleanFieldBloc: bloc.terminos,
+            controlAffinity: FieldBlocBuilderControlAffinity.leading,
+            padding: EdgeInsets.zero,
+            body: Container(
+              alignment: Alignment.center,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Text(
+                      "Acepto términos y condiciones.",
+                      style: TextStyle(
+                        fontSize: Adapt.px(30),
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () => Get.to(
-                        PdfViewer(
-                          path: Storage.config.terminos,
-                          title: "Términos y condiciones",
-                        ),
-                        fullscreenDialog: true,
+                  ),
+                  GestureDetector(
+                    onTap: () => Get.to(
+                      () => PdfViewer(
+                        path: Storage.config.terminos,
+                        title: "Términos y condiciones",
                       ),
-                      child: Text(
-                        "Ver Términos",
-                        style: TextStyle(
-                          color: AppTheme.kPrimaryColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: Adapt.px(30),
-                        ),
+                      fullscreenDialog: true,
+                    ),
+                    child: Text(
+                      "Ver Términos",
+                      style: TextStyle(
+                        color: AppTheme.kPrimaryColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: Adapt.px(30),
                       ),
-                    )
-                  ],
-                ),
-              ))
+                    ),
+                  )
+                ],
+              ),
+            ),
+          )
         ],
       ),
     );

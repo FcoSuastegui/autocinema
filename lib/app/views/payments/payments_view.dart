@@ -35,50 +35,50 @@ class PaymentsView extends StatelessWidget {
         movie: movie,
         horary: horary,
       ),
-      builder: (c) => WillPopScope(
-        onWillPop: () async {
-          _closeProcess();
-          return Future.value(false);
-        },
-        child: UnFocusForm(
-          child: Scaffold(
-            resizeToAvoidBottomPadding: true,
-            appBar: AppBar(
-              brightness: Brightness.light,
-              title: Text(
-                "Processo de pago",
-                style: TextStyle(
-                  color: Colors.black.withOpacity(0.3),
-                ),
-              ),
-              elevation: 0.0,
-            ),
-            body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    height: MediaQuery.of(context).size.height * 0.9,
-                    child: BlocProvider(
-                      create: (context) => PaymentsBloc(
-                        controller: c,
-                        pageViewController: _pageViewController,
+      builder: (c) => BlocProvider(
+        create: (context) => PaymentsBloc(
+          controller: c,
+          pageViewController: _pageViewController,
+        ),
+        child: Builder(
+          builder: (context) {
+            final bloc = BlocProvider.of<PaymentsBloc>(context);
+            return FormBlocListener<PaymentsBloc, String, String>(
+              onSubmitting: (context, state) => LoadingApleeks.show(context),
+              onSuccess: (context, state) {
+                LoadingApleeks.hide(context);
+                if (state.stepCompleted == state.lastStep) {
+                  Get.back();
+                  bloc.close();
+                }
+              },
+              onFailure: (context, state) async {
+                LoadingApleeks.hide(context);
+                Helper.error(message: state.failureResponse);
+              },
+              child: WillPopScope(
+                onWillPop: () async {
+                  _closeProcess(context);
+                  return Future.value(false);
+                },
+                child: UnFocusForm(
+                  child: Scaffold(
+                    resizeToAvoidBottomPadding: true,
+                    appBar: AppBar(
+                      brightness: Brightness.light,
+                      title: Text(
+                        "Processo de pago",
+                        style: TextStyle(
+                          color: Colors.black.withOpacity(0.3),
+                        ),
                       ),
-                      child: Builder(
-                        builder: (context) {
-                          final bloc = BlocProvider.of<PaymentsBloc>(context);
-                          return FormBlocListener<PaymentsBloc, String, String>(
-                            onSubmitting: (context, state) => LoadingApleeks.show(context),
-                            onSuccess: (context, state) {
-                              LoadingApleeks.hide(context);
-                              if (state.stepCompleted == state.lastStep) {
-                                Get.back();
-                                bloc.close();
-                              }
-                            },
-                            onFailure: (context, state) async {
-                              LoadingApleeks.hide(context);
-                              Helper.error(message: state.failureResponse);
-                            },
+                      elevation: 0.0,
+                    ),
+                    body: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.9,
                             child: StepperView(
                               listSteps: [
                                 StepItem(
@@ -105,44 +105,49 @@ class PaymentsView extends StatelessWidget {
                                 const SuccessPayments(),
                               ],
                             ),
-                          );
-                        },
+                          )
+                        ],
                       ),
                     ),
-                  )
-                ],
+                  ),
+                ),
               ),
-            ),
-          ),
+            );
+          },
         ),
       ),
     );
   }
 
-  Future<void> _closeProcess() async {
-    final result = await Get.dialog(
-      AlertDialog(
-        content: Text("¿Deseas cancelar el proceso de pago?"),
-        actions: [
-          OutlineButton(
-            child: Text("Continuar"),
-            onPressed: () => Get.back(result: false),
-          ),
-          OutlineButton(
-            child: Text(
-              "Cancelar",
-              style: TextStyle(
-                color: Colors.red,
-              ),
+  Future<void> _closeProcess(BuildContext context) async {
+    final finish = BlocProvider.of<PaymentsBloc>(context, listen: false).finish;
+    if (!finish) {
+      final result = await Get.dialog(
+        AlertDialog(
+          content: Text("¿Deseas cancelar el proceso de pago?"),
+          actions: [
+            OutlineButton(
+              child: Text("Cerrar"),
+              onPressed: () => Get.back(result: false),
             ),
-            onPressed: () => Get.back(result: true),
-          )
-        ],
-      ),
-      barrierDismissible: false,
-      barrierColor: Colors.transparent.withOpacity(0.8),
-    );
-    if (result != null && result) {
+            OutlineButton(
+              child: Text(
+                "Cancelar pago",
+                style: TextStyle(
+                  color: Colors.red,
+                ),
+              ),
+              onPressed: () => Get.back(result: true),
+            )
+          ],
+        ),
+        barrierDismissible: false,
+        barrierColor: Colors.transparent.withOpacity(0.8),
+      );
+      if (result != null && result) {
+        Get.back();
+      }
+    } else {
       Get.back();
     }
   }

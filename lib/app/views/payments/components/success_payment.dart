@@ -13,7 +13,7 @@ class SuccessPayments extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ignore: close_sinks
-    final bloc = BlocProvider.of<PaymentsBloc>(context);
+    final bloc = BlocProvider.of<PaymentsBloc>(context, listen: false);
     return Container(
       margin: EdgeInsets.symmetric(
         vertical: 10,
@@ -139,7 +139,7 @@ class SuccessPayments extends StatelessWidget {
                     ),
                     Container(
                       child: Text(
-                        "Folio: ${9099230239}",
+                        "Folio: ${bloc.folios['SrPagoFolio']}",
                         style: TextStyle(
                           color: Colors.black.withOpacity(0.8),
                           fontSize: Adapt.px(27),
@@ -183,7 +183,7 @@ class SuccessPayments extends StatelessWidget {
                     ),
                     Container(
                       child: Text(
-                        "01/03/2012 - 11:59:28",
+                        Helper.dateTimeFormat(),
                         style: TextStyle(
                           color: Colors.black.withOpacity(0.8),
                           fontSize: Adapt.px(27),

@@ -14,6 +14,8 @@ import 'package:get/get.dart';
 
 class PaymentsBloc extends FormBloc<String, String> {
   double total = 00;
+  bool finish = false;
+
   final PaymentsController controller;
   Map<String, String> folios = {
     'SrPagoFolio': '',
@@ -195,8 +197,9 @@ class PaymentsBloc extends FormBloc<String, String> {
             final backend = await AutoCinemaService.processPagoBackend(datos);
 
             if (backend.status) {
-              folios['SrPagoFolio'] = backend.data['Srpago'];
+              folios['SrPagoFolio'] = backend.data['SrPago'];
               folios['folioQr'] = backend.data['folio'];
+              finish = true;
               next();
             } else {
               print(backend.message);

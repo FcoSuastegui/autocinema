@@ -25,7 +25,7 @@ class _StepperViewState extends State<StepperView> {
   @override
   Widget build(BuildContext context) {
     // ignore: close_sinks
-    final bloc = BlocProvider.of<PaymentsBloc>(context);
+    final bloc = BlocProvider.of<PaymentsBloc>(context, listen: false);
     final _controller = ScrollController();
 
     return Column(
@@ -151,7 +151,7 @@ class _StepperContent extends StatelessWidget {
             ),
             child: Row(
               children: <Widget>[
-                bloc.state.currentStep > 0
+                bloc.state.currentStep > 0 && !bloc.state.isLastStep
                     ? FlatButton(
                         color: AppTheme.kPrimaryColor,
                         onPressed: () {
@@ -164,7 +164,7 @@ class _StepperContent extends StatelessWidget {
                         ),
                       )
                     : SizedBox.shrink(),
-                bloc.state.currentStep > 0
+                bloc.state.currentStep > 0 && !bloc.state.isLastStep
                     ? SizedBox(
                         width: 10,
                       )
@@ -176,9 +176,7 @@ class _StepperContent extends StatelessWidget {
                     bloc.submit();
                   },
                   child: Text(
-                    bloc.state.currentStep > 0 && bloc.state.currentStep == (4 - 1)
-                        ? "Terminar"
-                        : "Siguiente",
+                    bloc.state.currentStep > 0 && bloc.state.isLastStep ? "Terminar" : "Siguiente",
                     style: TextStyle(color: Colors.white),
                   ),
                 ),

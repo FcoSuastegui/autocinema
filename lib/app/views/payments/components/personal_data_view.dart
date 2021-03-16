@@ -11,7 +11,7 @@ class PersonalDataView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ignore: close_sinks
-    final bloc = BlocProvider.of<PaymentsBloc>(context);
+    final bloc = BlocProvider.of<PaymentsBloc>(context, listen: false);
     return Container(
       margin: EdgeInsets.symmetric(
         horizontal: 10,
