@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 
 class TrailerMovie extends StatelessWidget {
   final String youtubeId;
-
   const TrailerMovie({
     Key key,
     this.youtubeId,

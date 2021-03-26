@@ -71,11 +71,12 @@ class ThemeStyle {
     primaryColor: AppTheme.kPrimaryColor,
   );
 
-  static MediaQueryData _mediaQuery;
+  //static MediaQueryData _mediaQuery;
 
   static ThemeData getTheme(BuildContext context) {
-    _mediaQuery = MediaQuery.of(context);
-    _themeData = _mediaQuery.platformBrightness == Brightness.light ? lightTheme : darkTheme;
+    //_mediaQuery = MediaQuery.of(context);
+    //_themeData = _mediaQuery.platformBrightness == Brightness.light ? lightTheme : darkTheme;
+    _themeData = lightTheme;
     return _themeData;
   }
 }

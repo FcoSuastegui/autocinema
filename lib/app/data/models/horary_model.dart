@@ -12,6 +12,7 @@ class HoraryModel {
     this.isSubtitulada,
     this.tarifa,
     this.tarifaExtras,
+    this.especial,
     this.idTarifa,
     this.idTarifaPersonasExtra,
   });
@@ -28,6 +29,7 @@ class HoraryModel {
   bool isSubtitulada;
   String tarifa;
   String tarifaExtras;
+  int especial;
   int idTarifa;
   int idTarifaPersonasExtra;
 
@@ -44,6 +46,7 @@ class HoraryModel {
         isSubtitulada: json["isSubtitulada"] ?? false,
         tarifa: json["tarifa"] ?? '0.0',
         tarifaExtras: json["tarifaExtras"] ?? '0.0',
+        especial: json["especial"] ?? 0,
         idTarifa: json["idTarifa"] ?? 0,
         idTarifaPersonasExtra: json["idTarifaPersonasExtra"] ?? 0,
       );
@@ -61,6 +64,7 @@ class HoraryModel {
         "isSubtitulada": isSubtitulada,
         "tarifa": tarifa,
         "tarifaExtras": tarifaExtras,
+        "especial": especial,
         "idTarifa": idTarifa,
         "idTarifaPersonasExtra": idTarifaPersonasExtra,
       };

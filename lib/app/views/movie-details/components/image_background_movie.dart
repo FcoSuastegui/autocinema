@@ -37,50 +37,44 @@ class HeaderBackgroundState extends State<HeaderBackground> {
 
   @override
   Widget build(BuildContext context) {
-    return widget.imgUrl == null
-        ? Container(
-            key: ValueKey('bgEmpty'),
-            color: const Color(0xFF607D8B),
+    return Stack(
+      children: [
+        CachedNetworkImage(
+          imageUrl: widget.imgUrl,
+          imageBuilder: (context, image) => Container(
+            key: ValueKey(image),
+            transform: Matrix4.translationValues(0, postion, 0),
+            height: _height - postion,
             width: MediaQuery.of(context).size.width,
-          )
-        : Stack(
-            children: [
-              CachedNetworkImage(
-                imageUrl: widget.imgUrl,
-                imageBuilder: (context, image) => Container(
-                  key: ValueKey(image),
-                  transform: Matrix4.translationValues(0, postion, 0),
-                  height: _height - postion,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF607D8B),
-                    image: DecorationImage(
-                      image: image,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                placeholder: (context, url) => Container(
-                  key: ValueKey(url),
-                  transform: Matrix4.translationValues(0, postion, 0),
-                  color: const Color(0xFFAABBCC),
-                  height: _height - postion,
-                ),
-                errorWidget: (context, url, error) => Container(
-                  key: ValueKey(url),
-                  transform: Matrix4.translationValues(0, postion, 0),
-                  color: const Color(0xFFAABBCC),
-                  height: _height - postion,
-                ),
-                fadeOutDuration: const Duration(milliseconds: 400),
-                fadeInDuration: const Duration(milliseconds: 800),
+            decoration: BoxDecoration(
+              color: const Color(0xFF607D8B),
+              image: DecorationImage(
+                image: image,
+                fit: BoxFit.cover,
               ),
-              ScrollViewBackGround(
-                scrollController: widget.scrollController,
-                height: Adapt.px(700).floorToDouble(),
-                maxOpacity: 0.8,
-              )
-            ],
-          );
+            ),
+          ),
+          placeholder: (context, url) => Container(
+            key: ValueKey(url),
+            transform: Matrix4.translationValues(0, postion, 0),
+            color: const Color(0xFFAABBCC),
+            height: _height - postion,
+          ),
+          errorWidget: (context, url, error) => Container(
+            key: ValueKey(url),
+            transform: Matrix4.translationValues(0, postion, 0),
+            color: const Color(0xFFAABBCC),
+            height: _height - postion,
+          ),
+          fadeOutDuration: const Duration(milliseconds: 400),
+          fadeInDuration: const Duration(milliseconds: 800),
+        ),
+        ScrollViewBackGround(
+          scrollController: widget.scrollController,
+          height: Adapt.px(700).floorToDouble(),
+          maxOpacity: 0.8,
+        )
+      ],
+    );
   }
 }

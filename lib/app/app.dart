@@ -31,13 +31,15 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     ThemeStyle.init(context);
 
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      systemNavigationBarColor: Colors.transparent, // navigation bar color
-      statusBarColor: Colors.transparent, // status bar color
-      statusBarBrightness: Brightness.dark, //status bar brigtness
-      statusBarIconBrightness: Brightness.light, //status barIcon Brightness
-      systemNavigationBarIconBrightness: Brightness.dark, //navigation bar icon
-    ));
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        systemNavigationBarColor: Colors.transparent, // navigation bar color
+        statusBarColor: Colors.transparent, // status bar color
+        statusBarBrightness: Brightness.dark, //status bar brigtness
+        statusBarIconBrightness: Brightness.light, //status barIcon Brightness
+        systemNavigationBarIconBrightness: Brightness.dark, //navigation bar icon
+      ),
+    );
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
@@ -47,7 +49,6 @@ class _AppState extends State<App> {
         initialRoute: Storage.page,
         debugShowCheckedModeBanner: false,
         theme: ThemeStyle.lightTheme,
-        darkTheme: ThemeStyle.darkTheme,
         locale: Get.deviceLocale,
         translations: I18(),
         initialBinding: GlobalBinding(),

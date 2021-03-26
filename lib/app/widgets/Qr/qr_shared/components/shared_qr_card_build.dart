@@ -1,4 +1,5 @@
 import 'package:autocinema/app/themes/app_theme.dart';
+import 'package:autocinema/app/utils/storage.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:autocinema/app/themes/adapt.dart';
 import 'package:autocinema/app/widgets/Qr/qr_shared/controller/shared_qr_card_controller.dart';
@@ -34,7 +35,7 @@ class SharedQrCardBuild extends GetView<SharedQrCardController> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             CachedNetworkImage(
-              imageUrl: "https://qacinema.timeshareapp.com/storage/images/sistema/LogoExterno.png",
+              imageUrl: "${Storage.server}/storage/images/sistema/LogoExterno.png",
               imageBuilder: (context, image) => Container(
                 padding: EdgeInsets.symmetric(
                   horizontal: 10,

@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 
 class DescriptionMovie extends StatelessWidget {
   final String description;
+  final bool evento;
   const DescriptionMovie({
     Key key,
     this.description,
+    this.evento = false,
   }) : super(key: key);
 
   @override
@@ -23,7 +25,7 @@ class DescriptionMovie extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              "Sipnosis",
+              evento ? "Detalles" : "Sipnosis",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.black,

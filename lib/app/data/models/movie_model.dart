@@ -1,13 +1,9 @@
-import 'dart:convert';
-
-MovieModel movieModelFromJson(String str) => MovieModel.fromJson(json.decode(str));
-
-String movieModelToJson(MovieModel data) => json.encode(data.toJson());
-
 class MovieModel {
   MovieModel({
     this.id,
     this.titulo,
+    this.folio,
+    this.mapa,
     this.duracion,
     this.categoria,
     this.reciente,
@@ -19,12 +15,15 @@ class MovieModel {
     this.horario,
     this.idioma,
     this.director,
+    this.evento,
     this.actores,
   });
 
   int id;
   int reciente;
   String titulo;
+  String folio;
+  String mapa;
   String duracion;
   String categoria;
   String clasificacion;
@@ -35,12 +34,15 @@ class MovieModel {
   String horario;
   String idioma;
   String director;
+  int evento;
   String actores;
 
   factory MovieModel.fromJson(Map<String, dynamic> json) => MovieModel(
-        id: json["id"],
-        reciente: json["reciente"],
+        id: json["id"] ?? 0,
+        reciente: json["reciente"] ?? 0,
         titulo: json["titulo"] ?? '',
+        folio: json["folio"] ?? '',
+        mapa: json["mapa"] ?? '',
         duracion: json["duracion"] ?? '',
         categoria: json["categoria"] ?? '',
         clasificacion: json["clasificacion"] ?? '',
@@ -51,12 +53,15 @@ class MovieModel {
         horario: json["horario"] ?? '',
         idioma: json["idioma"] ?? '',
         director: json["director"] ?? '',
+        evento: json["evento"] ?? 0,
         actores: json["actores"] ?? '',
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "titulo": titulo,
+        "folio": folio,
+        "mapa": mapa,
         "duracion": duracion,
         "categoria": categoria,
         "reciente": reciente,
@@ -68,6 +73,7 @@ class MovieModel {
         "horario": horario,
         "idioma": idioma,
         "director": director,
+        "evento": evento,
         "actores": actores,
       };
 }

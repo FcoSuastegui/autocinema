@@ -4,6 +4,7 @@ import 'package:autocinema/app/views/movie-details/components/description_movie.
 import 'package:autocinema/app/views/movie-details/components/horaries_movie.dart';
 import 'package:autocinema/app/views/movie-details/components/image_background_movie.dart';
 import 'package:autocinema/app/views/movie-details/components/information_movie.dart';
+import 'package:autocinema/app/views/movie-details/components/map_event.dart';
 import 'package:autocinema/app/views/movie-details/components/trailer_movie.dart';
 import 'package:autocinema/app/views/movie-details/controller/movie_detail_controller.dart';
 import 'package:flutter/material.dart';
@@ -49,6 +50,7 @@ class MovieDetails extends GetView<MovieDetailController> {
                       description: movie.descripcion,
                       language: movie.idioma.tr,
                       facebook: movie.facebook,
+                      evento: movie.evento == 1,
                     ),
                   ],
                 ),
@@ -56,10 +58,15 @@ class MovieDetails extends GetView<MovieDetailController> {
               HorariesMovies(),
               DescriptionMovie(
                 description: movie.descripcion,
+                evento: movie.evento == 1,
               ),
-              TrailerMovie(
-                youtubeId: movie.trailer,
-              ),
+              movie.evento == 0
+                  ? TrailerMovie(
+                      youtubeId: movie.trailer,
+                    )
+                  : MapEvent(
+                      map: movie.mapa,
+                    ),
             ],
           ),
           AppBarMovie(

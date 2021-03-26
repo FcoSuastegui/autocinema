@@ -26,7 +26,7 @@ class BillBoardView extends StatelessWidget {
                   minHeight: Adapt.px(100),
                   maxHeight: Adapt.px(100),
                   child: FilterBar(
-                    title: "comming".tr,
+                    title: "billboard".tr,
                   ),
                 ),
               ),

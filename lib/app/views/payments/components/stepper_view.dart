@@ -146,8 +146,7 @@ class _StepperContent extends StatelessWidget {
           Container(
             width: double.infinity,
             margin: EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 30,
+              horizontal: 10,
             ),
             child: Row(
               children: <Widget>[

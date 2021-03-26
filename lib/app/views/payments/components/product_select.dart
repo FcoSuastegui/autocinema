@@ -1,9 +1,12 @@
+import 'package:autocinema/app/data/models/zone_model.dart';
 import 'package:autocinema/app/themes/adapt.dart';
 import 'package:autocinema/app/utils/helper.dart';
+import 'package:autocinema/app/views/payments/bloc/payments_bloc.dart';
 import 'package:autocinema/app/views/payments/controller/payments_controller.dart';
 import 'package:autocinema/app/widgets/TextField/numeric_step_button.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:get/get.dart';
 
 class ProductSelected extends GetView<PaymentsController> {
@@ -13,6 +16,9 @@ class ProductSelected extends GetView<PaymentsController> {
   Widget build(BuildContext context) {
     final movie = controller.movie;
     final horary = controller.horary;
+
+    // ignore: close_sinks
+    final bloc = BlocProvider.of<PaymentsBloc>(context, listen: false);
 
     return Column(
       children: [
@@ -81,7 +87,7 @@ class ProductSelected extends GetView<PaymentsController> {
                       children: [
                         Container(
                           child: Text(
-                            "${controller.vehiculo} Vehículos",
+                            "${controller.horary.especial == 1 ? controller.eventoVehiculo : controller.movieVehiculo} Vehículos",
                             style: TextStyle(
                               fontSize: Adapt.px(25),
                               color: Colors.black.withOpacity(0.3),
@@ -112,7 +118,7 @@ class ProductSelected extends GetView<PaymentsController> {
                       children: [
                         Container(
                           child: Text(
-                            "${controller.persona} Personas extras",
+                            "${controller.horary.especial == 1 ? controller.eventoPersona : controller.moviePersona} Personas extras",
                             style: TextStyle(
                               fontSize: Adapt.px(25),
                               color: Colors.black.withOpacity(0.3),
@@ -242,27 +248,34 @@ class ProductSelected extends GetView<PaymentsController> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(
-                            height: Adapt.px(5),
-                          ),
-                          RichText(
-                            text: TextSpan(
-                              text: "Categoría: ",
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: Adapt.px(28),
-                              ),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: movie.categoria,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: Adapt.px(25),
-                                  ),
+                          movie.evento == 1
+                              ? SizedBox.shrink()
+                              : Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      height: Adapt.px(5),
+                                    ),
+                                    RichText(
+                                      text: TextSpan(
+                                        text: "Categoría: ",
+                                        style: TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: Adapt.px(28),
+                                        ),
+                                        children: <TextSpan>[
+                                          TextSpan(
+                                            text: movie.categoria,
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: Adapt.px(25),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                          ),
                           SizedBox(
                             height: Adapt.px(10),
                           ),
@@ -305,104 +318,237 @@ class ProductSelected extends GetView<PaymentsController> {
                               ],
                             ),
                           ),
-                          SizedBox(
-                            height: Adapt.px(10),
-                          ),
-                          RichText(
-                            text: TextSpan(
-                              text: "Idioma: ",
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: Adapt.px(28),
-                              ),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: horary.funcionIdioma,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: Adapt.px(25),
-                                  ),
+                          movie.evento == 1
+                              ? SizedBox.shrink()
+                              : Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      height: Adapt.px(10),
+                                    ),
+                                    RichText(
+                                      text: TextSpan(
+                                        text: "Idioma: ",
+                                        style: TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: Adapt.px(28),
+                                        ),
+                                        children: <TextSpan>[
+                                          TextSpan(
+                                            text: horary.funcionIdioma,
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: Adapt.px(25),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: Adapt.px(10),
+                                    ),
+                                    RichText(
+                                      text: TextSpan(
+                                        text: "Subtitulos: ",
+                                        style: TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: Adapt.px(28),
+                                        ),
+                                        children: <TextSpan>[
+                                          TextSpan(
+                                            text: horary.subtitulo,
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: Adapt.px(25),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                          ),
                           SizedBox(
-                            height: Adapt.px(10),
+                            height: Adapt.px(20),
                           ),
-                          RichText(
-                            text: TextSpan(
-                              text: "Subtitulos: ",
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: Adapt.px(28),
-                              ),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: horary.subtitulo,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: Adapt.px(25),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                          movie.evento == 1
+                              ? Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Zonas",
+                                      style: TextStyle(
+                                        color: Colors.black.withOpacity(0.8),
+                                        fontSize: Adapt.px(25),
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.only(top: 5),
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: Colors.black12),
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: StreamBuilder(
+                                              stream: bloc.zones,
+                                              builder: (_, data) {
+                                                return DropdownButton(
+                                                  value: bloc.zones.value,
+                                                  style: TextStyle(
+                                                    color: Colors.black.withOpacity(0.4),
+                                                    fontSize: Adapt.px(25),
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                  icon: SizedBox.shrink(),
+                                                  isDense: true,
+                                                  underline: SizedBox.shrink(),
+                                                  items: bloc.listZones
+                                                      .map((e) => DropdownMenuItem(
+                                                            child: Text(e),
+                                                            value: e,
+                                                          ))
+                                                      .toList(),
+                                                  onChanged: (String value) {
+                                                    bloc.zones.updateValue(value);
+                                                    print(value);
+                                                  },
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                          Icon(
+                                            Icons.arrow_downward,
+                                            color: Colors.black.withOpacity(0.4),
+                                            size: Adapt.px(30),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              : SizedBox.shrink()
                         ],
                       ),
                     ),
                   ),
                 ],
               ),
-              Container(
-                padding: EdgeInsets.symmetric(
-                  vertical: 10,
-                ),
-                child: Obx(
-                  () => Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: NumericStepButton(
-                          title: Text(
-                            "Número de vehículos",
-                            style: TextStyle(
-                              color: Colors.black.withOpacity(0.5),
-                              fontSize: Adapt.px(23),
-                            ),
-                          ),
-                          minValue: 1,
-                          maxValue: 10,
-                          total: controller.vehiculo,
-                          onChanged: controller.incrementVehiculo,
-                        ),
-                      ),
-                      Expanded(
-                        child: Obx(
-                          () => NumericStepButton(
-                            key: Key(controller.maxPersonXvehiculo.toString()),
-                            title: Text(
-                              "Número de personas extras",
-                              style: TextStyle(
-                                color: Colors.black.withOpacity(0.5),
-                                fontSize: Adapt.px(23),
-                              ),
-                            ),
-                            minValue: 0,
-                            maxValue: controller.maxPersonXvehiculo,
-                            total: controller.persona,
-                            onChanged: controller.incrementPerson,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              movie.evento == 1 ? const EventoVehiculoPersona() : const MovieVehiculoPersona(),
             ],
           ),
         ),
       ],
+    );
+  }
+}
+
+class MovieVehiculoPersona extends GetView<PaymentsController> {
+  const MovieVehiculoPersona({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(
+        vertical: 10,
+      ),
+      child: Obx(
+        () => Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: NumericStepButton(
+                title: Text(
+                  "Número de vehículos",
+                  style: TextStyle(
+                    color: Colors.black.withOpacity(0.5),
+                    fontSize: Adapt.px(23),
+                  ),
+                ),
+                minValue: 1,
+                maxValue: 10,
+                total: controller.movieVehiculo,
+                onChanged: controller.movieIncrementVehiculo,
+              ),
+            ),
+            Expanded(
+              child: Obx(
+                () => NumericStepButton(
+                  key: Key(controller.movieMaxPersonXvehiculo.toString()),
+                  title: Text(
+                    "Número de personas extras",
+                    style: TextStyle(
+                      color: Colors.black.withOpacity(0.5),
+                      fontSize: Adapt.px(23),
+                    ),
+                  ),
+                  minValue: 0,
+                  maxValue: controller.movieMaxPersonXvehiculo,
+                  total: controller.moviePersona,
+                  onChanged: controller.movieIncrementPerson,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class EventoVehiculoPersona extends GetView<PaymentsController> {
+  const EventoVehiculoPersona({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(
+        vertical: 10,
+      ),
+      child: Obx(
+        () => Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: NumericStepButton(
+                title: Text(
+                  "Número de vehículos",
+                  style: TextStyle(
+                    color: Colors.black.withOpacity(0.5),
+                    fontSize: Adapt.px(23),
+                  ),
+                ),
+                minValue: 1,
+                maxValue: 10,
+                total: controller.eventoVehiculo,
+                onChanged: controller.eventoIncrementVehiculo,
+              ),
+            ),
+            Expanded(
+              child: Obx(
+                () => NumericStepButton(
+                  key: Key(controller.eventoMaxPersonXvehiculo.toString()),
+                  title: Text(
+                    "Número de personas extras",
+                    style: TextStyle(
+                      color: Colors.black.withOpacity(0.5),
+                      fontSize: Adapt.px(23),
+                    ),
+                  ),
+                  minValue: 0,
+                  maxValue: controller.eventoMaxPersonXvehiculo,
+                  total: controller.eventoPersona,
+                  onChanged: controller.eventoIncrementPerson,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

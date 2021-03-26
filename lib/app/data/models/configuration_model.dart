@@ -1,10 +1,3 @@
-import 'dart:convert';
-
-ConfigurationModel configurationModelFromJson(String str) =>
-    ConfigurationModel.fromJson(json.decode(str));
-
-String configurationModelToJson(ConfigurationModel data) => json.encode(data.toJson());
-
 class ConfigurationModel {
   ConfigurationModel({
     this.referencia,

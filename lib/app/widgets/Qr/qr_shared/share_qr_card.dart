@@ -1,6 +1,7 @@
 import 'package:autocinema/app/themes/adapt.dart';
 import 'package:autocinema/app/themes/app_theme.dart';
 import 'package:autocinema/app/utils/helper.dart';
+import 'package:autocinema/app/utils/storage.dart';
 import 'package:autocinema/app/widgets/Qr/qr_shared/controller/shared_qr_card_controller.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +51,7 @@ class ShareQrCard extends StatelessWidget {
           backgroundColor: Colors.white,
           titlePadding: EdgeInsets.zero,
           title: CachedNetworkImage(
-            imageUrl: "https://qacinema.timeshareapp.com/storage/images/sistema/LogoExterno.png",
+            imageUrl: "${Storage.server}/storage/images/sistema/LogoExterno.png",
             imageBuilder: (context, image) => Container(
               width: double.infinity,
               height: c.headerHeight * 0.5,
@@ -126,7 +127,7 @@ class ShareQrCard extends StatelessWidget {
                                               style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 color: AppTheme.kPrimaryColor,
-                                                fontSize: Adapt.px(22),
+                                                fontSize: Adapt.px(25),
                                               ),
                                             ),
                                           ),
@@ -137,7 +138,7 @@ class ShareQrCard extends StatelessWidget {
                                               maxLines: 1,
                                               style: TextStyle(
                                                 color: Colors.black.withOpacity(0.5),
-                                                fontSize: Adapt.px(22),
+                                                fontSize: Adapt.px(25),
                                               ),
                                             ),
                                           ),
@@ -154,7 +155,7 @@ class ShareQrCard extends StatelessWidget {
                                               style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 color: AppTheme.kPrimaryColor,
-                                                fontSize: Adapt.px(22),
+                                                fontSize: Adapt.px(25),
                                               ),
                                             ),
                                           ),
@@ -164,7 +165,7 @@ class ShareQrCard extends StatelessWidget {
                                             maxLines: 1,
                                             style: TextStyle(
                                               color: Colors.black.withOpacity(0.5),
-                                              fontSize: Adapt.px(22),
+                                              fontSize: Adapt.px(25),
                                             ),
                                           ),
                                         ],
@@ -181,7 +182,7 @@ class ShareQrCard extends StatelessWidget {
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: AppTheme.kPrimaryColor,
-                                      fontSize: Adapt.px(22),
+                                      fontSize: Adapt.px(25),
                                     ),
                                   ),
                                 ),
@@ -192,7 +193,7 @@ class ShareQrCard extends StatelessWidget {
                                     maxLines: 1,
                                     style: TextStyle(
                                       color: Colors.black.withOpacity(0.5),
-                                      fontSize: Adapt.px(22),
+                                      fontSize: Adapt.px(25),
                                     ),
                                   ),
                                 ),
@@ -213,7 +214,7 @@ class ShareQrCard extends StatelessWidget {
                                               style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 color: AppTheme.kPrimaryColor,
-                                                fontSize: Adapt.px(22),
+                                                fontSize: Adapt.px(25),
                                               ),
                                             ),
                                           ),
@@ -224,7 +225,7 @@ class ShareQrCard extends StatelessWidget {
                                               maxLines: 1,
                                               style: TextStyle(
                                                 color: Colors.black.withOpacity(0.5),
-                                                fontSize: Adapt.px(22),
+                                                fontSize: Adapt.px(25),
                                               ),
                                             ),
                                           ),
@@ -241,7 +242,7 @@ class ShareQrCard extends StatelessWidget {
                                               style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 color: AppTheme.kPrimaryColor,
-                                                fontSize: Adapt.px(22),
+                                                fontSize: Adapt.px(25),
                                               ),
                                             ),
                                           ),
@@ -252,7 +253,7 @@ class ShareQrCard extends StatelessWidget {
                                             maxLines: 1,
                                             style: TextStyle(
                                               color: Colors.black.withOpacity(0.5),
-                                              fontSize: Adapt.px(22),
+                                              fontSize: Adapt.px(25),
                                             ),
                                           ),
                                         ],
@@ -277,7 +278,7 @@ class ShareQrCard extends StatelessWidget {
                                               style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 color: AppTheme.kPrimaryColor,
-                                                fontSize: Adapt.px(22),
+                                                fontSize: Adapt.px(25),
                                               ),
                                             ),
                                           ),
@@ -287,7 +288,7 @@ class ShareQrCard extends StatelessWidget {
                                               overflow: TextOverflow.ellipsis,
                                               maxLines: 1,
                                               style: TextStyle(
-                                                fontSize: Adapt.px(22),
+                                                fontSize: Adapt.px(25),
                                                 color: Colors.black.withOpacity(0.5),
                                               ),
                                             ),
@@ -305,7 +306,7 @@ class ShareQrCard extends StatelessWidget {
                                               style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 color: AppTheme.kPrimaryColor,
-                                                fontSize: Adapt.px(22),
+                                                fontSize: Adapt.px(25),
                                               ),
                                             ),
                                           ),
@@ -314,7 +315,7 @@ class ShareQrCard extends StatelessWidget {
                                             overflow: TextOverflow.ellipsis,
                                             maxLines: 1,
                                             style: TextStyle(
-                                              fontSize: Adapt.px(22),
+                                              fontSize: Adapt.px(25),
                                               color: Colors.black.withOpacity(0.5),
                                             ),
                                           ),
@@ -354,7 +355,7 @@ class ShareQrCard extends StatelessWidget {
                                     style: TextStyle(
                                       color: AppTheme.kPrimaryColor,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: Adapt.px(22),
+                                      fontSize: Adapt.px(25),
                                     ),
                                   ),
                                 ),
@@ -362,7 +363,7 @@ class ShareQrCard extends StatelessWidget {
                                   "1. Presenta este correo en taquilla, impreso o de forma digital.",
                                   textAlign: TextAlign.start,
                                   style: TextStyle(
-                                    fontSize: Adapt.px(22),
+                                    fontSize: Adapt.px(25),
                                     color: Colors.black.withOpacity(0.7),
                                   ),
                                 ),
@@ -370,7 +371,7 @@ class ShareQrCard extends StatelessWidget {
                                   "2. Recuerda estar 10 minutos antes de que comience la función.",
                                   textAlign: TextAlign.start,
                                   style: TextStyle(
-                                    fontSize: Adapt.px(22),
+                                    fontSize: Adapt.px(25),
                                     color: Colors.black.withOpacity(0.7),
                                   ),
                                 ),
@@ -378,7 +379,7 @@ class ShareQrCard extends StatelessWidget {
                                   "3. Recuerda cumplir con las medidas sanitarias y portar tu cubre boca en todo momento.",
                                   textAlign: TextAlign.start,
                                   style: TextStyle(
-                                    fontSize: Adapt.px(22),
+                                    fontSize: Adapt.px(25),
                                     color: Colors.black.withOpacity(0.7),
                                   ),
                                 ),
@@ -386,7 +387,7 @@ class ShareQrCard extends StatelessWidget {
                                   "4. Recuerda sintonizar en tu radio la estación 88.5 FM para escuchar la película.",
                                   textAlign: TextAlign.start,
                                   style: TextStyle(
-                                    fontSize: Adapt.px(22),
+                                    fontSize: Adapt.px(25),
                                     color: Colors.black.withOpacity(0.7),
                                   ),
                                 ),

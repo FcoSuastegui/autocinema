@@ -279,7 +279,7 @@ class SuccessPayments extends StatelessWidget {
                         Expanded(
                           child: Container(
                             child: Text(
-                              "${bloc.c.vehiculo} X ${Helper.moneyFormat(double.parse(bloc.c.horary.tarifa))}",
+                              "${bloc.c.horary.especial == 1 ? bloc.c.eventoVehiculo : bloc.c.moviePersona} X ${Helper.moneyFormat(double.parse(bloc.c.horary.tarifa))}",
                               overflow: TextOverflow.ellipsis,
                               maxLines: 1,
                               style: TextStyle(
@@ -309,7 +309,7 @@ class SuccessPayments extends StatelessWidget {
                     ),
                   ],
                 ),
-                bloc.c.persona > 0
+                bloc.c.eventoPersona > 0 || bloc.c.moviePersona > 0
                     ? Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -350,7 +350,7 @@ class SuccessPayments extends StatelessWidget {
                               Expanded(
                                 child: Container(
                                   child: Text(
-                                    "${bloc.c.persona} X ${Helper.moneyFormat(double.parse(bloc.c.horary.tarifaExtras))}",
+                                    "${bloc.c.horary.especial == 1 ? bloc.c.eventoPersona : bloc.c.moviePersona} X ${Helper.moneyFormat(double.parse(bloc.c.horary.tarifaExtras))}",
                                     style: TextStyle(
                                       color: Colors.black.withOpacity(0.8),
                                       fontSize: Adapt.px(25),
@@ -428,9 +428,11 @@ class SuccessPayments extends StatelessWidget {
                 ShareQrCard(
                   qrValue: QrCardModel(
                     pelicula: bloc.c.movie.titulo,
-                    fecha: bloc.c.horary.fechaCorta,
-                    numPersonas: bloc.c.persona,
-                    numVehiculos: bloc.c.vehiculo,
+                    fecha: "${bloc.c.horary.fechaLarga} ${bloc.c.horary.hora}",
+                    numPersonas:
+                        bloc.c.horary.especial == 1 ? bloc.c.eventoPersona : bloc.c.moviePersona,
+                    numVehiculos:
+                        bloc.c.horary.especial == 1 ? bloc.c.eventoVehiculo : bloc.c.movieVehiculo,
                     titular: bloc.titular.value,
                     total: bloc.c.totalC,
                     boletoQr: bloc.folios['folioQr'] ?? '',

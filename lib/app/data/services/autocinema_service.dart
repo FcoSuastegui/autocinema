@@ -6,6 +6,7 @@ import 'package:autocinema/app/data/models/list_page.dart';
 import 'package:autocinema/app/data/models/movie_model.dart';
 import 'package:autocinema/app/data/models/response_model.dart';
 import 'package:autocinema/app/data/models/state_model.dart';
+import 'package:autocinema/app/data/models/zone_model.dart';
 
 class AutoCinemaService {
   static Future<List<ConfigurationModel>> banners() async {
@@ -79,6 +80,20 @@ class AutoCinemaService {
     if (response.status) {
       response.data.forEach(
         (item) => list.add(StateModel.fromJson(item)),
+      );
+    }
+    return list;
+  }
+
+  static Future<List<ZoneModel>> zones({idevento = 0}) async {
+    List<ZoneModel> list = List<ZoneModel>();
+    final response = await Network.i.post(
+      route: '/v1/app/zones',
+      data: {"caso": 18, "id": idevento},
+    );
+    if (response.status) {
+      response.data.forEach(
+        (item) => list.add(ZoneModel.fromJson(item)),
       );
     }
     return list;

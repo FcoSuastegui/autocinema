@@ -76,7 +76,7 @@ class HorariesMovies extends GetView<MovieDetailController> {
                                 width: Adapt.px(200),
                                 decoration: BoxDecoration(
                                   color: _theme.cardColor,
-                                  border: Border.all(color: Colors.black.withOpacity(0.5)),
+                                  border: Border.all(color: Colors.black.withOpacity(0.1)),
                                   borderRadius: BorderRadius.vertical(
                                     top: Radius.circular(
                                       Adapt.px(30),
@@ -108,21 +108,34 @@ class HorariesMovies extends GetView<MovieDetailController> {
                                         ),
                                       ),
                                     ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
                                     Container(
                                       child: Text(
                                         horary.dia,
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ),
                                     Container(
                                       child: Text(
                                         horary.fecha,
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ),
-                                    Container(
-                                      child: Text(
-                                        horary.idioma,
-                                      ),
-                                    ),
+                                    horary.especial == 1
+                                        ? SizedBox.shrink()
+                                        : Container(
+                                            child: Text(
+                                              horary.idioma,
+                                            ),
+                                          ),
                                   ],
                                 ),
                               ),

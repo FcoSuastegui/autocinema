@@ -1,4 +1,4 @@
-import 'package:autocinema/app/data/models/state_model.dart';
+import 'package:autocinema/app/data/models/zone_model.dart';
 import 'package:autocinema/app/data/services/autocinema_service.dart';
 import 'package:autocinema/app/globals/SrPago/permission.dart';
 import 'package:autocinema/app/globals/SrPago/sr_pago_card_model.dart';
@@ -25,7 +25,8 @@ class PaymentsBloc extends FormBloc<String, String> {
   final PaymentsController c = Get.find<PaymentsController>();
   final PageController pageViewController;
 
-  List<StateModel> listStates = [];
+  List<String> listZones = [];
+  List<ZoneModel> listZoneModel = [];
 
   final none = TextFieldBloc();
 
@@ -78,6 +79,10 @@ class PaymentsBloc extends FormBloc<String, String> {
     items: [],
   );
 
+  final zones = SelectFieldBloc<String, Object>(
+    items: [],
+  );
+
   final titular = TextFieldBloc(
     validators: [
       ValidatorString.required,
@@ -109,9 +114,10 @@ class PaymentsBloc extends FormBloc<String, String> {
     @required this.pageViewController,
   }) : assert(controller != null) {
     getStates();
+    getZones();
     addFieldBlocs(
       step: 0,
-      fieldBlocs: [none],
+      fieldBlocs: [none, zones],
     );
     addFieldBlocs(
       step: 1,
@@ -176,15 +182,19 @@ class PaymentsBloc extends FormBloc<String, String> {
               "telefono": phone.value,
               "funcion": c.horary.id,
               "tarifa": c.horary.tarifa,
-              "cantidad": c.vehiculo + c.persona,
+              "cantidad": c.horary.especial == 1
+                  ? c.eventoVehiculo
+                  : c.movieVehiculo + c.horary.especial == 1
+                      ? c.eventoPersona
+                      : c.moviePersona,
               "id_user_client": Storage.user.id,
               "titular": titular.value,
               "items": [
                 {
                   "idHorario": c.horary.id,
                   "idUsuario": 0,
-                  "numCarros": c.vehiculo,
-                  "numExtras": c.persona,
+                  "numCarros": c.horary.especial == 1 ? c.eventoVehiculo : c.movieVehiculo,
+                  "numExtras": c.horary.especial == 1 ? c.eventoPersona : c.moviePersona,
                   "tarifa": c.horary.tarifa,
                   "tarifaExtras": c.horary.tarifaExtras,
                   "tipoItem": 1,
@@ -259,12 +269,26 @@ class PaymentsBloc extends FormBloc<String, String> {
 
   Future<void> getStates() async {
     final lStates = await AutoCinemaService.states();
-    listStates = lStates;
     final List<String> list = [];
     lStates.forEach((element) {
       list.add(element.label);
     });
     states.updateItems(list);
+  }
+
+  Future<void> getZones() async {
+    if (c.horary.especial == 1) {
+      final lZones = await AutoCinemaService.zones(
+        idevento: c.horary.id,
+      );
+      final List<String> list = [];
+      lZones.forEach((element) {
+        listZones.add(element.label);
+        list.add(element.label);
+      });
+      print(list.toList());
+      zones.updateInitialValue(list.first);
+    }
   }
 
   @override
@@ -284,6 +308,7 @@ class PaymentsBloc extends FormBloc<String, String> {
     expired.close();
     cvv.close();
     terminos.close();
+    zones.close();
     return super.close();
   }
 }
